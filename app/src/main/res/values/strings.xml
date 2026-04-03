@@ -8,4 +8,12 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="recipe_title">Recipe Title</string>
+    <string name="discover_and_share_recipes"><![CDATA[Discover & Share Recipes]]></string>
+    <string name="recipe_app">Recipe App</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password_label">Password</string>
+    <string name="email_hint">your@email.com</string>
+    <string name="email_label">Email</string>
+    <string name="password_hint">password</string>
 </resources>
