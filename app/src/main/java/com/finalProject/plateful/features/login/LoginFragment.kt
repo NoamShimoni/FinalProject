@@ -33,14 +33,17 @@ class LoginFragment : Fragment() {
             if (email.isEmpty()) {
                 Toast.makeText(context, "Please enter an email address", Toast.LENGTH_SHORT).show()
             } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT)
+                    .show()
             } else if (password.isEmpty()) {
                 Toast.makeText(context, "Please enter a password", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show()
                 AuthRepository.shared.login(email, password) {
                     Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_loginFragment_to_addRecipeFragment)
+                    findNavController().navigate(R.id.homeFragment) {
+                        popUpTo(R.id.loginFragment) { inclusive = true }
+                    }
                 }
             }
         }

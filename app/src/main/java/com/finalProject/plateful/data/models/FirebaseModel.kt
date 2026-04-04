@@ -5,6 +5,7 @@ import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class FirebaseModel {
@@ -49,5 +50,9 @@ class FirebaseModel {
                 completion()
             }
         } ?: completion()
+    }
+
+    fun currentUser(): FirebaseUser? {
+        return auth.currentUser
     }
 }

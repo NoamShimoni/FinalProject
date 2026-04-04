@@ -94,7 +94,9 @@ class RegisterFragment : Fragment() {
         binding.loadingIndicator.visibility = View.GONE
         binding.btnCreateAccount.isEnabled = true
         Toast.makeText(context, "Account created successfully", Toast.LENGTH_SHORT).show()
-        findNavController().navigate(R.id.action_loginFragment_to_addRecipeFragment)
+        findNavController().navigate(R.id.homeFragment) {
+            popUpTo(R.id.registerFragment) { inclusive = true }
+        }
     }
 
     override fun onDestroyView() {

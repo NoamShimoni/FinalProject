@@ -5,6 +5,7 @@ import android.net.Uri
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseModel
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class AuthRepository private constructor() {
@@ -50,5 +51,9 @@ class AuthRepository private constructor() {
                 completion()
             }
         }
+    }
+
+    fun currentUser(): FirebaseUser? {
+        return firebaseModel.currentUser()
     }
 }
