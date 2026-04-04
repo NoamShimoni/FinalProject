@@ -1,4 +1,4 @@
-package com.finalProject.plateful.data.repositories.login
+package com.finalProject.plateful.data.repositories.auth
 
 import android.graphics.Bitmap
 import android.net.Uri
@@ -7,13 +7,13 @@ import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseModel
 import com.google.firebase.auth.UserProfileChangeRequest
 
-class LoginRepository private constructor() {
+class AuthRepository private constructor() {
 
     private val storageModel = CloudinaryStorageModel()
     private val firebaseModel = FirebaseModel()
 
     companion object {
-        val shared = LoginRepository()
+        val shared = AuthRepository()
     }
 
     fun login(email: String, password: String, completion: Completion) {

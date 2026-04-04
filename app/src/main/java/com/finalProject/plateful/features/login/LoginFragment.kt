@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.finalProject.plateful.R
 import com.finalProject.plateful.databinding.FragmentLoginBinding
-import com.finalProject.plateful.data.repositories.login.LoginRepository
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -38,7 +38,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Please enter a password", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show()
-                LoginRepository.shared.login(email, password) {
+                AuthRepository.shared.login(email, password) {
                     Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_addRecipeFragment)
                 }

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.finalProject.plateful.databinding.FragmentRegisterBinding
 import com.finalProject.plateful.utils.extentions.bitmap
-import com.finalProject.plateful.data.repositories.login.LoginRepository
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import android.graphics.Bitmap
 import com.finalProject.plateful.R
 
@@ -85,7 +85,7 @@ class RegisterFragment : Fragment() {
             bitmap = binding.ivProfilePreview.bitmap
         }
 
-        LoginRepository.shared.register(username, email, password, bitmap) {
+        AuthRepository.shared.register(username, email, password, bitmap) {
             finishRegistration()
         }
     }
