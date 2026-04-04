@@ -6,16 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.finalProject.plateful.R
 import com.finalProject.plateful.databinding.FragmentLoginBinding
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
+import com.finalProject.plateful.data.repositories.login.LoginRepository
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +26,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = Firebase.auth
-
         binding.btnSignIn.setOnClickListener {
             val email = binding.tilEmail.editText?.text.toString()
             val password = binding.tilPassword.editText?.text.toString()
@@ -41,38 +37,17 @@ class LoginFragment : Fragment() {
             } else if (password.isEmpty()) {
                 Toast.makeText(context, "Please enter a password", Toast.LENGTH_SHORT).show()
             } else {
-                signInWithEmailPassword(email, password)
+                Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show()
+                LoginRepository.shared.login(email, password) {
+                    Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_addRecipeFragment)
+                }
             }
         }
 
         binding.tvSignUp.setOnClickListener {
-            //TODO: navigate to register screen
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if (auth.currentUser != null) {
-            //TODO: navigate to home screen
-        }
-    }
-
-    private fun signInWithEmailPassword(email: String, password: String) {
-        Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show()
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                    //TODO: navigate to home screen
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Authentication failed: ${task.exception?.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
     }
 
     override fun onDestroyView() {
