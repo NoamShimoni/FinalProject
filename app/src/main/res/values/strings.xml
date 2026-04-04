@@ -16,5 +16,4 @@
     <string name="email_hint">your@email.com</string>
     <string name="email_label">Email</string>
     <string name="password_hint">password</string>
-    <string name="default_web_client_id_placeholder">YOUR_WEB_CLIENT_ID_HERE</string>
 </resources>
