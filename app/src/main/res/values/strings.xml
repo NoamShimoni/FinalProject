@@ -16,7 +16,6 @@
     <string name="email_hint">your@email.com</string>
     <string name="email_label">Email</string>
     <string name="password_hint">password</string>
-    <string name="default_web_client_id_placeholder">YOUR_WEB_CLIENT_ID_HERE</string>
     <string name="sign_up">Sign Up</string>
     <string name="create_account">Create Account</string>
     <string name="join_community">Join our community of food lovers</string>
