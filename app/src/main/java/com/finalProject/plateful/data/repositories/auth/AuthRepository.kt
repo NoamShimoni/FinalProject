@@ -8,7 +8,6 @@ import com.finalProject.plateful.data.models.FirebaseModel
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class AuthRepository private constructor() {
-
     private val storageModel = CloudinaryStorageModel()
     private val firebaseModel = FirebaseModel()
 

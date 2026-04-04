@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.finalProject.plateful.R
-import com.finalProject.plateful.databinding.FragmentLoginBinding
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
+import com.finalProject.plateful.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null

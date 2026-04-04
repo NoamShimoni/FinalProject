@@ -3,9 +3,9 @@ package com.finalProject.plateful.data.models
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.firestore.firestore
 
 class FirebaseModel {
     val db = Firebase.firestore
