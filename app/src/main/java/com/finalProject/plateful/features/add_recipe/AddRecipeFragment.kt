@@ -54,7 +54,7 @@ class AddRecipeFragment : Fragment() {
             val recipeInstructions = binding?.recipeInstructionsEditText?.text.toString()
 
             val recipe = Recipe(
-                id = "1",
+                id = java.util.UUID.randomUUID().toString(),
                 title = recipeTitle,
                 ingredients = recipeIngredients,
                 instructions = recipeInstructions,

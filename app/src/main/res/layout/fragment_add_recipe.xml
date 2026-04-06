@@ -20,11 +20,13 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/recipe_title_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/recipe_title"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipe_image_image_view" />
 
@@ -32,77 +34,111 @@
         android:id="@+id/recipe_title_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recipe_title_text_view"
+        android:layout_marginTop="8dp"
+        app:hintEnabled="false"
+        app:boxStrokeColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recipe_title_text_view"
-        app:layout_constraintTop_toTopOf="@+id/recipe_title_text_view">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_title_text_view">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/recipe_title_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/e_g_chocolate_cake"
+            android:textColorHint="#999999"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/recipe_ingredients_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/ingredients"
-        app:layout_constraintStart_toStartOf="@+id/recipe_title_text_view"
-        app:layout_constraintTop_toTopOf="@+id/ingredients_input_layout" />
+        app:layout_constraintEnd_toEndOf="@+id/recipe_title_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/recipe_title_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_title_input_layout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/recipe_ingredients_hint_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enter each ingredient on a new line"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_ingredients_text_view"
+        app:layout_constraintStart_toStartOf="@+id/recipe_ingredients_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_ingredients_text_view" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ingredients_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/recipe_title_input_layout"
-        app:layout_constraintStart_toEndOf="@+id/recipe_title_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_title_input_layout">
+        android:layout_marginTop="8dp"
+        app:hintEnabled="false"
+        app:boxStrokeColor="@color/orange"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_ingredients_text_view"
+        app:layout_constraintStart_toStartOf="@+id/recipe_ingredients_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_ingredients_hint_text_view">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/recipe_ingredients_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:minLines="3"
             android:gravity="top|start"
-            android:inputType="textMultiLine" />
+            android:hint="@string/_2_cap_flour_10_1_cup_sugar_10_3_eggs_10_1_2_cup_butter"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:textColorHint="#999999" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/recipe_instructions_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/instructions"
-        app:layout_constraintStart_toStartOf="@+id/recipe_title_text_view"
-        app:layout_constraintTop_toTopOf="@+id/instructions_input_layout" />
+        app:layout_constraintEnd_toEndOf="@+id/ingredients_input_layout"
+        app:layout_constraintStart_toStartOf="@+id/ingredients_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/ingredients_input_layout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/recipe_instructions_hint_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enter each instruction on a new line"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_instructions_text_view"
+        app:layout_constraintStart_toStartOf="@+id/recipe_instructions_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_instructions_text_view" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/instructions_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/ingredients_input_layout"
-        app:layout_constraintStart_toEndOf="@+id/recipe_title_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients_input_layout">
+        android:layout_marginTop="8dp"
+        app:hintEnabled="false"
+        app:boxStrokeColor="@color/orange"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_instructions_text_view"
+        app:layout_constraintStart_toStartOf="@+id/recipe_instructions_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/recipe_instructions_hint_text_view">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/recipe_instructions_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:minLines="3"
             android:gravity="top|start"
-            android:inputType="textMultiLine" />
+            android:hint="@string/preheat_oven_to_350_f_10_mix_dry_ingredients_10_add_wet_ingredients_10_bake_for_30_minutes"
+            android:inputType="textMultiLine"
+            android:minLines="5"
+            android:textColorHint="#999999" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -113,6 +149,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="36dp"
         android:text="@string/save"
+        app:backgroundTint="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cancel_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -125,6 +162,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
         android:text="@string/cancel"
+        app:backgroundTint="@color/orange"
         app:layout_constraintBaseline_toBaselineOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -144,10 +182,11 @@
         style="@style/Widget.Material3.LoadingIndicator.Contained"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:indicatorColor="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/takePictureButton"
@@ -158,5 +197,6 @@
         app:srcCompat="@android:drawable/ic_menu_camera"
         app:layout_constraintBottom_toBottomOf="@+id/recipe_image_image_view"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
