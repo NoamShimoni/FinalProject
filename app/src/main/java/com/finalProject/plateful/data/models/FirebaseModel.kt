@@ -27,6 +27,17 @@ class FirebaseModel {
             }
     }
 
+    fun deleteRecipe(recipe: Recipe, completion: Completion) {
+        db.collection(RECIPES)
+            .document(recipe.id).delete()
+            .addOnSuccessListener { documentReference ->
+                completion()
+            }
+            .addOnFailureListener { e ->
+                completion()
+            }
+    }
+
     fun signInWithEmailAndPassword(email: String, password: String, completion: Completion) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {

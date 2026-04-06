@@ -12,6 +12,8 @@ import com.finalProject.plateful.base.MyApplication
 import com.finalProject.plateful.base.StringCompletion
 import java.io.File
 import kotlin.collections.get
+import kotlin.concurrent.thread
+
 
 class CloudinaryStorageModel {
 
@@ -62,6 +64,52 @@ class CloudinaryStorageModel {
                     // Upload rescheduled
                 }
             }).dispatch()
+    }
+
+    fun deleteRecipeImage(imageUrl: String, completion: (Boolean) -> Unit) {
+        val publicId = extractPublicId(imageUrl)
+
+        if (publicId == null) {
+            Log.e("TAG", "Failed to extract Public ID from URL")
+            completion(false)
+            return
+        }
+
+        thread {
+            try {
+                val result = MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
+
+                val response = result["result"] as? String
+                if (response == "ok") {
+                    Log.v("TAG", "Cloudinary delete success: $publicId")
+                    completion(true)
+                } else {
+                    Log.e("TAG", "Cloudinary delete failed: $response")
+                    completion(false)
+                }
+            } catch (e: Exception) {
+                Log.e("TAG", "Cloudinary delete error: ${e.message}")
+                completion(false)
+            }
+        }
+    }
+
+    private fun extractPublicId(url: String): String? {
+        val parts = url.split("/")
+        val uploadIndex = parts.indexOf("upload")
+        if (uploadIndex == -1) return null
+
+        val afterUpload = parts.subList(uploadIndex + 1, parts.size)
+
+        val startIndex = if (afterUpload[0].startsWith("v") && afterUpload[0].substring(1).all { it.isDigit() }) {
+            1
+        } else {
+            0
+        }
+
+        val publicIdWithExtension = afterUpload.subList(startIndex, afterUpload.size).joinToString("/")
+
+        return publicIdWithExtension.substringBeforeLast(".")
     }
 
     fun uploadProfileImage(image: Bitmap, userId: String, completion: StringCompletion) {
