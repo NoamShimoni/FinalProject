@@ -18,15 +18,26 @@ class RecipesRepository private constructor() {
 
     fun addRecipe(recipeImage: Bitmap, recipe: Recipe, completion: Completion) {
         firebaseModel.addRecipe(recipe) {
-            storageModel.uploadRecipeImage(recipeImage, recipe.id) {
-                imageUrl ->
+            storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
                 if (!imageUrl.isNullOrEmpty()) {
                     val recipeCopy = recipe.copy(imageUrl = imageUrl)
                     firebaseModel.addRecipe(recipeCopy, completion)
                 } else {
                     completion()
                 }
-             }
+            }
         }
-     }
+    }
+
+    fun deleteRecipe(recipe: Recipe, completion: Completion) {
+        firebaseModel.deleteRecipe(recipe) {
+            storageModel.deleteRecipeImage(recipe.imageUrl) { deleteImageSuccessful ->
+                if (!deleteImageSuccessful) {
+                    Log.v("TAG", "Error deleting recipe image for recipe: ${recipe.id}")
+                }
+
+                completion()
+            }
+        }
+    }
 }
