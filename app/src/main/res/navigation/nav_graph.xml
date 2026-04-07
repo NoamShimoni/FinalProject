@@ -8,5 +8,31 @@
         android:id="@+id/recipeListFragment"
         android:name="com.finalProject.plateful.features.recipe_list.RecipeListFragment"
         android:label="fragment_recipe_list"
-        tools:layout="@layout/fragment_recipe_list" />
+        tools:layout="@layout/fragment_recipe_list" >
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeCardFragment"
+            app:destination="@id/recipeCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeCardFragment"
+        android:name="com.finalProject.plateful.features.recipe_card.RecipeCardFragment"
+        android:label="fragment_recipe_card"
+        tools:layout="@layout/fragment_recipe_card" >
+        <argument
+            android:name="TITLE_KEY"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="INGREDIENTS_KEY"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="INSTRUCTIONS_KEY"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="IMAGE_URL_KEY"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

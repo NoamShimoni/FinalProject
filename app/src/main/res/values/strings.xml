@@ -12,4 +12,6 @@
     <string name="_2_cap_flour_10_1_cup_sugar_10_3_eggs_10_1_2_cup_butter">2 Cap flour\n1 cup sugar\n3 eggs\n1/2 cup butter</string>
     <string name="preheat_oven_to_350_f_10_mix_dry_ingredients_10_add_wet_ingredients_10_bake_for_30_minutes">Preheat oven to 350°F\nMix dry ingredients\nAdd wet ingredients\nBake for 30 minutes</string>
     <string name="created_by">Created by</string>
+    <string name="instructions_content">instructions content</string>
+    <string name="ingredients_content">ingredients content</string>
 </resources>
