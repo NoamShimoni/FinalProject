@@ -35,6 +35,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/title"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recipe_image_view" />
@@ -46,6 +47,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:text="@string/created_by"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/recipe_title_text_view"
             app:layout_constraintTop_toBottomOf="@+id/recipe_title_text_view" />
