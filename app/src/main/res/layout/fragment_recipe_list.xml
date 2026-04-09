@@ -46,7 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:dividerColor="@color/divider"
-        app:layout_constraintBottom_toTopOf="@+id/recipe_list_coordinator_layout" />
+        app:layout_constraintBottom_toTopOf="@+id/recipe_list_coordinator_layout"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/recipe_list_coordinator_layout"
