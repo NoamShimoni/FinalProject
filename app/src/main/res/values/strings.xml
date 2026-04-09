@@ -15,4 +15,9 @@
     <string name="instructions_content">instructions content</string>
     <string name="ingredients_content">ingredients content</string>
     <string name="home">Home</string>
+    <string name="my_recipes">My Recipes</string>
+    <string name="log_out">Log Out</string>
+    <string name="recipe_app_v1_0_0_nmade_with_for_food_lovers">Recipe App v1.0.0\nMade with ❤️ for food lovers</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="profile">Profile</string>
 </resources>
