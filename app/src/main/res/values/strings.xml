@@ -20,4 +20,5 @@
     <string name="recipe_app_v1_0_0_nmade_with_for_food_lovers">Recipe App v1.0.0\nMade with ❤️ for food lovers</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="profile">Profile</string>
+    <string name="username">Username</string>
 </resources>

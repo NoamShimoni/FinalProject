@@ -8,11 +8,11 @@
     android:background="#FFFFFF">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvProfileTitle"
+        android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textColor="#001F3F"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -20,15 +20,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/dividerTop"
+        android:id="@+id/divider_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:dividerColor="#E0E0E0"
-        app:layout_constraintTop_toBottomOf="@id/tvProfileTitle" />
+        app:layout_constraintTop_toBottomOf="@id/title_text_view" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvAvatar"
+        android:id="@+id/avatar_card_view"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="24dp"
@@ -38,45 +38,46 @@
         app:cardElevation="0dp"
         app:strokeWidth="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dividerTop">
+        app:layout_constraintTop_toBottomOf="@id/divider_top">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/avatar_image_view"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_person"
-            app:tint="#E86A17" />
+            app:tint="@color/orange" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvUserName"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="John Doe"
+        android:text="@string/username"
         android:textColor="#001F3F"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/cvAvatar"
-        app:layout_constraintTop_toTopOf="@id/cvAvatar" />
+        app:layout_constraintStart_toEndOf="@id/avatar_card_view"
+        app:layout_constraintTop_toTopOf="@id/avatar_card_view" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEditProfile"
+        android:id="@+id/edit_profile_button"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="@string/edit_profile"
-        android:textColor="#E86A17"
+        android:textColor="@color/orange"
         android:textSize="14sp"
         app:icon="@drawable/ic_edit"
         app:iconSize="16dp"
-        app:iconTint="#E86A17"
-        app:layout_constraintStart_toEndOf="@id/cvAvatar"
-        app:layout_constraintTop_toBottomOf="@id/tvUserName" />
+        app:iconTint="@color/orange"
+        app:layout_constraintStart_toEndOf="@id/avatar_card_view"
+        app:layout_constraintTop_toBottomOf="@id/username" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardStats"
+        android:id="@+id/my_recipes_count_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -87,7 +88,7 @@
         app:strokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvAvatar">
+        app:layout_constraintTop_toBottomOf="@id/avatar_card_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -95,7 +96,7 @@
             android:padding="16dp">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvRecipesCount"
+                android:id="@+id/my_recipes_count_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
@@ -107,6 +108,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/my_recipes_count_label_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -115,20 +117,20 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvRecipesCount" />
+                app:layout_constraintTop_toBottomOf="@id/my_recipes_count_text_view" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/dividerMiddle"
+        android:id="@+id/divider_middle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:dividerColor="#E0E0E0"
-        app:layout_constraintTop_toBottomOf="@id/cardStats" />
+        app:layout_constraintTop_toBottomOf="@id/my_recipes_count_card" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardActionMyRecipes"
+        android:id="@+id/my_recipes_navigation_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -138,7 +140,7 @@
         app:cardElevation="0dp"
         app:strokeColor="#E0E0E0"
         app:strokeWidth="1dp"
-        app:layout_constraintTop_toBottomOf="@id/dividerMiddle">
+        app:layout_constraintTop_toBottomOf="@id/divider_middle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -146,7 +148,7 @@
             android:padding="16dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivIconRecipes"
+                android:id="@+id/my_recipes_navigation_image_view"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_library"
@@ -156,6 +158,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/my_recipes_navigation_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -163,12 +166,12 @@
                 android:textColor="#001F3F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/ivChevronRecipes"
-                app:layout_constraintStart_toEndOf="@id/ivIconRecipes"
+                app:layout_constraintEnd_toStartOf="@id/my_recipes_navigation_right_arrow"
+                app:layout_constraintStart_toEndOf="@id/my_recipes_navigation_image_view"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivChevronRecipes"
+                android:id="@+id/my_recipes_navigation_right_arrow"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_chevron_right"
@@ -180,7 +183,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardActionLogOut"
+        android:id="@+id/logout_navigation_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -190,7 +193,7 @@
         app:cardElevation="0dp"
         app:strokeColor="#E0E0E0"
         app:strokeWidth="1dp"
-        app:layout_constraintTop_toBottomOf="@id/cardActionMyRecipes">
+        app:layout_constraintTop_toBottomOf="@id/my_recipes_navigation_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -198,7 +201,7 @@
             android:padding="16dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivIconLogOut"
+                android:id="@+id/logout_navigation_image_view"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_logout"
@@ -208,6 +211,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/logout_navigation_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -215,12 +219,12 @@
                 android:textColor="#D32F2F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/ivChevronLogOut"
-                app:layout_constraintStart_toEndOf="@id/ivIconLogOut"
+                app:layout_constraintEnd_toStartOf="@id/logout_navigation_right_arrow"
+                app:layout_constraintStart_toEndOf="@id/logout_navigation_image_view"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivChevronLogOut"
+                android:id="@+id/logout_navigation_right_arrow"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_chevron_right"
@@ -232,11 +236,12 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvFooter"
+        android:id="@+id/app_details_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:gravity="center"
+        android:lineSpacingExtra="8dp"
         android:text="@string/recipe_app_v1_0_0_nmade_with_for_food_lovers"
         android:textColor="#90A4AE"
         android:textSize="14sp"
