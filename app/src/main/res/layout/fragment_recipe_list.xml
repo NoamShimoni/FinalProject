@@ -21,7 +21,7 @@
             android:id="@+id/title_greeting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/good_morning"
+            android:text="@string/hello_chef"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
