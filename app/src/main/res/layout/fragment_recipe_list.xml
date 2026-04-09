@@ -41,7 +41,16 @@
             app:layout_constraintTop_toBottomOf="@id/title_greeting" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/bottom_nav_separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/divider"
+        app:layout_constraintBottom_toTopOf="@+id/recipe_list_coordinator_layout"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/recipe_list_coordinator_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
