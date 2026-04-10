@@ -7,6 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".base.MainActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:titleTextColor="#001F3F"
+            android:minHeight="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar_menu" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/top_app_bar_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainNavHost"
@@ -17,7 +42,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar_divider"
         app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.divider.MaterialDivider

@@ -1,13 +1,15 @@
 package com.finalProject.plateful.base
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.finalProject.plateful.R
 import com.finalProject.plateful.databinding.ActivityMainBinding
 
@@ -34,16 +36,48 @@ class MainActivity : AppCompatActivity() {
 
         binding?.bottomNavigation?.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.main_menu_home -> {
+                R.id.bottom_navigation_menu_home -> {
                     navController?.navigate(R.id.recipeListFragment)
                     true
                 }
-                R.id.main_menu_profile -> {
-                    navController?.navigate(R.id.profileFragment)
+                R.id.bottom_navigation_menu_profile -> {
+                    navController?.navigate(R.id.action_global_profileFragment)
                     true
                 }
                 else -> false
             }
         }
+
+        val topAppBar = binding?.topAppBar
+
+
+        topAppBar?.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.top_bar_menu_add -> {
+                    navController?.navigate(R.id.action_global_addRecipeFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        setupTopBar()
+
     }
+
+    private fun setupTopBar() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.mainNavHost) as? NavHostFragment
+
+        navController = navHost?.navController
+        navController?.let {
+            val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
+                setOf(R.id.recipeListFragment, R.id.profileFragment)
+            )
+            binding?.topAppBar?.let { toolbar ->
+                NavigationUI.setupWithNavController(toolbar, it, appBarConfiguration)
+            }
+        }
+    }
+
+
 }
