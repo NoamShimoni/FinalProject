@@ -1,8 +1,6 @@
 package com.finalProject.plateful.base
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -75,6 +73,11 @@ class MainActivity : AppCompatActivity() {
             )
             binding?.topAppBar?.let { toolbar ->
                 NavigationUI.setupWithNavController(toolbar, it, appBarConfiguration)
+
+                it.addOnDestinationChangedListener { _, destination, _ ->
+                    val addMenuItem = toolbar.menu.findItem(R.id.top_bar_menu_add)
+                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment
+                }
             }
         }
     }
