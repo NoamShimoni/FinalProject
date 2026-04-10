@@ -24,4 +24,7 @@
     <string name="what_would_you_like_to_cook_today">What would you like to cook today?</string>
     <string name="hello_chef">Hello Chef!</string>
     <string name="_0_recipes">0 recipes</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="save_changes">Save Changes</string>
 </resources>
