@@ -97,7 +97,7 @@
             android:padding="24dp">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/username_label_text_viewl"
+                android:id="@+id/username_label_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
@@ -120,7 +120,7 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/username_label_text_viewl">
+                app:layout_constraintTop_toBottomOf="@id/username_label_text_view">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username_text_input"

@@ -18,7 +18,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
         binding?.editProfileButton?.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("Noam", "sd")
+            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("Noam", "https://res.cloudinary.com/dltg3tc47/image/upload/v1775500141/avrrwceyrdnw40cnlmih.jpg")
             it.findNavController().navigate(action)
         }
 
