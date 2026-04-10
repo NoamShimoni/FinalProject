@@ -1,6 +1,7 @@
 package com.finalProject.plateful.features.recipe_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,8 @@ class RecipeListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecipeListBinding.inflate(layoutInflater, container, false)
+
+        binding?.recipeCountSubtitle?.text = "${viewModel.data.value?.size ?: 0} recipes"
 
         setupRecyclerView()
 
@@ -55,6 +58,7 @@ class RecipeListFragment : Fragment() {
             adapter?.notifyDataSetChanged()
             binding?.swipeRefresh?.isRefreshing = false
 
+            binding?.recipeCountSubtitle?.text = "${viewModel.data.value?.size ?: 0} recipes"
         }
     }
 
