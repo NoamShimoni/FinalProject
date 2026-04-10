@@ -21,8 +21,6 @@ class RecipeListFragment : Fragment() {
     ): View? {
         binding = FragmentRecipeListBinding.inflate(layoutInflater, container, false)
 
-        binding?.recipeCountSubtitle?.text = "${viewModel.data.value?.size ?: 0} recipes"
-
         setupRecyclerView()
 
         return binding?.root
@@ -58,7 +56,7 @@ class RecipeListFragment : Fragment() {
             adapter?.notifyDataSetChanged()
             binding?.swipeRefresh?.isRefreshing = false
 
-            binding?.recipeCountSubtitle?.text = "${viewModel.data.value?.size ?: 0} recipes"
+            binding?.recipeCountSubtitle?.text = "${it.size} recipes"
         }
     }
 
