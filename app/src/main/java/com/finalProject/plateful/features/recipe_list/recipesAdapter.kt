@@ -31,7 +31,4 @@ class RecipesAdapter (
             holder.bind(it[position], position)
         }
     }
-
-
-
 }
