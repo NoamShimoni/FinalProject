@@ -51,4 +51,8 @@ class AuthRepository private constructor() {
             }
         }
     }
+
+    fun isUserSignedIn(): Boolean {
+        return firebaseModel.currentUser() != null
+    }
 }

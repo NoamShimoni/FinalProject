@@ -1,10 +1,12 @@
 package com.finalProject.plateful.data.models
 
+import android.util.Log
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class FirebaseModel {
@@ -60,5 +62,10 @@ class FirebaseModel {
                 completion()
             }
         } ?: completion()
+    }
+
+    fun currentUser(): FirebaseUser? {
+        Log.v("TAG", auth.currentUser.toString())
+        return auth.currentUser
     }
 }
