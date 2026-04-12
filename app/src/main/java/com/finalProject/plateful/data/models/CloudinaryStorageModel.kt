@@ -12,8 +12,6 @@ import com.finalProject.plateful.base.MyApplication
 import com.finalProject.plateful.base.StringCompletion
 import java.io.File
 import kotlin.collections.get
-import kotlin.concurrent.thread
-
 
 class CloudinaryStorageModel {
 
