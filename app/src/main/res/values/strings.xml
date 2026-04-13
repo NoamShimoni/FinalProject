@@ -6,8 +6,8 @@
     <string name="title">Title</string>
     <string name="recipe_title">Recipe Title</string>
     <string name="created_by">Created by</string>
-    <string name="instructions_content">instructions content</string>
-    <string name="ingredients_content">ingredients content</string>
+    <string name="instructions_content">Instructions content</string>
+    <string name="ingredients_content">Ingredients content</string>
     <string name="what_would_you_like_to_cook_today">What would you like to cook today?</string>
     <string name="hello_chef">Hello Chef!</string>
     <string name="_0_recipes">0 recipes</string>

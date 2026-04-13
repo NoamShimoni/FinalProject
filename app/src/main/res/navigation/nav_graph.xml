@@ -15,9 +15,9 @@
     </fragment>
     <fragment
         android:id="@+id/recipeCardFragment"
-        android:name="com.finalProject.plateful.features.recipe_card.RecipeCardFragment"
+        android:name="com.finalProject.plateful.features.recipe_details.RecipeDetailsFragment"
         android:label="fragment_recipe_card"
-        tools:layout="@layout/fragment_recipe_card" >
+        tools:layout="@layout/fragment_recipe_details" >
         <argument
             android:name="TITLE_KEY"
             app:argType="string"

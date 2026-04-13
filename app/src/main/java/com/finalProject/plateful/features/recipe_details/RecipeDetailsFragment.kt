@@ -1,4 +1,4 @@
-package com.finalProject.plateful.features.recipe_card
+package com.finalProject.plateful.features.recipe_details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.finalProject.plateful.databinding.FragmentRecipeCardBinding
+import com.finalProject.plateful.databinding.FragmentRecipeDetailsBinding
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 
-class RecipeCardFragment : Fragment() {
-    private var binding: FragmentRecipeCardBinding? = null
+class RecipeDetailsFragment : Fragment() {
+    private var binding: FragmentRecipeDetailsBinding? = null
     private var titleTextView: TextView? = null
     private var ingredientsContentTextView: TextView? = null
     private var instructionsContentTextView: TextView? = null
@@ -37,15 +37,15 @@ class RecipeCardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRecipeCardBinding.inflate(inflater, container, false)
+        binding = FragmentRecipeDetailsBinding.inflate(inflater, container, false)
 
         titleTextView = binding?.recipeTitleTextView
         titleTextView?.text = title ?: "oops! title was not set"
 
-        ingredientsContentTextView = binding?.recipeIngredientsContentTextView
+        ingredientsContentTextView = binding?.recipeIngredientsTextView
         ingredientsContentTextView?.text = ingredients ?: "oops! ingredients were not set"
 
-        instructionsContentTextView = binding?.recipeInstructionsContentTextView
+        instructionsContentTextView = binding?.recipeInstructionsTextView
         instructionsContentTextView?.text = instructions ?: "oops! instructions were not set"
 
         recipeImageView = binding?.recipeImageView
