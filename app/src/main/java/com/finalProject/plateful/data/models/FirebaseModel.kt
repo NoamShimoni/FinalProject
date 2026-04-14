@@ -35,4 +35,15 @@ class FirebaseModel {
                 completion()
             }
     }
+
+    fun deleteRecipe(recipe: Recipe, completion: Completion) {
+        db.collection(RECIPES)
+            .document(recipe.id).delete()
+            .addOnSuccessListener { documentReference ->
+                completion()
+            }
+            .addOnFailureListener { e ->
+                completion()
+            }
+    }
 }

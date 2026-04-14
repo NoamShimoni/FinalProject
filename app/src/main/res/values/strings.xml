@@ -13,4 +13,6 @@
     <string name="what_would_you_like_to_cook_today">What would you like to cook today?</string>
     <string name="hello_chef">Hello Chef!</string>
     <string name="_0_recipes">0 recipes</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 </resources>

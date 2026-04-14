@@ -53,6 +53,51 @@
             app:layout_constraintStart_toStartOf="@+id/recipe_title_text_view"
             app:layout_constraintTop_toBottomOf="@+id/recipe_title_text_view" />
 
+        <View
+            android:id="@+id/edit_delete_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            app:layout_constraintBottom_toTopOf="@+id/buttons_container"
+            app:layout_constraintTop_toBottomOf="@id/recipe_creator_text_view" />
+
+        <LinearLayout
+            android:id="@+id/buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/recipe_edit_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/edit"
+                android:textColor="@color/orange"
+                app:icon="@drawable/ic_edit"
+                app:iconTint="@color/orange"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/divider" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/recipe_delete_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/delete"
+                android:textColor="@color/red"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="@color/red" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

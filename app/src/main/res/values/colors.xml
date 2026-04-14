@@ -9,4 +9,5 @@
     <color name="darkGray">#4a5565</color>
     <color name="divider">#E0E0E0</color>
     <color name="grayBackground">#F9FAFB</color>
+    <color name="red">#C0392B</color>
 </resources>

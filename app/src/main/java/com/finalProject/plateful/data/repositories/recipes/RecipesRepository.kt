@@ -1,6 +1,7 @@
 package com.finalProject.plateful.data.repositories.recipes
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.dao.AppLocalDB
@@ -60,4 +61,16 @@ class RecipesRepository private constructor() {
              }
         }
      }
+
+    fun deleteRecipe(recipe: Recipe, completion: Completion) {
+        firebaseModel.deleteRecipe(recipe) {
+            storageModel.deleteRecipeImage(recipe.imageUrl) { deleteImageSuccessful ->
+                if (!deleteImageSuccessful) {
+                    Log.v("TAG", "Error deleting recipe image for recipe: ${recipe.id}")
+                }
+
+                completion()
+            }
+        }
+    }
 }
