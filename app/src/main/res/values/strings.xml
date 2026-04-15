@@ -10,4 +10,7 @@
     <string name="recipe_instructions_text_input_hint">Preheat oven to 350°F\nMix dry ingredients\nAdd wet ingredients\nBake for 30 minutes</string>
     <string name="recipe_ingredients_text_input_hint">2 cups flour\n1 cup sugar\n3 eggs\n1/2 cup butter</string>
     <string name="created_by">Created by</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="instruction_on_a_new_line">Enter each instruction on a new line</string>
+    <string name="ingredient_on_a_new_line">Enter each ingredient on a new line</string>
 </resources>
