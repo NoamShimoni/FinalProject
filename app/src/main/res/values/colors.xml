@@ -9,4 +9,6 @@
     <color name="darkGray">#4a5565</color>
     <color name="divider">#E0E0E0</color>
     <color name="grayBackground">#F9FAFB</color>
+    <color name="inputBorderColor">#d1d5dc</color>
+    <color name="cardBorderColor">#ebe6e7</color>
 </resources>
