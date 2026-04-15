@@ -74,7 +74,7 @@ class RecipeListFragment : Fragment() {
 
     private fun navigateToRecipeCardFragment(recipe: Recipe){
         view?.let {
-            val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeCardFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
+            val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
             Navigation.findNavController(it).navigate(action)
         }
     }
