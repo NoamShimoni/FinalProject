@@ -33,11 +33,11 @@ class RecipesRepository private constructor() {
             executor.execute {
                 var time = lastUpdated
 
-                for (student in it) {
-                    database.recipeDao.insertRecipes(student)
-                    student.lastUpdated?.let { studentLastUpdated ->
-                        if (time < studentLastUpdated) {
-                            time = studentLastUpdated
+                for (recipe in it) {
+                    database.recipeDao.insertRecipes(recipe)
+                    recipe.lastUpdated?.let { recipeLastUpdated ->
+                        if (time < recipeLastUpdated) {
+                            time = recipeLastUpdated
                         }
                     }
                 }
