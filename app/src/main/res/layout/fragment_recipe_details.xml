@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#F0F2F5">
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/image_placeholder"
-            app:tint="#B0BEC5"
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.card.MaterialCardView
@@ -49,7 +47,6 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="32dp"
                     android:text="@string/title"
-                    android:textColor="#002147"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +60,7 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/created_by"
-                    android:textColor="#546E7A"
+                    android:textColor="@color/lightGray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +73,6 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="24dp"
                     android:text="@string/ingredients"
-                    android:textColor="#002147"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="16dp"
-                    app:cardBackgroundColor="#F8F9FA"
+                    app:cardBackgroundColor="@color/grayBackground"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:contentPadding="16dp"
@@ -103,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:paddingVertical="4dp"
                         android:text="@string/ingredients_content"
-                        android:textColor="#263238" />
+                        android:textColor="@color/textContent" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.divider.MaterialDivider
@@ -112,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="24dp"
-                    app:dividerColor="#E0E0E0"
+                    app:dividerColor="@color/divider"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_ingredients_card" />
@@ -124,7 +120,6 @@
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="24dp"
                     android:text="@string/instructions"
-                    android:textColor="#002147"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="16dp"
-                    app:cardBackgroundColor="#F8F9FA"
+                    app:cardBackgroundColor="@color/grayBackground"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:contentPadding="16dp"
@@ -151,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:paddingVertical="4dp"
                         android:text="@string/instructions_content"
-                        android:textColor="#263238" />
+                        android:textColor="@color/textContent" />
                 </com.google.android.material.card.MaterialCardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
