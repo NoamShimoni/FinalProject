@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/ingredient_on_a_new_line"
-                android:textColor="@color/lightGray"
+                android:textColor="@color/midGray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recipe_ingredients_label_text_view" />
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/instruction_on_a_new_line"
-                android:textColor="@color/lightGray"
+                android:textColor="@color/midGray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recipe_instructions_label_text_view" />

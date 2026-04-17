@@ -15,7 +15,8 @@
     <string name="home">Home</string>
     <string name="my_recipes">My Recipes</string>
     <string name="log_out">Log Out</string>
-    <string name="recipe_app_v1_0_0_nmade_with_for_food_lovers">Recipe App v1.0.0\nMade with ❤️ for food lovers</string>
+    <string name="recipe_app_version">Recipe App v1.0.0</string>
+    <string name="made_with_love">Made with ❤️ for food lovers</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="profile">Profile</string>
     <string name="username">Username</string>
@@ -25,4 +26,5 @@
     <string name="save_recipe">Save Recipe</string>
     <string name="instruction_on_a_new_line">Enter each instruction on a new line</string>
     <string name="ingredient_on_a_new_line">Enter each ingredient on a new line</string>
+    <string name="_0">0</string>
 </resources>
