@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/white">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title_text_view"
@@ -32,7 +32,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        app:cardBackgroundColor="#FFECCC"
+        app:cardBackgroundColor="@color/avatarBackground"
         app:cardCornerRadius="40dp"
         app:cardElevation="0dp"
         app:strokeWidth="0dp"
@@ -55,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/username"
-        android:textColor="#001F3F"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/avatar_card_view"
         app:layout_constraintTop_toTopOf="@id/avatar_card_view" />
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        app:cardBackgroundColor="#FCF6F0"
+        app:cardBackgroundColor="@color/recipeCounterBackground"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
         app:strokeWidth="0dp"
@@ -98,10 +98,9 @@
                 android:id="@+id/my_recipes_count_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#001F3F"
+                android:text="@string/_0"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -111,8 +110,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="My Recipes"
-                android:textColor="#546E7A"
+                android:text="@string/my_recipes"
+                android:textColor="@color/darkGray"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:dividerColor="#E0E0E0"
+        app:dividerColor="@color/divider"
         app:layout_constraintTop_toBottomOf="@id/my_recipes_count_card" />
 
     <com.google.android.material.card.MaterialCardView
@@ -134,10 +133,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        app:cardBackgroundColor="#FFFFFF"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
-        app:strokeColor="#E0E0E0"
+        app:strokeColor="@color/divider"
         app:strokeWidth="1dp"
         app:layout_constraintTop_toBottomOf="@id/divider_middle">
 
@@ -151,7 +150,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_library"
-                app:tint="#546E7A"
+                app:tint="@color/darkGray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -162,8 +161,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/my_recipes"
-                android:textColor="#001F3F"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/my_recipes_navigation_right_arrow"
                 app:layout_constraintStart_toEndOf="@id/my_recipes_navigation_image_view"
@@ -174,7 +173,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_chevron_right"
-                app:tint="#B0BEC5"
+                app:tint="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -187,10 +186,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="#FFFFFF"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
-        app:strokeColor="#E0E0E0"
+        app:strokeColor="@color/divider"
         app:strokeWidth="1dp"
         app:layout_constraintTop_toBottomOf="@id/my_recipes_navigation_card">
 
@@ -204,7 +203,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_logout"
-                app:tint="#D32F2F"
+                app:tint="@color/red"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -215,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/log_out"
-                android:textColor="#D32F2F"
+                android:textColor="@color/red"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/logout_navigation_right_arrow"
@@ -227,7 +226,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_chevron_right"
-                app:tint="#D32F2F"
+                app:tint="@color/red"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -235,18 +234,30 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/app_details_text_view"
+        android:id="@+id/app_version_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/recipe_app_version"
+        android:textColor="@color/midGray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/app_love_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logout_navigation_card"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/app_love_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:lineSpacingExtra="8dp"
-        android:text="@string/recipe_app_v1_0_0_nmade_with_for_food_lovers"
-        android:textColor="#90A4AE"
+        android:text="@string/made_with_love"
+        android:textColor="@color/lightGray"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout_navigation_card" />
+        app:layout_constraintTop_toBottomOf="@+id/app_version_text_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
