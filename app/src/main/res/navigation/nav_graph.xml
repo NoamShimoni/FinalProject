@@ -10,14 +10,14 @@
         android:label="Recipe List"
         tools:layout="@layout/fragment_recipe_list">
         <action
-            android:id="@+id/action_recipeListFragment_to_recipeCardFragment"
-            app:destination="@id/recipeCardFragment" />
+            android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/recipeCardFragment"
-        android:name="com.finalProject.plateful.features.recipe_card.RecipeCardFragment"
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.finalProject.plateful.features.recipe_details.RecipeDetailsFragment"
         android:label="Recipe Details"
-        tools:layout="@layout/fragment_recipe_card">
+        tools:layout="@layout/fragment_recipe_details">
         <argument
             android:name="TITLE_KEY"
             app:argType="string"

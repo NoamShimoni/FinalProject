@@ -15,7 +15,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recipe_image_image_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recipe_image_image_view"
-            app:strokeColor="#DCE0E5"
+            app:strokeColor="@color/border"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/recipe_title"
-                    android:textColor="#1E3A5F"
+                    android:textColor="@color/textContent"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="#DCE0E5"
+                    app:boxStrokeColor="@color/orange"
                     app:hintEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -75,10 +75,9 @@
                         android:id="@+id/recipe_title_text_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="e.g., Chocolate Cake"
+                        android:hint="@string/recipe_title_text_input_hint"
                         android:inputType="textCapWords"
                         android:padding="12dp"
-                        android:textColorHint="#8A96A3"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +95,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recipe_title_card"
-            app:strokeColor="#DCE0E5"
+            app:strokeColor="@color/border"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/ingredients"
-                    android:textColor="#002A5C"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -120,14 +119,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Enter each ingredient on a new line"
-                    android:textColor="#5C6C7B"
+                    android:text="@string/ingredient_on_a_new_line"
+                    android:textColor="@color/midGray"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_ingredients_label_text_view" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/recipe_ingredients_text_input_label"
+                    android:id="@+id/recipe_ingredients_text_input_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -136,7 +135,7 @@
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="#DCE0E5"
+                    app:boxStrokeColor="@color/orange"
                     app:hintEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -148,11 +147,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="top|start"
-                        android:hint="2 cups flour\n1 cup sugar\n3 eggs\n1/2 cup butter"
+                        android:hint="@string/recipe_ingredients_text_input_hint"
                         android:inputType="textMultiLine"
                         android:minLines="5"
                         android:padding="12dp"
-                        android:textColorHint="#8A96A3"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -170,7 +168,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recipe_ingredients_card"
-            app:strokeColor="#DCE0E5"
+            app:strokeColor="@color/border"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -183,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/instructions"
-                    android:textColor="#002A5C"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -194,8 +192,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Enter each instruction on a new line"
-                    android:textColor="#5C6C7B"
+                    android:text="@string/instruction_on_a_new_line"
+                    android:textColor="@color/midGray"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recipe_instructions_label_text_view" />
@@ -210,7 +208,7 @@
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="#DCE0E5"
+                    app:boxStrokeColor="@color/orange"
                     app:hintEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -222,11 +220,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="top|start"
-                        android:hint="Preheat oven to 350°F\nMix dry ingredients\nAdd wet ingredients\nBake for 30 minutes"
+                        android:hint="@string/recipe_instructions_text_input_hint"
                         android:inputType="textMultiLine"
                         android:minLines="5"
                         android:padding="12dp"
-                        android:textColorHint="#8A96A3"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -238,10 +235,10 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
-            android:text="Save Recipe"
+            android:text="@string/save_recipe"
             android:textAllCaps="false"
             android:textSize="16sp"
-            app:backgroundTint="#FF6B00"
+            app:backgroundTint="@color/orange"
             app:cornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

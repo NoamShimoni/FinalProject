@@ -50,15 +50,15 @@ class RecipeListFragment : Fragment() {
         binding?.recyclerView?.adapter = adapter
 
         binding?.swipeRefresh?.setOnRefreshListener {
-            binding?.swipeRefresh?.isRefreshing = true // check if there are no new student while refreshing, so the swipeRefresh will stuck on isRefreshing = true
+            binding?.swipeRefresh?.isRefreshing = true
             refreshRecipes()
         }
 
-        observeStudents()
+        observeRecipes()
 
     }
 
-    private fun observeStudents() {
+    private fun observeRecipes() {
         viewModel.data.observe(viewLifecycleOwner) {
             adapter?.recipes = it
             adapter?.notifyDataSetChanged()
@@ -74,7 +74,7 @@ class RecipeListFragment : Fragment() {
 
     private fun navigateToRecipeCardFragment(recipe: Recipe){
         view?.let {
-            val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeCardFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
+            val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
             Navigation.findNavController(it).navigate(action)
         }
     }

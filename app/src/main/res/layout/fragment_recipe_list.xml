@@ -19,7 +19,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00000000"
+            android:background="@color/grayBackground"
             app:elevation="0dp">
 
             <com.google.android.material.textview.MaterialTextView
@@ -30,8 +30,8 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
-                android:text="@string/_0_recipes"
-                android:textColor="#808080"
+                android:text="@string/recipe_count"
+                android:textColor="@color/darkGray"
                 android:textSize="14sp"
                 app:layout_scrollFlags="scroll" />
 
