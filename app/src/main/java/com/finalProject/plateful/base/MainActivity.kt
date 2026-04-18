@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         binding?.bottomNavigation?.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.main_menu_home -> {
-                    Log.v("MainActivity", "Home menu item selected")
                     navController?.navigate(R.id.recipeListFragment)
                     true
                 }
