@@ -32,6 +32,39 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
+        setupBottomBar()
+
+        setupTopBar()
+
+    }
+
+    private fun setupTopBar() {
+        navController?.let {
+            val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
+                setOf(R.id.recipeListFragment, R.id.profileFragment)
+            )
+            binding?.topAppBar?.let { toolbar ->
+                toolbar.setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.top_bar_menu_add -> {
+                            navController?.navigate(R.id.action_global_addRecipeFragment)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+
+                NavigationUI.setupWithNavController(toolbar, it, appBarConfiguration)
+
+                it.addOnDestinationChangedListener { _, destination, _ ->
+                    val addMenuItem = toolbar.menu.findItem(R.id.top_bar_menu_add)
+                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment
+                }
+            }
+        }
+    }
+
+    private fun setupBottomBar() {
         binding?.bottomNavigation?.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.bottom_navigation_menu_home -> {
@@ -45,42 +78,5 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-        val topAppBar = binding?.topAppBar
-
-
-        topAppBar?.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.top_bar_menu_add -> {
-                    navController?.navigate(R.id.action_global_addRecipeFragment)
-                    true
-                }
-                else -> false
-            }
-        }
-
-        setupTopBar()
-
     }
-
-    private fun setupTopBar() {
-        val navHost = supportFragmentManager.findFragmentById(R.id.mainNavHost) as? NavHostFragment
-
-        navController = navHost?.navController
-        navController?.let {
-            val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
-                setOf(R.id.recipeListFragment, R.id.profileFragment)
-            )
-            binding?.topAppBar?.let { toolbar ->
-                NavigationUI.setupWithNavController(toolbar, it, appBarConfiguration)
-
-                it.addOnDestinationChangedListener { _, destination, _ ->
-                    val addMenuItem = toolbar.menu.findItem(R.id.top_bar_menu_add)
-                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment
-                }
-            }
-        }
-    }
-
-
 }
