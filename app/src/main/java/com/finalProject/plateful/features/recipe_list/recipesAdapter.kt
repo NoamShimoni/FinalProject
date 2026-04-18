@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.finalProject.plateful.databinding.RecipeRowLayoutBinding
 import com.finalProject.plateful.models.Recipe
 
+interface OnItemClickListener {
+    fun onRecipeItemClick(recipe: Recipe)
+}
 
 class RecipesAdapter (
      var recipes: MutableList<Recipe>?
 ): RecyclerView.Adapter<RecipeRowViewHolder>() {
 
+    var listener: OnItemClickListener? = null
     override fun getItemCount(): Int = recipes?.size ?: 0
 
     override fun onCreateViewHolder(
@@ -20,7 +24,7 @@ class RecipesAdapter (
         val inflator = LayoutInflater.from(parent.context)
         val binding = RecipeRowLayoutBinding.inflate(inflator, parent, false)
 
-        return RecipeRowViewHolder(binding)
+        return RecipeRowViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(
