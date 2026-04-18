@@ -1,14 +1,11 @@
 package com.finalProject.plateful.features.profile
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.finalProject.plateful.R
-import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.databinding.FragmentProfileBinding
 import com.finalProject.plateful.features.recipe_list.RecipesListViewModel
 import kotlin.getValue
