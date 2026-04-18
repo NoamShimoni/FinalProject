@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recipe_row">
+    app:startDestination="@id/recipeListFragment">
     <fragment
-        android:id="@+id/recipe_row"
-        android:name="com.finalProject.plateful.base.recipe_row"
-        android:label="recipe_row" />
+        android:id="@+id/recipeListFragment"
+        android:name="com.finalProject.plateful.features.recipe_list.RecipeListFragment"
+        android:label="fragment_recipe_list"
+        tools:layout="@layout/fragment_recipe_list" />
 </navigation>
