@@ -43,7 +43,7 @@ class RecipeListFragment : Fragment() {
         adapter?.listener = object: OnItemClickListener {
 
             override fun onRecipeItemClick(recipe: Recipe) {
-                navigateToRecipeCardFragment(recipe)
+                navigateToRecipeDetailsFragment(recipe)
             }
         }
 
@@ -72,7 +72,7 @@ class RecipeListFragment : Fragment() {
         viewModel.refreshRecipes()
     }
 
-    private fun navigateToRecipeCardFragment(recipe: Recipe){
+    private fun navigateToRecipeDetailsFragment(recipe: Recipe){
         view?.let {
             val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
             Navigation.findNavController(it).navigate(action)
