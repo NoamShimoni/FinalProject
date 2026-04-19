@@ -12,23 +12,19 @@ import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentLoginBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    ): View? {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding?.loadingIndicator?.visibility = View.GONE
 
-        binding.btnSignIn.setOnClickListener {
-            val email = binding.tilEmail.editText?.text.toString()
-            val password = binding.tilPassword.editText?.text.toString()
+        binding?.signInButton?.setOnClickListener {
+            val email = binding?.emailTextInputLayout?.editText?.text.toString()
+            val password = binding?.passwordTextInputLayout?.editText?.text.toString()
 
             if (email.isEmpty()) {
                 Toast.makeText(context, "Please enter an email address", Toast.LENGTH_SHORT).show()
@@ -37,21 +33,19 @@ class LoginFragment : Fragment() {
             } else if (password.isEmpty()) {
                 Toast.makeText(context, "Please enter a password", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show()
-                AuthRepository.shared.login(email, password) {
+                binding?.loadingIndicator?.visibility = View.VISIBLE
+
+                AuthRepository.shared.signIn(email, password) {
                     Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_loginFragment_to_addRecipeFragment)
+                    findNavController().navigate(R.id.bottom_navigation_menu_home)
                 }
             }
         }
 
-        binding.tvSignUp.setOnClickListener {
+        binding?.signUpTextView?.setOnClickListener {
             //TODO: navigate to register screen
         }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return binding?.root
     }
 }

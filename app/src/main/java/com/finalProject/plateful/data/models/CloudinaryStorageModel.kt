@@ -63,39 +63,6 @@ class CloudinaryStorageModel {
                 }
             }).dispatch()
     }
-
-    fun uploadProfileImage(image: Bitmap, userId: String, completion: StringCompletion) {
-        val context = MyApplication.appContext ?: return
-
-        val file = bitmapToFile(image, context)
-
-        MediaManager.get().upload(file.path)
-            .option("public_id", "users/${userId}/profile_image")
-            .callback ( object: UploadCallback {
-                override fun onStart(requestId: String) {
-                    //Upload started
-                }
-
-                override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {
-                    //Upload progress
-                }
-
-                override fun onSuccess(requestId: String, resultData: Map<*, *>) {
-                    val imageUrl = resultData["secure_url"] as? String
-                    Log.v("TAG", "Cloudinary upload success: $imageUrl")
-                    completion(imageUrl)
-                }
-
-                override fun onError(requestId: String, error: ErrorInfo) {
-                    Log.v("TAG", "Cloudinary upload error: ${error.description}")
-                    completion(null)
-                }
-
-                override fun onReschedule(requestId: String, error: ErrorInfo) {
-                    //Upload rescheduled
-                }
-            }).dispatch()
-    }
     private fun bitmapToFile(image: Bitmap, context: Context): File {
         val file = File(context.cacheDir, "temp_image_${System.currentTimeMillis()}.jpg")
 

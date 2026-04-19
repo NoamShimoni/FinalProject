@@ -60,7 +60,6 @@ dependencies {
     implementation(libs.cloudinary.android.preprocess)
 
     implementation(platform(libs.firebase.bom))
-    implementation(platform(libs.firebase.auth))
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
