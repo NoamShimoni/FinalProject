@@ -5,5 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="BottomNavOverlay" parent="">
+        <item name="colorSecondaryContainer">#33f97316</item>
+    </style>
+
     <style name="Theme.Plateful" parent="Base.Theme.Plateful" />
 </resources>

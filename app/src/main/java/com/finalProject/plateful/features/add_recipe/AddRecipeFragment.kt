@@ -22,7 +22,7 @@ class AddRecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddRecipeBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
         setupView()
 
         cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
@@ -42,19 +42,15 @@ class AddRecipeFragment : Fragment() {
     private fun setupView() {
         binding?.loadingIndicator?.visibility = View.GONE
 
-        binding?.cancelButton?.setOnClickListener {
-            dismiss()
-        }
-
-        binding?.saveButton?.setOnClickListener {
+        binding?.saveRecipeButton?.setOnClickListener {
             binding?.loadingIndicator?.visibility = View.VISIBLE
 
-            val recipeTitle = binding?.recipeTitleEditText?.text.toString()
-            val recipeIngredients = binding?.recipeIngredientsEditText?.text.toString()
-            val recipeInstructions = binding?.recipeInstructionsEditText?.text.toString()
+            val recipeTitle = binding?.recipeTitleTextInput?.text.toString()
+            val recipeIngredients = binding?.recipeIngredientsTextInput?.text.toString()
+            val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
 
             val recipe = Recipe(
-                id = "1",
+                id = java.util.UUID.randomUUID().toString(),
                 title = recipeTitle,
                 ingredients = recipeIngredients,
                 instructions = recipeInstructions,
