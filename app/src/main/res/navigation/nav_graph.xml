@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/recipeListFragment"
         android:name="com.finalProject.plateful.features.recipe_list.RecipeListFragment"
-        android:label="fragment_recipe_list"
-        tools:layout="@layout/fragment_recipe_list" >
+        android:label="Recipe List"
+        tools:layout="@layout/fragment_recipe_list">
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
@@ -38,7 +38,8 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.finalProject.plateful.features.profile.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -46,7 +47,8 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.finalProject.plateful.features.profile.EditProfileFragment"
-        android:label="EditProfileFragment" >
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
         <argument
             android:name="USERNAME_KEY"
             app:argType="string" />
@@ -54,4 +56,10 @@
             android:name="AVATAR_URL_KEY"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.finalProject.plateful.features.add_recipe.AddRecipeFragment"
+        android:label="Add Recipe"
+        tools:layout="@layout/fragment_add_recipe" />
+    <action android:id="@+id/action_global_addRecipeFragment" app:destination="@id/addRecipeFragment" />
 </navigation>

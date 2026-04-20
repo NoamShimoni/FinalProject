@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#101828</color>
-    <color name="lightBlack">#101828</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#f97316</color>
     <color name="gray">#999999</color>
     <color name="lightGray">#99a1af</color>
     <color name="midGray">#6a7282</color>
     <color name="darkGray">#4a5565</color>
-    <color name="divider">#E0E0E0</color>
+    <color name="border">#ebe6e7</color>
     <color name="grayBackground">#F9FAFB</color>
     <color name="inputBorder">#d1d5dc</color>
-    <color name="cardBorder">#ebe6e7</color>
     <color name="textContent">#364153</color>
     <color name="recipeCounterBackground">#FCF6F0</color>
     <color name="red">#D32F2F</color>
