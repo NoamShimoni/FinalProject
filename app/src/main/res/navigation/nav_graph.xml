@@ -3,34 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/addRecipeFragment">
-
+    app:startDestination="@id/recipeListFragment">
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="com.finalProject.plateful.features.recipe_list.RecipeListFragment"
+        android:label="Recipe List"
+        tools:layout="@layout/fragment_recipe_list">
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.finalProject.plateful.features.recipe_details.RecipeDetailsFragment"
+        android:label="Recipe Details"
+        tools:layout="@layout/fragment_recipe_details">
+        <argument
+            android:name="TITLE_KEY"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="INGREDIENTS_KEY"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="INSTRUCTIONS_KEY"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="IMAGE_URL_KEY"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.finalProject.plateful.features.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.finalProject.plateful.features.profile.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="USERNAME_KEY"
+            app:argType="string" />
+        <argument
+            android:name="AVATAR_URL_KEY"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/addRecipeFragment"
         android:name="com.finalProject.plateful.features.add_recipe.AddRecipeFragment"
-        android:label="fragment_add_recipe"
+        android:label="Add Recipe"
         tools:layout="@layout/fragment_add_recipe" />
+    <action
+        android:id="@+id/action_global_addRecipeFragment"
+        app:destination="@id/addRecipeFragment" />
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.finalProject.plateful.features.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login">
+        android:id="@+id/signInFragment"
+        android:name="com.finalProject.plateful.features.login.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_addRecipeFragment"
-            app:destination="@id/addRecipeFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.finalProject.plateful.features.login.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register">
-        <action
-            android:id="@+id/action_registerFragment_to_addRecipeFragment"
-            app:destination="@id/addRecipeFragment" />
+            android:id="@+id/action_signInFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
     </fragment>
 </navigation>

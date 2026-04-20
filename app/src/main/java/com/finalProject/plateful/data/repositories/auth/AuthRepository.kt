@@ -4,21 +4,21 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
-import com.finalProject.plateful.data.models.FirebaseModel
+import com.finalProject.plateful.data.models.FirebaseAuthModel
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class AuthRepository private constructor() {
     private val storageModel = CloudinaryStorageModel()
-    private val firebaseModel = FirebaseModel()
+    private val firebaseAuthModel = FirebaseAuthModel()
 
     companion object {
         val shared = AuthRepository()
     }
 
-    fun login(email: String, password: String, completion: Completion) {
-        firebaseModel.signInWithEmailAndPassword(email, password, completion)
+    fun signIn(email: String, password: String, completion: Completion) {
+        firebaseAuthModel.signIn(email, password, completion)
     }
-    
+
     fun register(
         username: String,
         email: String,
@@ -26,8 +26,8 @@ class AuthRepository private constructor() {
         profileImageBitmap: Bitmap?,
         completion: Completion
     ) {
-        firebaseModel.createUserWithEmailAndPassword(email, password) {
-            val user = firebaseModel.auth.currentUser
+        firebaseAuthModel.createUserWithEmailAndPassword(email, password) {
+            val user = firebaseAuthModel.auth.currentUser
             if (user != null) {
                 if (profileImageBitmap != null) {
                     storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
@@ -38,13 +38,13 @@ class AuthRepository private constructor() {
                             profileUpdates.setPhotoUri(Uri.parse(imageUrl))
                         }
 
-                        firebaseModel.updateProfile(profileUpdates.build(), completion)
+                        firebaseAuthModel.updateProfile(profileUpdates.build(), completion)
                     }
                 } else {
                     val profileUpdates = UserProfileChangeRequest.Builder()
                         .setDisplayName(username)
                         .build()
-                    firebaseModel.updateProfile(profileUpdates, completion)
+                    firebaseAuthModel.updateProfile(profileUpdates, completion)
                 }
             } else {
                 completion()
@@ -53,6 +53,6 @@ class AuthRepository private constructor() {
     }
 
     fun isUserSignedIn(): Boolean {
-        return firebaseModel.currentUser() != null
+        return firebaseAuthModel.currentUser() != null
     }
 }
