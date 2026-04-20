@@ -24,7 +24,7 @@
             app:strokeWidth="0dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/avatar_image_view"
+                android:id="@+id/logo_image_view"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

@@ -6,19 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.finalProject.plateful.R
+import androidx.navigation.findNavController
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
-import com.finalProject.plateful.databinding.FragmentLoginBinding
+import com.finalProject.plateful.databinding.FragmentSignInBinding
 
-class LoginFragment : Fragment() {
-    private var binding: FragmentLoginBinding? = null
+class SignInFragment : Fragment() {
+    private var binding: FragmentSignInBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentSignInBinding.inflate(inflater, container, false)
 
         binding?.loadingIndicator?.visibility = View.GONE
 
@@ -36,8 +35,8 @@ class LoginFragment : Fragment() {
                 binding?.loadingIndicator?.visibility = View.VISIBLE
 
                 AuthRepository.shared.signIn(email, password) {
-                    Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.bottom_navigation_menu_home)
+                    val action = SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
+                    it.findNavController().navigate(action)
                 }
             }
         }

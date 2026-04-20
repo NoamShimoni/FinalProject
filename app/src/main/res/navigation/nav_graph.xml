@@ -43,7 +43,10 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
-    </fragment><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
+    </fragment>
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.finalProject.plateful.features.profile.EditProfileFragment"
@@ -61,12 +64,17 @@
         android:name="com.finalProject.plateful.features.add_recipe.AddRecipeFragment"
         android:label="Add Recipe"
         tools:layout="@layout/fragment_add_recipe" />
-    <action android:id="@+id/action_global_addRecipeFragment" app:destination="@id/addRecipeFragment" />
+    <action
+        android:id="@+id/action_global_addRecipeFragment"
+        app:destination="@id/addRecipeFragment" />
 
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.finalProject.plateful.features.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login">
+        android:id="@+id/signInFragment"
+        android:name="com.finalProject.plateful.features.login.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
     </fragment>
 </navigation>
