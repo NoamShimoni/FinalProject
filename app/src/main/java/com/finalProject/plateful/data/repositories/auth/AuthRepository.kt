@@ -26,8 +26,8 @@ class AuthRepository private constructor() {
         profileImageBitmap: Bitmap?,
         completion: Completion
     ) {
-        firebaseAuthModel.createUserWithEmailAndPassword(email, password) {
-            val user = firebaseAuthModel.auth.currentUser
+        firebaseAuthModel.signUp(email, password) {
+            val user = firebaseAuthModel.currentUser()
             if (user != null) {
                 if (profileImageBitmap != null) {
                     storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
