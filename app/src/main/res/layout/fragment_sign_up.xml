@@ -88,7 +88,7 @@
             android:textColor="@color/textContent"
             app:cornerRadius="8dp"
             app:strokeColor="#E0E0E0"
-            app:icon="@android:drawable/ic_menu_upload"
+            app:icon="@android:drawable/ic_menu_camera"
             app:iconTint="@color/textContent"
             app:layout_constraintBottom_toBottomOf="@+id/profile_preview_image_view"
             app:layout_constraintEnd_toEndOf="parent"
