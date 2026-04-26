@@ -63,7 +63,6 @@ class CloudinaryStorageModel {
                 }
             }).dispatch()
     }
-
     private fun bitmapToFile(image: Bitmap, context: Context): File {
         val file = File(context.cacheDir, "temp_image_${System.currentTimeMillis()}.jpg")
 

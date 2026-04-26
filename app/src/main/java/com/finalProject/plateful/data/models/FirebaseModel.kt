@@ -9,7 +9,6 @@ import com.google.firebase.firestore.firestore
 
 class FirebaseModel {
     val db = Firebase.firestore
-
     private companion object {
         const val RECIPES = "recipes"
     }
