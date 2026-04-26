@@ -14,15 +14,14 @@ import com.finalProject.plateful.databinding.FragmentSignUpBinding
 import com.finalProject.plateful.utils.extentions.bitmap
 
 class SignUpFragment : Fragment() {
-    private var _binding: FragmentSignUpBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentSignUpBinding? = null
 
     private var isImageSelected = false
 
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitMap ->
             bitMap?.let {
-                binding.profilePreviewImageView.setImageBitmap(it)
+                binding?.profilePreviewImageView?.setImageBitmap(it)
                 isImageSelected = true
             } ?: Toast.makeText(context, "No image captured", Toast.LENGTH_SHORT).show()
         }
@@ -30,31 +29,28 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    ): View? {
+        this.binding = FragmentSignUpBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.uploadPhotoButton.setOnClickListener {
+        binding?.uploadPhotoButton?.setOnClickListener {
             cameraLauncher.launch(null)
         }
 
-        binding.createAccountButton.setOnClickListener {
+        binding?.createAccountButton?.setOnClickListener {
             performRegistration()
 
             val action = SignUpFragmentDirections.actionSignInFragmentToRecipeListFragment()
             it.findNavController().navigate(action)
         }
+
+        return binding?.root
     }
 
     private fun performRegistration() {
-        val username = binding.usernameTextInputLayout.editText?.text.toString().trim()
-        val email = binding.emailTextInputLayout.editText?.text.toString().trim()
-        val password = binding.passwordTextInputLayout.editText?.text.toString()
-        val confirmPassword = binding.confirmPasswordTextInputLayout.editText?.text.toString()
+        val username = binding?.usernameTextInputLayout?.editText?.text.toString().trim()
+        val email = binding?.emailTextInputLayout?.editText?.text.toString().trim()
+        val password = binding?.passwordTextInputLayout?.editText?.text.toString()
+        val confirmPassword = binding?.confirmPasswordTextInputLayout?.editText?.text.toString()
 
         if (username.isEmpty()) {
             Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT).show()
@@ -73,14 +69,14 @@ class SignUpFragment : Fragment() {
             return
         }
 
-        binding.loadingIndicator.visibility = View.VISIBLE
-        binding.createAccountButton.isEnabled = false
+        binding?.loadingIndicator?.visibility = View.VISIBLE
+        binding?.createAccountButton?.isEnabled = false
 
         var bitmap: Bitmap? = null
         if (isImageSelected) {
-            binding.profilePreviewImageView.isDrawingCacheEnabled = true
-            binding.profilePreviewImageView.buildDrawingCache()
-            bitmap = binding.profilePreviewImageView.bitmap
+            binding?.profilePreviewImageView?.isDrawingCacheEnabled = true
+            binding?.profilePreviewImageView?.buildDrawingCache()
+            bitmap = binding?.profilePreviewImageView?.bitmap
         }
 
         AuthRepository.shared.signUp(username, email, password, bitmap) {
@@ -89,12 +85,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun finishRegistration() {
-        binding.loadingIndicator.visibility = View.GONE
-        binding.createAccountButton.isEnabled = true
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding?.loadingIndicator?.visibility = View.GONE
+        binding?.createAccountButton?.isEnabled = true
     }
 }

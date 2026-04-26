@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.mainNavHost) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
-        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+        val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph)
 
         if (this.shouldNavigateToSignIn()) {
             navGraph.setStartDestination(R.id.signInFragment)
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             navGraph.setStartDestination(R.id.recipeListFragment)
         }
 
-        navController.graph = navGraph
+        navController?.graph = navGraph
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
