@@ -8,7 +8,7 @@ import com.finalProject.plateful.data.models.FirebaseAuthModel
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class AuthRepository private constructor() {
-    private val storageModel = CloudinaryStorageModel()
+    private val storageModel = CloudinaryStorageModel.shared
     private val firebaseAuthModel = FirebaseAuthModel()
 
     companion object {
@@ -19,7 +19,7 @@ class AuthRepository private constructor() {
         firebaseAuthModel.signIn(email, password, completion)
     }
 
-    fun register(
+    fun signUp(
         username: String,
         email: String,
         password: String,

@@ -17,7 +17,7 @@ class FirebaseAuthModel {
                     completion()
                 }
             }.addOnFailureListener {
-                Log.i("TAG", "Sign in failed: ${it.message}")
+                Log.e("TAG", "Sign in failed: ${it.message}")
             }
     }
 

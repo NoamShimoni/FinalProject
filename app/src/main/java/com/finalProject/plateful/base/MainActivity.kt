@@ -24,9 +24,19 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding?.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainNavHost) as? NavHostFragment
-        navController = navHostFragment?.navController
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.mainNavHost) as NavHostFragment
+        val navController = navHostFragment.navController
 
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+
+        if (this.shouldNavigateToSignIn()) {
+            navGraph.setStartDestination(R.id.signInFragment)
+        } else {
+            navGraph.setStartDestination(R.id.recipeListFragment)
+        }
+
+        navController.graph = navGraph
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -79,23 +89,9 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.mainNavHost) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
-
-        if (this.shouldNavigateToLogin()) {
-            navGraph.setStartDestination(R.id.signInFragment)
-        } else {
-            navGraph.setStartDestination(R.id.addRecipeFragment)
-        }
-
-        navController.graph = navGraph
     }
 
-    private fun shouldNavigateToLogin(): Boolean {
+    private fun shouldNavigateToSignIn(): Boolean {
         return !AuthRepository.shared.isUserSignedIn()
     }
 }

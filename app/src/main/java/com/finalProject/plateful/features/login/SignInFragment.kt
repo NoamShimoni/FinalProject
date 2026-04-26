@@ -42,7 +42,8 @@ class SignInFragment : Fragment() {
         }
 
         binding?.signUpTextView?.setOnClickListener {
-            //TODO: navigate to register screen
+            val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
+            it.findNavController().navigate(action)
         }
 
         return binding?.root

@@ -1,5 +1,6 @@
 package com.finalProject.plateful.features.login
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,15 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.finalProject.plateful.databinding.FragmentRegisterBinding
-import com.finalProject.plateful.utils.extentions.bitmap
+import androidx.navigation.findNavController
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
-import android.graphics.Bitmap
-import com.finalProject.plateful.R
+import com.finalProject.plateful.databinding.FragmentSignUpBinding
+import com.finalProject.plateful.utils.extentions.bitmap
 
-class RegisterFragment : Fragment() {
-    private var _binding: FragmentRegisterBinding? = null
+class SignUpFragment : Fragment() {
+    private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
     private var isImageSelected = false
@@ -23,7 +22,7 @@ class RegisterFragment : Fragment() {
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitMap ->
             bitMap?.let {
-                binding.ivProfilePreview.setImageBitmap(it)
+                binding.profilePreviewImageView.setImageBitmap(it)
                 isImageSelected = true
             } ?: Toast.makeText(context, "No image captured", Toast.LENGTH_SHORT).show()
         }
@@ -32,31 +31,30 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnClose.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding.btnUploadPhoto.setOnClickListener {
+        binding.uploadPhotoButton.setOnClickListener {
             cameraLauncher.launch(null)
         }
 
-        binding.btnCreateAccount.setOnClickListener {
+        binding.createAccountButton.setOnClickListener {
             performRegistration()
+
+            val action = SignUpFragmentDirections.actionSignInFragmentToRecipeListFragment()
+            it.findNavController().navigate(action)
         }
     }
 
     private fun performRegistration() {
-        val username = binding.tilUsername.editText?.text.toString().trim()
-        val email = binding.tilEmail.editText?.text.toString().trim()
-        val password = binding.tilPassword.editText?.text.toString()
-        val confirmPassword = binding.tilConfirmPassword.editText?.text.toString()
+        val username = binding.usernameTextInputLayout.editText?.text.toString().trim()
+        val email = binding.emailTextInputLayout.editText?.text.toString().trim()
+        val password = binding.passwordTextInputLayout.editText?.text.toString()
+        val confirmPassword = binding.confirmPasswordTextInputLayout.editText?.text.toString()
 
         if (username.isEmpty()) {
             Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT).show()
@@ -76,25 +74,23 @@ class RegisterFragment : Fragment() {
         }
 
         binding.loadingIndicator.visibility = View.VISIBLE
-        binding.btnCreateAccount.isEnabled = false
+        binding.createAccountButton.isEnabled = false
 
         var bitmap: Bitmap? = null
         if (isImageSelected) {
-            binding.ivProfilePreview.isDrawingCacheEnabled = true
-            binding.ivProfilePreview.buildDrawingCache()
-            bitmap = binding.ivProfilePreview.bitmap
+            binding.profilePreviewImageView.isDrawingCacheEnabled = true
+            binding.profilePreviewImageView.buildDrawingCache()
+            bitmap = binding.profilePreviewImageView.bitmap
         }
 
-        AuthRepository.shared.register(username, email, password, bitmap) {
+        AuthRepository.shared.signUp(username, email, password, bitmap) {
             finishRegistration()
         }
     }
 
     private fun finishRegistration() {
         binding.loadingIndicator.visibility = View.GONE
-        binding.btnCreateAccount.isEnabled = true
-        Toast.makeText(context, "Account created successfully", Toast.LENGTH_SHORT).show()
-        findNavController().navigate(R.id.action_loginFragment_to_addRecipeFragment)
+        binding.createAccountButton.isEnabled = true
     }
 
     override fun onDestroyView() {

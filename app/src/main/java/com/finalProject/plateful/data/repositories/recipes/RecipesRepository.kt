@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 
 class RecipesRepository private constructor() {
 
-    private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel()
+    private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared
     private val firebaseModel = FirebaseModel()
     private val executor = Executors.newSingleThreadExecutor()
     private val database: AppLocalDbRepository = AppLocalDB.db
