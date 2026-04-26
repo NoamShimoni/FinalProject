@@ -1,6 +1,7 @@
 package com.finalProject.plateful.features.recipe_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,7 @@ class RecipeListFragment : Fragment() {
 
     private fun observeRecipes() {
         viewModel.data.observe(viewLifecycleOwner) {
+            Log.v("TAG", it.toString())
             adapter?.recipes = it
             adapter?.notifyDataSetChanged()
             binding?.swipeRefresh?.isRefreshing = false

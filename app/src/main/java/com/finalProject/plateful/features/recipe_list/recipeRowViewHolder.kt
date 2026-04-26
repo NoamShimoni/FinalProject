@@ -28,7 +28,7 @@ class RecipeRowViewHolder(
 
         Picasso.get().load(recipe.imageUrl).into(binding.recipeImageView)
 
-        val isOwner = false //TODO: implement this check when Recipe model has a creatingUserId
+        val isOwner = true //TODO: implement this check when Recipe model has a creatingUserId
 
         if (isOwner) {
             binding.editDeleteDivider.visibility = View.VISIBLE
@@ -40,7 +40,9 @@ class RecipeRowViewHolder(
 
         // TODO: Implement recipe editing
         binding.recipeDeleteBtn.setOnClickListener {
-            RecipesRepository.shared.deleteRecipe(recipe) {}
+            RecipesRepository.shared.deleteRecipe(recipe) {
+                RecipesRepository.shared.refreshRecipes()
+            }
         }
     }
 
