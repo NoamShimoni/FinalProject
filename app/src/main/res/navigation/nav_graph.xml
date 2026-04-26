@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/recipeListFragment"
         android:name="com.finalProject.plateful.features.recipe_list.RecipeListFragment"
-        android:label="fragment_recipe_list"
-        tools:layout="@layout/fragment_recipe_list" >
+        android:label="Recipe List"
+        tools:layout="@layout/fragment_recipe_list">
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
@@ -34,5 +34,62 @@
             android:name="IMAGE_URL_KEY"
             app:argType="string"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.finalProject.plateful.features.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.finalProject.plateful.features.profile.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile">
+        <argument
+            android:name="USERNAME_KEY"
+            app:argType="string" />
+        <argument
+            android:name="AVATAR_URL_KEY"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeFragment"
+        android:name="com.finalProject.plateful.features.add_recipe.AddRecipeFragment"
+        android:label="Add Recipe"
+        tools:layout="@layout/fragment_add_recipe" />
+    <action
+        android:id="@+id/action_global_addRecipeFragment"
+        app:destination="@id/addRecipeFragment" />
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.finalProject.plateful.features.login.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.finalProject.plateful.features.login.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signInFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

@@ -22,7 +22,7 @@ class AddRecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddRecipeBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
         setupView()
 
         cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {

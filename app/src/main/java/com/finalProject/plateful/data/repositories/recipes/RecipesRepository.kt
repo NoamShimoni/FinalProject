@@ -13,7 +13,7 @@ import java.util.concurrent.Executors
 
 class RecipesRepository private constructor() {
 
-    private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel()
+    private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared
     private val firebaseModel = FirebaseModel()
     private val executor = Executors.newSingleThreadExecutor()
     private val database: AppLocalDbRepository = AppLocalDB.db
@@ -50,15 +50,14 @@ class RecipesRepository private constructor() {
 
     fun addRecipe(recipeImage: Bitmap, recipe: Recipe, completion: Completion) {
         firebaseModel.addRecipe(recipe) {
-            storageModel.uploadRecipeImage(recipeImage, recipe.id) {
-                imageUrl ->
+            storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
                 if (!imageUrl.isNullOrEmpty()) {
                     val recipeCopy = recipe.copy(imageUrl = imageUrl)
                     firebaseModel.addRecipe(recipeCopy, completion)
                 } else {
                     completion()
                 }
-             }
+            }
         }
      }
 
