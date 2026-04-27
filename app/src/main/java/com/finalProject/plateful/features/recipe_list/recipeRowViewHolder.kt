@@ -1,7 +1,12 @@
 package com.finalProject.plateful.features.recipe_list
 
+import android.util.Log
 import android.view.View
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.finalProject.plateful.NavGraphDirections
+import com.finalProject.plateful.R
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.databinding.RecipeRowLayoutBinding
 import com.finalProject.plateful.models.Recipe
@@ -38,7 +43,11 @@ class RecipeRowViewHolder(
             binding.buttonsContainer.visibility = View.GONE
         }
 
-        // TODO: Implement recipe editing
+        binding.recipeEditBtn.setOnClickListener {
+            val action = NavGraphDirections.actionGlobalEditRecipeFragment(recipe.id, recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
+            it.findNavController().navigate(action)
+        }
+
         binding.recipeDeleteBtn.setOnClickListener {
             RecipesRepository.shared.deleteRecipe(recipe) {
                 RecipesRepository.shared.refreshRecipes()

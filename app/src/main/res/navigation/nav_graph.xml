@@ -70,6 +70,30 @@
     <action
         android:id="@+id/action_global_addRecipeFragment"
         app:destination="@id/addRecipeFragment" />
+    <fragment
+        android:id="@+id/editRecipeFragment"
+        android:name="com.finalProject.plateful.features.edit_recipe.EditRecipeFragment"
+        android:label="Edit Recipe"
+        tools:layout="@layout/fragment_edit_recipe">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="ingredients"
+            app:argType="string" />
+        <argument
+            android:name="instructions"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_editRecipeFragment"
+        app:destination="@id/editRecipeFragment" />
 
     <fragment
         android:id="@+id/signInFragment"
