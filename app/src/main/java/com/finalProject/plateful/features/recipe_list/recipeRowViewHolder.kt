@@ -10,13 +10,22 @@ import com.squareup.picasso.Picasso
 class RecipeRowViewHolder(
     private val binding: RecipeRowLayoutBinding,
     private val listener: OnItemClickListener?
-): RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
     private var recipe: Recipe? = null
 
     init {
         itemView.setOnClickListener {
             recipe?.let { recipe ->
                 listener?.onRecipeItemClick(recipe)
+            }
+        }
+
+        // TODO: Implement recipe editing
+        binding.recipeDeleteBtn.setOnClickListener {
+            recipe?.let { recipe ->
+                RecipesRepository.shared.deleteRecipe(recipe) {
+                    RecipesRepository.shared.refreshRecipes()
+                }
             }
         }
     }
@@ -37,13 +46,5 @@ class RecipeRowViewHolder(
             binding.editDeleteDivider.visibility = View.GONE
             binding.buttonsContainer.visibility = View.GONE
         }
-
-        // TODO: Implement recipe editing
-        binding.recipeDeleteBtn.setOnClickListener {
-            RecipesRepository.shared.deleteRecipe(recipe) {
-                RecipesRepository.shared.refreshRecipes()
-            }
-        }
     }
-
 }
