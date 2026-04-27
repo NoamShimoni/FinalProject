@@ -24,6 +24,21 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding?.root)
 
+        setupNavigation()
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
+
+        setupBottomBar()
+
+        setupTopBar()
+
+    }
+
+    private fun setupNavigation() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.mainNavHost) as NavHostFragment
         navController = navHostFragment.navController
@@ -37,22 +52,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         navController?.graph = navGraph
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            WindowInsetsCompat.CONSUMED
-        }
-
-        setupBottomBar()
-
-        setupTopBar()
-
     }
 
     private fun setupTopBar() {
         navController?.let {
             val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
-                setOf(R.id.recipeListFragment, R.id.profileFragment)
+                setOf(R.id.recipeListFragment, R.id.profileFragment, R.id.signInFragment)
             )
             binding?.topAppBar?.let { toolbar ->
                 toolbar.setOnMenuItemClickListener { menuItem ->
@@ -69,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
                 it.addOnDestinationChangedListener { _, destination, _ ->
                     val addMenuItem = toolbar.menu.findItem(R.id.top_bar_menu_add)
-                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment
+                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment && destination.id != R.id.signInFragment && destination.id != R.id.signUpFragment
                 }
             }
         }
