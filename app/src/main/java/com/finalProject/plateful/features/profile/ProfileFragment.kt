@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.databinding.FragmentProfileBinding
 import com.finalProject.plateful.features.recipe_list.RecipesListViewModel
 import kotlin.getValue
@@ -15,6 +16,8 @@ class ProfileFragment : Fragment() {
     private var binding: FragmentProfileBinding? = null
 
     private val viewModel: RecipesListViewModel by viewModels()
+
+    private val authRepository = AuthRepository.shared
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,12 @@ class ProfileFragment : Fragment() {
 
         binding?.editProfileButton?.setOnClickListener {
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("Noam", "https://res.cloudinary.com/dltg3tc47/image/upload/v1775500141/avrrwceyrdnw40cnlmih.jpg")
+            it.findNavController().navigate(action)
+        }
+
+        binding?.logoutNavigationCard?.setOnClickListener {
+            authRepository.signOut()
+            val action = ProfileFragmentDirections.actionProfileFragmentToSignInFragment()
             it.findNavController().navigate(action)
         }
 

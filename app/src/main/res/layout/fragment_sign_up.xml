@@ -19,7 +19,8 @@
             app:cardCornerRadius="40dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/logo_image_view"
@@ -67,16 +68,15 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profile_preview_image_view"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginTop="8dp"
-            android:background="#F5F5F5"
+            android:background="@color/grayBackground"
+            android:padding="8dp"
             android:scaleType="centerCrop"
-            android:padding="16dp"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Day"
-            app:srcCompat="@drawable/ic_chef_hat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_image_label_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_image_label_text_view"
+            app:srcCompat="@drawable/ic_chef_hat" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/upload_photo_button"
@@ -86,9 +86,15 @@
             android:layout_marginStart="16dp"
             android:text="@string/upload_photo"
             android:textColor="@color/textContent"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="0dp"
             app:cornerRadius="8dp"
-            app:strokeColor="#E0E0E0"
+            app:strokeColor="@color/border"
             app:icon="@android:drawable/ic_menu_camera"
+            app:iconSize="32dp"
+            app:iconPadding="12dp"
+            app:iconGravity="textStart"
             app:iconTint="@color/textContent"
             app:layout_constraintBottom_toBottomOf="@+id/profile_preview_image_view"
             app:layout_constraintEnd_toEndOf="parent"

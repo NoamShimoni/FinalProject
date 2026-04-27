@@ -2,10 +2,14 @@ package com.finalProject.plateful.data.repositories.auth
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
+import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseAuthModel
+import com.google.firebase.Firebase
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.auth
 
 class AuthRepository private constructor() {
     private val storageModel = CloudinaryStorageModel.shared
@@ -15,7 +19,7 @@ class AuthRepository private constructor() {
         val shared = AuthRepository()
     }
 
-    fun signIn(email: String, password: String, completion: Completion) {
+    fun signIn(email: String, password: String, completion: BooleanCompletion) {
         firebaseAuthModel.signIn(email, password, completion)
     }
 
@@ -24,18 +28,21 @@ class AuthRepository private constructor() {
         email: String,
         password: String,
         profileImageBitmap: Bitmap?,
-        completion: Completion
+        completion: BooleanCompletion
     ) {
         firebaseAuthModel.signUp(email, password) {
-            val user = firebaseAuthModel.currentUser()
-            if (user != null) {
+            val user = Firebase.auth.currentUser
+            if (user == null) {
+                completion(false)
+            } else {
                 if (profileImageBitmap != null) {
                     storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
                         val profileUpdates = UserProfileChangeRequest.Builder()
-                            .setDisplayName(username)
+
+                        profileUpdates.displayName = username
 
                         if (imageUrl != null) {
-                            profileUpdates.setPhotoUri(Uri.parse(imageUrl))
+                            profileUpdates.photoUri = Uri.parse(imageUrl)
                         }
 
                         firebaseAuthModel.updateProfile(profileUpdates.build(), completion)
@@ -46,13 +53,15 @@ class AuthRepository private constructor() {
                         .build()
                     firebaseAuthModel.updateProfile(profileUpdates, completion)
                 }
-            } else {
-                completion()
             }
         }
     }
 
+    fun signOut() {
+        firebaseAuthModel.signOut()
+    }
+
     fun isUserSignedIn(): Boolean {
-        return firebaseAuthModel.currentUser() != null
+        return Firebase.auth.currentUser != null
     }
 }

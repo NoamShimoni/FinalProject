@@ -28,15 +28,23 @@ class SignInFragment : Fragment() {
             if (email.isEmpty()) {
                 Toast.makeText(context, "Please enter an email address", Toast.LENGTH_SHORT).show()
             } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT)
+                    .show()
             } else if (password.isEmpty()) {
                 Toast.makeText(context, "Please enter a password", Toast.LENGTH_SHORT).show()
             } else {
                 binding?.loadingIndicator?.visibility = View.VISIBLE
 
-                AuthRepository.shared.signIn(email, password) {
-                    val action = SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
-                    it.findNavController().navigate(action)
+                AuthRepository.shared.signIn(email, password) { isSuccess ->
+                    isSuccess?.let { isSuccess ->
+                        if (isSuccess) {
+                            val action =
+                                SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
+                            it.findNavController().navigate(action)
+                        }
+                    }
+
+                    binding?.loadingIndicator?.visibility = View.GONE
                 }
             }
         }
