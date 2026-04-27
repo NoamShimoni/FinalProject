@@ -1,6 +1,7 @@
 package com.finalProject.plateful.data.models
 
 import android.util.Log
+import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.base.Completion
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
@@ -10,18 +11,23 @@ import com.google.firebase.auth.auth
 class FirebaseAuthModel {
     private val auth = Firebase.auth
 
-    fun signIn(email: String, password: String, completion: Completion) {
+    fun signIn(email: String, password: String, completion: BooleanCompletion) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    completion()
+                    completion(true)
                 }
             }.addOnFailureListener {
                 Log.e("TAG", "Sign in failed: ${it.message}")
+                completion(false)
             }
     }
 
     fun signUp(email: String, password: String, completion: Completion) {
+        if (auth.currentUser !== null) {
+            completion(); return
+        }
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 completion()
@@ -29,15 +35,13 @@ class FirebaseAuthModel {
         }
     }
 
-    fun updateProfile(profileUpdates: UserProfileChangeRequest, completion: Completion) {
-        auth.currentUser?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                completion()
-            }
-        } ?: completion()
+    fun signOut() {
+        auth.signOut()
     }
 
-    fun currentUser(): FirebaseUser? {
-        return auth.currentUser
+    fun updateProfile(profileUpdates: UserProfileChangeRequest, completion: BooleanCompletion) {
+        auth.currentUser?.updateProfile(profileUpdates)?.addOnCompleteListener {
+            completion(true)
+        } ?: completion(false)
     }
 }
