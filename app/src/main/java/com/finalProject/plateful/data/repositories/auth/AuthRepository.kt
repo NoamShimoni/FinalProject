@@ -12,7 +12,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
 
 class AuthRepository private constructor() {
-    private val storageModel = CloudinaryStorageModel.shared
+    private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared
     private val firebaseAuthModel = FirebaseAuthModel()
 
     companion object {

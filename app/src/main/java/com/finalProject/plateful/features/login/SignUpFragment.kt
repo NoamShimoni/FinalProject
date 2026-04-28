@@ -40,7 +40,7 @@ class SignUpFragment : Fragment() {
 
         binding?.createAccountButton?.setOnClickListener {
             if(performRegistration()) {
-                val action = SignUpFragmentDirections.actionSignInFragmentToRecipeListFragment()
+                val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
                 it.findNavController().navigate(action)
             } else {
                 binding?.loadingIndicator?.visibility = View.GONE
