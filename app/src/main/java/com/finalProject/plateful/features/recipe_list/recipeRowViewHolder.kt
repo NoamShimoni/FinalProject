@@ -26,8 +26,17 @@ class RecipeRowViewHolder(
         }
 
         binding.recipeEditBtn.setOnClickListener {
-            val action = NavGraphDirections.actionGlobalEditRecipeFragment(recipe.id, recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
-            it.findNavController().navigate(action)
+            recipe?.let { recipe ->
+            val action = NavGraphDirections.actionGlobalEditRecipeFragment(
+                recipe.id,
+                recipe.title,
+                recipe.ingredients,
+                recipe.instructions,
+                recipe.imageUrl,
+                recipe.creatingUserId
+            )
+                it.findNavController().navigate(action)
+            }
         }
 
         binding.recipeDeleteBtn.setOnClickListener {

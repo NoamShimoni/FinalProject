@@ -31,7 +31,7 @@ class RecipesRepository private constructor() {
     fun refreshRecipes() {
         val lastUpdated = Recipe.Companion.lastUpdated
 
-        firebaseModel.getAllRecipes(lastUpdated) {
+        firebaseModel.getAllRecipes {
             executor.execute {
                 var time = lastUpdated
 

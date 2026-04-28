@@ -1,6 +1,7 @@
 package com.finalProject.plateful.features.add_recipe
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.finalProject.plateful.utils.extentions.bitmap
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class AddRecipeFragment : Fragment() {
     private var binding: FragmentAddRecipeBinding? = null
@@ -48,27 +51,33 @@ class AddRecipeFragment : Fragment() {
             val recipeTitle = binding?.recipeTitleTextInput?.text.toString()
             val recipeIngredients = binding?.recipeIngredientsTextInput?.text.toString()
             val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
+            val creatingUserId = Firebase.auth.currentUser?.uid
 
-            val recipe = Recipe(
-                id = java.util.UUID.randomUUID().toString(),
-                title = recipeTitle,
-                ingredients = recipeIngredients,
-                instructions = recipeInstructions,
-                imageUrl = "",
-                lastUpdated = null
-            )
+            creatingUserId?.let { creatingUserId ->
+                val recipe = Recipe(
+                    id = java.util.UUID.randomUUID().toString(),
+                    title = recipeTitle,
+                    ingredients = recipeIngredients,
+                    instructions = recipeInstructions,
+                    imageUrl = "",
+                    creatingUserId = creatingUserId,
+                    lastUpdated = null
+                )
 
-            binding?.recipeImageImageView?.isDrawingCacheEnabled = true
-            binding?.recipeImageImageView?.buildDrawingCache()
+                binding?.recipeImageImageView?.isDrawingCacheEnabled = true
+                binding?.recipeImageImageView?.buildDrawingCache()
 
-            val bitmap = binding?.recipeImageImageView?.bitmap
+                val bitmap = binding?.recipeImageImageView?.bitmap
 
-            bitmap?.let {
-                RecipesRepository.shared.addRecipe( it, recipe, ) {
-                    dismiss()
+                bitmap?.let {
+                    RecipesRepository.shared.addRecipe( it, recipe, ) {
+                        dismiss()
+                    }
+                } ?: run {
+                    Toast.makeText(context, "Please capture a profile image", Toast.LENGTH_SHORT).show()
                 }
             } ?: run {
-                Toast.makeText(context, "Please capture a profile image", Toast.LENGTH_SHORT).show()
+                Log.v("TAG", "Error adding recipe. No current user")
             }
         }
     }

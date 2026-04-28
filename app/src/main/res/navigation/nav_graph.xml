@@ -90,6 +90,9 @@
         <argument
             android:name="imageUrl"
             app:argType="string" />
+        <argument
+            android:name="creatingUserId"
+            app:argType="string" />
     </fragment>
     <action
         android:id="@+id/action_global_editRecipeFragment"

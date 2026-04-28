@@ -26,6 +26,7 @@ class EditRecipeFragment : Fragment() {
     var ingredients: String? = null
     var instructions: String? = null
     var imageUrl: String? = null
+    var creatingUserId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +36,9 @@ class EditRecipeFragment : Fragment() {
             this.ingredients = it.getString(Recipe.INGREDIENTS_KEY)
             this.instructions = it.getString(Recipe.INSTRUCTIONS_KEY)
             this.imageUrl = it.getString(Recipe.IMAGE_URL_KEY)
+            this.creatingUserId = it.getString(Recipe.CREATING_USER_ID_KEY)
 
-            if (this.id.isNullOrEmpty()) {
+            if (this.id.isNullOrEmpty() || this.creatingUserId.isNullOrEmpty()) {
                 this.dismiss()
             }
         }
@@ -85,31 +87,34 @@ class EditRecipeFragment : Fragment() {
             val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
 
             id?.let { id ->
-                var newImageUrl = ""
-                var imageBitmap: Bitmap? = null
+                creatingUserId?.let { creatingUserId ->
+                    var newImageUrl = ""
+                    var imageBitmap: Bitmap? = null
 
-                this.imageUrl?.let { imageUrl ->
-                    if (!this.hasImageChanged) {
-                        newImageUrl = imageUrl
-                    } else {
-                        binding?.recipeImageImageView?.isDrawingCacheEnabled = true
-                        binding?.recipeImageImageView?.buildDrawingCache()
+                    this.imageUrl?.let { imageUrl ->
+                        if (!this.hasImageChanged) {
+                            newImageUrl = imageUrl
+                        } else {
+                            binding?.recipeImageImageView?.isDrawingCacheEnabled = true
+                            binding?.recipeImageImageView?.buildDrawingCache()
 
-                        imageBitmap = binding?.recipeImageImageView?.bitmap
+                            imageBitmap = binding?.recipeImageImageView?.bitmap
+                        }
                     }
-                }
 
-                val recipe = Recipe(
-                    id = id,
-                    title = recipeTitle,
-                    ingredients = recipeIngredients,
-                    instructions = recipeInstructions,
-                    imageUrl = newImageUrl,
-                    lastUpdated = null
-                )
+                    val recipe = Recipe(
+                        id = id,
+                        title = recipeTitle,
+                        ingredients = recipeIngredients,
+                        instructions = recipeInstructions,
+                        imageUrl = newImageUrl,
+                        creatingUserId = creatingUserId,
+                        lastUpdated = null
+                    )
 
-                RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
-                    dismiss()
+                    RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
+                        dismiss()
+                    }
                 }
             }
         }

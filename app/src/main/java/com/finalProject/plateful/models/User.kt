@@ -8,15 +8,11 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 
 @Entity
-data class Recipe(
+data class User(
     @PrimaryKey
     val id: String,
-    val title: String,
-    var ingredients: String,
-    val instructions: String,
-    val imageUrl: String,
-    val creatingUserId: String,
-    val lastUpdated: Long?,
+    val username: String,
+    val lastUpdated: Long?
     ) {
     companion object {
         var lastUpdated: Long
@@ -33,33 +29,24 @@ data class Recipe(
             }
 
         const val ID_KEY = "id"
-        const val TITLE_KEY = "title"
-        const val INGREDIENTS_KEY = "ingredients"
+        const val USERNAME_KEY = "username"
+        const val EMAIL_KEY = "email"
 
-        const val INSTRUCTIONS_KEY = "instructions"
+        const val PASSWORD_KEY = "password"
         const val IMAGE_URL_KEY = "imageUrl"
-        const val CREATING_USER_ID_KEY = "creatingUserId"
         const val LAST_UPDATED_KEY = "lastUpdated"
 
 
 
-        fun fromJson(json: Map<String, Any>): Recipe {
+        fun fromJson(json: Map<String, Any>): User {
             val id = json[ID_KEY] as? String ?: ""
-            val title = json[TITLE_KEY] as? String ?: ""
-            val ingredients = json[INGREDIENTS_KEY] as? String ?: ""
-            val instructions = json[INSTRUCTIONS_KEY] as? String ?: ""
-            val imageUrl = json[IMAGE_URL_KEY] as? String ?: ""
-            val creatingUserId = json[CREATING_USER_ID_KEY] as? String ?: ""
+            val username = json[USERNAME_KEY] as? String ?: ""
             val timestamp = json[LAST_UPDATED_KEY] as? Timestamp
             val lastUpdatedLong = timestamp?.toDate()?.time
 
-            return Recipe(
+            return User(
                 id = id,
-                title = title,
-                ingredients = ingredients,
-                instructions = instructions,
-                imageUrl = imageUrl,
-                creatingUserId = creatingUserId,
+                username = username,
                 lastUpdated = lastUpdatedLong
             )
         }
@@ -68,11 +55,7 @@ data class Recipe(
     val toJson: Map<String, Any?>
         get() = hashMapOf(
             ID_KEY to id,
-            TITLE_KEY to title,
-            INGREDIENTS_KEY to ingredients,
-            INSTRUCTIONS_KEY to instructions,
-            IMAGE_URL_KEY to imageUrl,
-            CREATING_USER_ID_KEY to creatingUserId,
+            USERNAME_KEY to username,
             LAST_UPDATED_KEY to FieldValue.serverTimestamp()
         )
 }
