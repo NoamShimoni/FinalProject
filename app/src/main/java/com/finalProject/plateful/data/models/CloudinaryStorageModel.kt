@@ -36,14 +36,19 @@ class CloudinaryStorageModel private constructor() {
         val shared = CloudinaryStorageModel()
     }
 
-    private fun uploadImage(image: Bitmap, name: String, url: String, completion: StringCompletion) {
+    private fun uploadImage(
+        image: Bitmap,
+        name: String,
+        url: String,
+        completion: StringCompletion
+    ) {
         val context = MyApplication.appContext ?: return
 
         val file = bitmapToFile(image, context)
 
         MediaManager.get().upload(file.path)
             .option(name, url)
-            .callback ( object: UploadCallback {
+            .callback(object : UploadCallback {
                 override fun onStart(requestId: String) {
                     // Upload started
                 }
@@ -88,14 +93,15 @@ class CloudinaryStorageModel private constructor() {
 
         thread {
             try {
-                val result = MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
+                val response =
+                    MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
 
-                val response = result["result"] as? String
-                if (response == "ok") {
+                val result = response["result"] as? String
+                if (result == "ok") {
                     Log.v("TAG", "Cloudinary delete success: $publicId")
                     completion(true)
                 } else {
-                    Log.e("TAG", "Cloudinary delete failed: $response")
+                    Log.e("TAG", "Cloudinary delete failed: $result")
                     completion(false)
                 }
             } catch (e: Exception) {
@@ -112,13 +118,11 @@ class CloudinaryStorageModel private constructor() {
 
         val afterUpload = parts.subList(uploadIndex + 1, parts.size)
 
-        val startIndex = if (afterUpload[0].startsWith("v") && afterUpload[0].substring(1).all { it.isDigit() }) {
-            1
-        } else {
-            0
-        }
+        val startIndex = if (afterUpload[0].startsWith("v") && afterUpload[0].substring(1)
+            .all { it.isDigit() }) { 1 } else { 0 }
 
-        val publicIdWithExtension = afterUpload.subList(startIndex, afterUpload.size).joinToString("/")
+        val publicIdWithExtension =
+            afterUpload.subList(startIndex, afterUpload.size).joinToString("/")
 
         return publicIdWithExtension.substringBeforeLast(".")
     }

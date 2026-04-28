@@ -61,7 +61,6 @@ class RecipeListFragment : Fragment() {
 
     private fun observeRecipes() {
         viewModel.data.observe(viewLifecycleOwner) {
-            Log.v("TAG", it.toString())
             adapter?.recipes = it
             adapter?.notifyDataSetChanged()
             binding?.swipeRefresh?.isRefreshing = false

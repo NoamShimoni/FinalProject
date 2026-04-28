@@ -98,7 +98,7 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.finalProject.plateful.features.login.SignInFragment"
-        android:label="fragment_sign_in"
+        android:label="Sign In"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_recipeListFragment"
@@ -110,10 +110,10 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.finalProject.plateful.features.login.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label="Sign Up"
         tools:layout="@layout/fragment_sign_up">
         <action
-            android:id="@+id/action_signInFragment_to_recipeListFragment"
+            android:id="@+id/action_signUpFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" />
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"

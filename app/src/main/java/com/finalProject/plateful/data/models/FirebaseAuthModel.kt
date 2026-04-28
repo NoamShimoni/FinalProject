@@ -32,6 +32,8 @@ class FirebaseAuthModel {
             if (task.isSuccessful) {
                 completion()
             }
+        }.addOnFailureListener {
+            Log.i("TAG", "signIn failed: ${it.message}")
         }
     }
 
@@ -42,6 +44,8 @@ class FirebaseAuthModel {
     fun updateProfile(profileUpdates: UserProfileChangeRequest, completion: BooleanCompletion) {
         auth.currentUser?.updateProfile(profileUpdates)?.addOnCompleteListener {
             completion(true)
+        }?.addOnFailureListener {
+            Log.i("TAG", "signIn failed: ${it.message}")
         } ?: completion(false)
     }
 }
