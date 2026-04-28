@@ -12,6 +12,11 @@ object AppLocalDB {
             db.execSQL("ALTER TABLE Recipe ADD COLUMN creatingUserId TEXT NOT NULL DEFAULT ''")
         }
     }
+    private val MIGRATION_ADD_CREATING_USERNAME = object : Migration(2, 3) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE Recipe ADD COLUMN creatingUserName TEXT NOT NULL DEFAULT ''")
+        }
+    }
     val db: AppLocalDbRepository by lazy {
         val context =
             MyApplication.appContext ?: throw IllegalStateException("Context is not initialized")
@@ -20,6 +25,7 @@ object AppLocalDB {
             context,
             AppLocalDbRepository::class.java,
             "recipes.db"
-        ).addMigrations(MIGRATION_ADD_CREATING_USER).build()
+        ).addMigrations(MIGRATION_ADD_CREATING_USER).addMigrations(MIGRATION_ADD_CREATING_USERNAME)
+            .build()
     }
 }

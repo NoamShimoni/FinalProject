@@ -33,7 +33,8 @@ class RecipeRowViewHolder(
                 recipe.ingredients,
                 recipe.instructions,
                 recipe.imageUrl,
-                recipe.creatingUserId
+                recipe.creatingUserId,
+                recipe.creatingUserName,
             )
                 it.findNavController().navigate(action)
             }

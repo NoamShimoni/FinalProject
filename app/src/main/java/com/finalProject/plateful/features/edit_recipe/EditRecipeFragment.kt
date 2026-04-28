@@ -27,6 +27,7 @@ class EditRecipeFragment : Fragment() {
     var instructions: String? = null
     var imageUrl: String? = null
     var creatingUserId: String? = null
+    var creatingUserName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,7 @@ class EditRecipeFragment : Fragment() {
             this.instructions = it.getString(Recipe.INSTRUCTIONS_KEY)
             this.imageUrl = it.getString(Recipe.IMAGE_URL_KEY)
             this.creatingUserId = it.getString(Recipe.CREATING_USER_ID_KEY)
+            this.creatingUserName = it.getString(Recipe.CREATING_USER_NAME_KEY)
 
             if (this.id.isNullOrEmpty() || this.creatingUserId.isNullOrEmpty()) {
                 this.dismiss()
@@ -109,6 +111,7 @@ class EditRecipeFragment : Fragment() {
                         instructions = recipeInstructions,
                         imageUrl = newImageUrl,
                         creatingUserId = creatingUserId,
+                        creatingUserName = creatingUserName ?: "",
                         lastUpdated = null
                     )
 

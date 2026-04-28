@@ -16,6 +16,7 @@ data class Recipe(
     val instructions: String,
     val imageUrl: String,
     val creatingUserId: String,
+    val creatingUserName: String,
     val lastUpdated: Long?,
     ) {
     companion object {
@@ -39,6 +40,7 @@ data class Recipe(
         const val INSTRUCTIONS_KEY = "instructions"
         const val IMAGE_URL_KEY = "imageUrl"
         const val CREATING_USER_ID_KEY = "creatingUserId"
+        const val CREATING_USER_NAME_KEY = "creatingUserName"
         const val LAST_UPDATED_KEY = "lastUpdated"
 
 
@@ -50,6 +52,7 @@ data class Recipe(
             val instructions = json[INSTRUCTIONS_KEY] as? String ?: ""
             val imageUrl = json[IMAGE_URL_KEY] as? String ?: ""
             val creatingUserId = json[CREATING_USER_ID_KEY] as? String ?: ""
+            val creatingUserName = json[CREATING_USER_NAME_KEY] as? String ?: ""
             val timestamp = json[LAST_UPDATED_KEY] as? Timestamp
             val lastUpdatedLong = timestamp?.toDate()?.time
 
@@ -60,6 +63,7 @@ data class Recipe(
                 instructions = instructions,
                 imageUrl = imageUrl,
                 creatingUserId = creatingUserId,
+                creatingUserName = creatingUserName,
                 lastUpdated = lastUpdatedLong
             )
         }
@@ -73,6 +77,7 @@ data class Recipe(
             INSTRUCTIONS_KEY to instructions,
             IMAGE_URL_KEY to imageUrl,
             CREATING_USER_ID_KEY to creatingUserId,
+            CREATING_USER_NAME_KEY to creatingUserName,
             LAST_UPDATED_KEY to FieldValue.serverTimestamp()
         )
 }

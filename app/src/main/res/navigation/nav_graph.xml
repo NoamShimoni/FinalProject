@@ -93,6 +93,9 @@
         <argument
             android:name="creatingUserId"
             app:argType="string" />
+        <argument
+            android:name="creatingUserName"
+            app:argType="string" />
     </fragment>
     <action
         android:id="@+id/action_global_editRecipeFragment"

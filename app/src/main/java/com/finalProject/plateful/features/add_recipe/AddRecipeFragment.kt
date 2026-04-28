@@ -51,16 +51,17 @@ class AddRecipeFragment : Fragment() {
             val recipeTitle = binding?.recipeTitleTextInput?.text.toString()
             val recipeIngredients = binding?.recipeIngredientsTextInput?.text.toString()
             val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
-            val creatingUserId = Firebase.auth.currentUser?.uid
+            val creatingUser = Firebase.auth.currentUser
 
-            creatingUserId?.let { creatingUserId ->
+            creatingUser?.let { creatingUser ->
                 val recipe = Recipe(
                     id = java.util.UUID.randomUUID().toString(),
                     title = recipeTitle,
                     ingredients = recipeIngredients,
                     instructions = recipeInstructions,
                     imageUrl = "",
-                    creatingUserId = creatingUserId,
+                    creatingUserId = creatingUser.uid,
+                    creatingUserName = creatingUser.displayName ?: "",
                     lastUpdated = null
                 )
 
