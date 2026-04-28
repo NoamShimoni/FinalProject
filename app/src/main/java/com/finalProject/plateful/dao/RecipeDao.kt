@@ -12,9 +12,6 @@ interface RecipeDao {
     @Query("SELECT * FROM Recipe")
     fun getAllRecipes(): LiveData<MutableList<Recipe>>
 
-    @Query("SELECT * FROM Recipe WHERE creatingUserId = :creatingUserId")
-    fun getAllRecipesByUser(creatingUserId: String): LiveData<MutableList<Recipe>>
-
     @Query("SELECT * FROM Recipe")
     fun getAllRecipesSync(): MutableList<Recipe>
 
