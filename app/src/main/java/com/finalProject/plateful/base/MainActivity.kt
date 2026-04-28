@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupTopBar() {
         navController?.let {
             val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
-                setOf(R.id.recipeListFragment, R.id.profileFragment, R.id.signInFragment)
+                setOf(R.id.recipeListFragment, R.id.profileFragment, R.id.libraryFragment, R.id.signInFragment)
             )
             binding?.topAppBar?.let { toolbar ->
                 toolbar.setOnMenuItemClickListener { menuItem ->
@@ -89,6 +89,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.bottom_navigation_menu_profile -> {
                     navController?.navigate(R.id.action_global_profileFragment)
+                    true
+                }
+                R.id.bottom_navigation_menu_library -> {
+                    navController?.navigate(R.id.libraryFragment)
                     true
                 }
                 else -> false

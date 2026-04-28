@@ -125,4 +125,13 @@
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.finalProject.plateful.features.library.LibraryFragment"
+        android:label="Library"
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
 </navigation>

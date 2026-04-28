@@ -24,8 +24,8 @@ class RecipesRepository private constructor() {
         val shared = RecipesRepository()
     }
 
-    fun getAllRecipes(): LiveData<MutableList<Recipe>> {
-        return recipes ?: database.recipeDao.getAllRecipes()
+    fun getAllRecipes(creatingUserId: String?): LiveData<MutableList<Recipe>> {
+        return recipes ?: creatingUserId?.let { creatingUserId -> database.recipeDao.getAllRecipesByUser(creatingUserId) } ?: run { database.recipeDao.getAllRecipes() }
     }
 
     fun refreshRecipes() {
