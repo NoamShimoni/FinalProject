@@ -52,16 +52,9 @@
         app:destination="@id/profileFragment" />
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.finalProject.plateful.features.profile.EditProfileFragment"
+        android:name="com.finalProject.plateful.features.edit_profile.EditProfileFragment"
         android:label="Edit Profile"
-        tools:layout="@layout/fragment_edit_profile">
-        <argument
-            android:name="USERNAME_KEY"
-            app:argType="string" />
-        <argument
-            android:name="AVATAR_URL_KEY"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_edit_profile"/>
     <fragment
         android:id="@+id/addRecipeFragment"
         android:name="com.finalProject.plateful.features.add_recipe.AddRecipeFragment"

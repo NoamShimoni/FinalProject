@@ -6,6 +6,7 @@ import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseAuthModel
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
 
@@ -59,6 +60,10 @@ class AuthRepository private constructor() {
 
     fun signOut() {
         firebaseAuthModel.signOut()
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return Firebase.auth.currentUser
     }
 
     fun isUserSignedIn(): Boolean {

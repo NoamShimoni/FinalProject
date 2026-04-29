@@ -76,12 +76,15 @@ class SignUpFragment : Fragment() {
             AuthRepository.shared.signUp(username, email, password, bitmap) { isSuccess ->
                 isSuccess?.let { isSuccess ->
                     if (isSuccess) {
-                        val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
+                        val action =
+                            SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
                         it.findNavController().navigate(action)
                     }
                 }
+
                 binding?.loadingIndicator?.visibility = View.GONE
             }
+
         }
     }
 }
