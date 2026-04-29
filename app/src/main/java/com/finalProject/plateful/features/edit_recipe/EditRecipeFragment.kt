@@ -90,18 +90,13 @@ class EditRecipeFragment : Fragment() {
 
             id?.let { id ->
                 creatingUserId?.let { creatingUserId ->
-                    var newImageUrl = ""
                     var imageBitmap: Bitmap? = null
 
-                    this.imageUrl?.let { imageUrl ->
-                        if (!this.hasImageChanged) {
-                            newImageUrl = imageUrl
-                        } else {
-                            binding?.recipeImageImageView?.isDrawingCacheEnabled = true
-                            binding?.recipeImageImageView?.buildDrawingCache()
+                    if (this.hasImageChanged) {
+                        binding?.recipeImageImageView?.isDrawingCacheEnabled = true
+                        binding?.recipeImageImageView?.buildDrawingCache()
 
-                            imageBitmap = binding?.recipeImageImageView?.bitmap
-                        }
+                        imageBitmap = binding?.recipeImageImageView?.bitmap
                     }
 
                     val recipe = Recipe(
@@ -109,11 +104,11 @@ class EditRecipeFragment : Fragment() {
                         title = recipeTitle,
                         ingredients = recipeIngredients,
                         instructions = recipeInstructions,
-                        imageUrl = newImageUrl,
+                        imageUrl = imageUrl ?: "",
                         creatingUserId = creatingUserId,
                         creatingUserName = creatingUserName ?: "",
                         isDeleted = true,
-                        lastUpdated = null
+                        lastUpdated = Recipe.lastUpdated
                     )
 
                     RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
