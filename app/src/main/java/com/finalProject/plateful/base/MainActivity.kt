@@ -1,6 +1,7 @@
 package com.finalProject.plateful.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -93,6 +94,17 @@ class MainActivity : AppCompatActivity() {
         binding?.bottomNavigation?.let { bottomNavigationView ->
             navController?.let { navController ->
                 NavigationUI.setupWithNavController(bottomNavigationView, navController)
+            }
+        }
+
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.signInFragment, R.id.signUpFragment -> {
+                    binding?.bottomNavigation?.visibility = View.GONE
+                }
+                else -> {
+                    binding?.bottomNavigation?.visibility = View.VISIBLE
+                }
             }
         }
     }

@@ -22,13 +22,13 @@ class FirebaseAuthModel {
     }
 
     fun signUp(email: String, password: String, completion: BooleanCompletion) {
-        if (auth.currentUser !== null) {
-            return
-        }
+        if (auth.currentUser !== null) { completion(false); return }
 
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 completion(true)
+            } else {
+                completion(false)
             }
         }.addOnFailureListener {
             Log.v("TAG", "signIn failed: ${it.message}")

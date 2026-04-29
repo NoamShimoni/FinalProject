@@ -28,9 +28,10 @@ class AuthRepository private constructor() {
         profileImageBitmap: Bitmap?,
         completion: BooleanCompletion
     ) {
-        firebaseAuthModel.signUp(email, password) {
+        firebaseAuthModel.signUp(email, password) { isSuccess ->
             val user = Firebase.auth.currentUser
-            if (user == null) {
+
+            if (user == null || !isSuccess) {
                 completion(false)
             } else {
                 if (profileImageBitmap != null) {
