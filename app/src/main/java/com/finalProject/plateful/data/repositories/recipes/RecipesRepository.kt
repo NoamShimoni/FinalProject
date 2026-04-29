@@ -11,9 +11,9 @@ import com.finalProject.plateful.data.models.FirebaseModel
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Timestamp
 import java.util.concurrent.Executors
+import kotlin.concurrent.thread
 
 class RecipesRepository private constructor() {
-
     private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared
     private val firebaseModel = FirebaseModel()
     private val executor = Executors.newSingleThreadExecutor()
@@ -31,27 +31,19 @@ class RecipesRepository private constructor() {
     fun refreshRecipes() {
         val lastUpdated = Recipe.Companion.lastUpdated
 
-        firebaseModel.getAllRecipes {
+        firebaseModel.getAllRecipes(lastUpdated) {
             executor.execute {
                 var time = lastUpdated
 
-                val delete = database.recipeDao.getAllRecipesSync().filter { recipe ->
-                    !it.contains(recipe)
-                }
-
-                for (recipe in delete) {
-                    database.recipeDao.deleteRecipeById(recipe.id)
-                }
-
-                val update = it.filter { recipe ->
-                    (recipe.lastUpdated ?: (Timestamp.now().seconds * 1000)) >= lastUpdated
-                }
-
-                for (recipe in update) {
-                    database.recipeDao.insertRecipes(recipe)
-                    recipe.lastUpdated?.let { recipeLastUpdated ->
-                        if (time < recipeLastUpdated) {
-                            time = recipeLastUpdated
+                for (recipe in it) {
+                    if(recipe.isDeleted) {
+                        database.recipeDao.deleteRecipeById(recipe.id)
+                    } else {
+                        database.recipeDao.insertRecipes(recipe)
+                        recipe.lastUpdated?.let { recipeLastUpdated ->
+                            if (time < recipeLastUpdated) {
+                                time = recipeLastUpdated
+                            }
                         }
                     }
                 }

@@ -112,6 +112,7 @@ class EditRecipeFragment : Fragment() {
                         imageUrl = newImageUrl,
                         creatingUserId = creatingUserId,
                         creatingUserName = creatingUserName ?: "",
+                        isDeleted = true,
                         lastUpdated = null
                     )
 

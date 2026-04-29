@@ -62,6 +62,7 @@ class AddRecipeFragment : Fragment() {
                     imageUrl = "",
                     creatingUserId = creatingUser.uid,
                     creatingUserName = creatingUser.displayName ?: "",
+                    isDeleted = false,
                     lastUpdated = null
                 )
 

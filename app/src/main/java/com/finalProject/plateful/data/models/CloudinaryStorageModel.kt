@@ -11,9 +11,12 @@ import com.cloudinary.android.policy.UploadPolicy
 import com.finalProject.plateful.base.MyApplication
 import com.finalProject.plateful.base.StringCompletion
 import java.io.File
+import java.util.concurrent.Executors
 import kotlin.concurrent.thread
 
 class CloudinaryStorageModel private constructor() {
+    private val executor = Executors.newSingleThreadExecutor()
+
     init {
         val config = mapOf(
             "cloud_name" to "dltg3tc47",
@@ -89,7 +92,7 @@ class CloudinaryStorageModel private constructor() {
             return
         }
 
-        thread {
+        executor.execute {
             try {
                 val response =
                     MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
@@ -117,7 +120,12 @@ class CloudinaryStorageModel private constructor() {
         val afterUpload = parts.subList(uploadIndex + 1, parts.size)
 
         val startIndex = if (afterUpload[0].startsWith("v") && afterUpload[0].substring(1)
-            .all { it.isDigit() }) { 1 } else { 0 }
+                .all { it.isDigit() }
+        ) {
+            1
+        } else {
+            0
+        }
 
         val publicIdWithExtension =
             afterUpload.subList(startIndex, afterUpload.size).joinToString("/")

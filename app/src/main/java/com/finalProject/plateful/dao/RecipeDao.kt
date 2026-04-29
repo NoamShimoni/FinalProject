@@ -9,6 +9,7 @@ import com.finalProject.plateful.models.Recipe
 
 @Dao
 interface RecipeDao {
+
     @Query("SELECT * FROM Recipe")
     fun getAllRecipes(): LiveData<MutableList<Recipe>>
 
@@ -23,4 +24,7 @@ interface RecipeDao {
 
     @Query("DELETE FROM Recipe WHERE id = :recipeId")
     fun deleteRecipeById(recipeId: String)
+
+    @Query("DELETE FROM Recipe")
+    fun deleteRecipes()
 }
