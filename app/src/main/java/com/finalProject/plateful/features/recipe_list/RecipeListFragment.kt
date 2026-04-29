@@ -10,6 +10,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finalProject.plateful.databinding.FragmentRecipeListBinding
 import com.finalProject.plateful.models.Recipe
+import com.finalProject.plateful.utils.recipe_row.OnItemClickListener
+import com.finalProject.plateful.utils.recipe_row.RecipesAdapter
 
 class RecipeListFragment : Fragment() {
     private var binding: FragmentRecipeListBinding? = null

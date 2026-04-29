@@ -1,4 +1,4 @@
-package com.finalProject.plateful.features.library
+package com.finalProject.plateful.utils.recipe_row
 
 import android.view.View
 import androidx.navigation.findNavController

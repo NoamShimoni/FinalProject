@@ -1,4 +1,4 @@
-package com.finalProject.plateful.features.recipe_list
+package com.finalProject.plateful.utils.recipe_row
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
