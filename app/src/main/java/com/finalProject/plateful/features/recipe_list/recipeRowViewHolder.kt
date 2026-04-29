@@ -1,12 +1,9 @@
 package com.finalProject.plateful.features.recipe_list
 
-import android.util.Log
 import android.view.View
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.finalProject.plateful.NavGraphDirections
-import com.finalProject.plateful.R
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.databinding.RecipeRowLayoutBinding
 import com.finalProject.plateful.models.Recipe

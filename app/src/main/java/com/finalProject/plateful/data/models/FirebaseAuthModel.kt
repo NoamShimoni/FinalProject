@@ -2,7 +2,6 @@ package com.finalProject.plateful.data.models
 
 import android.util.Log
 import com.finalProject.plateful.base.BooleanCompletion
-import com.finalProject.plateful.base.Completion
 import com.google.firebase.Firebase
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
@@ -46,6 +45,7 @@ class FirebaseAuthModel {
             completion(true)
         }?.addOnFailureListener {
             Log.i("TAG", "Update profile failed: ${it.message}")
-        } ?: completion(false)
+            completion(false)
+        }
     }
 }

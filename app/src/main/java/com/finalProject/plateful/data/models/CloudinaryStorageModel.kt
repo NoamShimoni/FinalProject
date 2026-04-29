@@ -10,9 +10,7 @@ import com.cloudinary.android.policy.GlobalUploadPolicy
 import com.cloudinary.android.policy.UploadPolicy
 import com.finalProject.plateful.base.MyApplication
 import com.finalProject.plateful.base.StringCompletion
-import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import java.io.File
-import kotlin.collections.get
 import kotlin.concurrent.thread
 
 class CloudinaryStorageModel private constructor() {

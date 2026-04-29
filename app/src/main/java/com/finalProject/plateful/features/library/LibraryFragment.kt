@@ -10,8 +10,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finalProject.plateful.databinding.FragmentLibraryBinding
 import com.finalProject.plateful.models.Recipe
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 
 class LibraryFragment : Fragment() {
     private var binding: FragmentLibraryBinding? = null

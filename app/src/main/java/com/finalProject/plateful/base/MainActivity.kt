@@ -90,24 +90,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomBar() {
-        binding?.bottomNavigation?.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.bottom_navigation_menu_home -> {
-                    navController?.navigate(R.id.recipeListFragment)
-                    true
-                }
-
-                R.id.bottom_navigation_menu_profile -> {
-                    navController?.navigate(R.id.action_global_profileFragment)
-                    true
-                }
-
-                R.id.bottom_navigation_menu_library -> {
-                    navController?.navigate(R.id.libraryFragment)
-                    true
-                }
-
-                else -> false
+        binding?.bottomNavigation?.let { bottomNavigationView ->
+            navController?.let { navController ->
+                NavigationUI.setupWithNavController(bottomNavigationView, navController)
             }
         }
     }
