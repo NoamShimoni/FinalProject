@@ -2,7 +2,7 @@ package com.finalProject.plateful.data.repositories.auth
 
 import android.graphics.Bitmap
 import android.net.Uri
-import com.finalProject.plateful.base.BooleanCompletion
+import com.finalProject.plateful.base.StringCompletion
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseAuthModel
 import com.google.firebase.Firebase
@@ -17,7 +17,7 @@ class AuthRepository private constructor() {
         val shared = AuthRepository()
     }
 
-    fun signIn(email: String, password: String, completion: BooleanCompletion) {
+    fun signIn(email: String, password: String, completion: StringCompletion) {
         firebaseAuthModel.signIn(email, password, completion)
     }
 
@@ -26,13 +26,13 @@ class AuthRepository private constructor() {
         email: String,
         password: String,
         profileImageBitmap: Bitmap?,
-        completion: BooleanCompletion
+        completion: StringCompletion
     ) {
-        firebaseAuthModel.signUp(email, password) { isSuccess ->
+        firebaseAuthModel.signUp(email, password) { error ->
             val user = Firebase.auth.currentUser
 
-            if (user == null || !isSuccess) {
-                completion(false)
+            if (user == null || !error.isNullOrEmpty()) {
+                completion(error)
             } else {
                 if (profileImageBitmap != null) {
                     storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
