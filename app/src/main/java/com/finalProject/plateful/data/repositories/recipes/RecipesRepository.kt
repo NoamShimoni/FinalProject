@@ -28,7 +28,7 @@ class RecipesRepository private constructor() {
         return recipes ?: creatingUserId?.let { creatingUserId -> database.recipeDao.getAllRecipesByUser(creatingUserId) } ?: run { database.recipeDao.getAllRecipes() }
     }
 
-    fun refreshRecipes() {
+    fun refreshRecipes(completion: Completion) {
         val lastUpdated = Recipe.Companion.lastUpdated
 
         firebaseModel.getAllRecipes(lastUpdated) {
@@ -40,15 +40,17 @@ class RecipesRepository private constructor() {
                         database.recipeDao.deleteRecipeById(recipe.id)
                     } else {
                         database.recipeDao.insertRecipes(recipe)
-                        recipe.lastUpdated?.let { recipeLastUpdated ->
-                            if (time < recipeLastUpdated) {
-                                time = recipeLastUpdated
-                            }
+                    }
+
+                    recipe.lastUpdated?.let { recipeLastUpdated ->
+                        if (time < recipeLastUpdated) {
+                            time = recipeLastUpdated
                         }
                     }
                 }
 
                 Recipe.Companion.lastUpdated = time
+                completion()
             }
         }
     }

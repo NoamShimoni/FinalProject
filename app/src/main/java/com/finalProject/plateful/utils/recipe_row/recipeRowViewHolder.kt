@@ -40,7 +40,7 @@ class RecipeRowViewHolder(
         binding.recipeDeleteBtn.setOnClickListener {
             recipe?.let { recipe ->
                 RecipesRepository.shared.deleteRecipe(recipe) {
-                    RecipesRepository.shared.refreshRecipes()
+                    RecipesRepository.shared.refreshRecipes {}
                 }
             }
         }

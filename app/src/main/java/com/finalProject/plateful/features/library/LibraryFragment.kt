@@ -64,9 +64,12 @@ class LibraryFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner) {
             adapter?.recipes = it
             adapter?.notifyDataSetChanged()
-            binding?.swipeRefresh?.isRefreshing = false
 
             binding?.recipeCountSubtitle?.text = "${it.size} recipes"
+        }
+
+        viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
+            binding?.swipeRefresh?.isRefreshing = isRefreshing
         }
     }
 
