@@ -1,21 +1,51 @@
 package com.finalProject.plateful.data.models
 
 import android.util.Log
+import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.base.Completion
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.auth
 
 class FirebaseAuthModel {
     private val auth = Firebase.auth
 
-    fun signIn(email: String, password: String, completion: Completion) {
+    fun signIn(email: String, password: String, completion: BooleanCompletion) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    completion()
+                    completion(true)
                 }
             }.addOnFailureListener {
-                Log.i("TAG", "Sign in failed: ${it.message}")
+                Log.e("TAG", "Sign in failed: ${it.message}")
+                completion(false)
             }
+    }
+
+    fun signUp(email: String, password: String, completion: Completion) {
+        if (auth.currentUser !== null) {
+            completion(); return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                completion()
+            }
+        }.addOnFailureListener {
+            Log.i("TAG", "signIn failed: ${it.message}")
+        }
+    }
+
+    fun signOut() {
+        auth.signOut()
+    }
+
+    fun updateProfile(profileUpdates: UserProfileChangeRequest, completion: BooleanCompletion) {
+        auth.currentUser?.updateProfile(profileUpdates)?.addOnCompleteListener {
+            completion(true)
+        }?.addOnFailureListener {
+            Log.i("TAG", "signIn failed: ${it.message}")
+        } ?: completion(false)
     }
 }

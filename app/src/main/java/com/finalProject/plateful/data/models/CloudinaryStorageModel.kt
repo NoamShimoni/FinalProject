@@ -10,11 +10,11 @@ import com.cloudinary.android.policy.GlobalUploadPolicy
 import com.cloudinary.android.policy.UploadPolicy
 import com.finalProject.plateful.base.MyApplication
 import com.finalProject.plateful.base.StringCompletion
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import java.io.File
 import kotlin.collections.get
 
-class CloudinaryStorageModel {
-
+class CloudinaryStorageModel private constructor() {
     init {
         val config = mapOf(
             "cloud_name" to "dltg3tc47",
@@ -31,13 +31,17 @@ class CloudinaryStorageModel {
         }
     }
 
-    fun uploadRecipeImage(image: Bitmap, recipeId: String, completion: StringCompletion) {
+    companion object {
+        val shared = CloudinaryStorageModel()
+    }
+
+    private fun uploadImage(image: Bitmap, name: String, url: String, completion: StringCompletion) {
         val context = MyApplication.appContext ?: return
 
         val file = bitmapToFile(image, context)
 
         MediaManager.get().upload(file.path)
-            .option("images", "recipes/${recipeId}/recipe_image")
+            .option(name, url)
             .callback ( object: UploadCallback {
                 override fun onStart(requestId: String) {
                     // Upload started
@@ -63,6 +67,15 @@ class CloudinaryStorageModel {
                 }
             }).dispatch()
     }
+
+    fun uploadRecipeImage(image: Bitmap, recipeId: String, completion: StringCompletion) {
+        return this.uploadImage(image, "images", "recipes/${recipeId}/recipe_image", completion)
+    }
+
+    fun uploadProfileImage(image: Bitmap, userId: String, completion: StringCompletion) {
+        return this.uploadImage(image, "public_id", "users/${userId}/profile_image", completion)
+    }
+
     private fun bitmapToFile(image: Bitmap, context: Context): File {
         val file = File(context.cacheDir, "temp_image_${System.currentTimeMillis()}.jpg")
 

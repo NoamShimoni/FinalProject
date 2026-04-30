@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.finalProject.plateful.R
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,8 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding?.root)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainNavHost) as? NavHostFragment
-        navController = navHostFragment?.navController
+        setupNavigation()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -38,10 +38,26 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun setupNavigation() {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.mainNavHost) as NavHostFragment
+        navController = navHostFragment.navController
+
+        val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph)
+
+        if (this.shouldNavigateToSignIn()) {
+            navGraph.setStartDestination(R.id.signInFragment)
+        } else {
+            navGraph.setStartDestination(R.id.recipeListFragment)
+        }
+
+        navController?.graph = navGraph
+    }
+
     private fun setupTopBar() {
         navController?.let {
             val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
-                setOf(R.id.recipeListFragment, R.id.profileFragment)
+                setOf(R.id.recipeListFragment, R.id.profileFragment, R.id.signInFragment)
             )
             binding?.topAppBar?.let { toolbar ->
                 toolbar.setOnMenuItemClickListener { menuItem ->
@@ -58,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
                 it.addOnDestinationChangedListener { _, destination, _ ->
                     val addMenuItem = toolbar.menu.findItem(R.id.top_bar_menu_add)
-                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment
+                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment && destination.id != R.id.signInFragment && destination.id != R.id.signUpFragment
                 }
             }
         }
@@ -78,5 +94,9 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun shouldNavigateToSignIn(): Boolean {
+        return !AuthRepository.shared.isUserSignedIn()
     }
 }

@@ -6,6 +6,8 @@ import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.firestore
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class FirebaseModel {
     val db = Firebase.firestore

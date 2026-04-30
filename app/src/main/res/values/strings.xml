@@ -37,4 +37,11 @@
     <string name="email_hint">your@email.com</string>
     <string name="email_label">Email</string>
     <string name="password_hint">password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_community">Join our community of food lovers</string>
+    <string name="profile_image_optional">Profile Image (Optional)</string>
+    <string name="choose_username">Choose a username</string>
+    <string name="username_label">Username</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
