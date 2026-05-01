@@ -92,23 +92,21 @@ class CloudinaryStorageModel private constructor() {
             return
         }
 
-        executor.execute {
-            try {
-                val response =
-                    MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
+        try {
+            val response =
+                MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
 
-                val result = response["result"] as? String
-                if (result == "ok") {
-                    Log.v("TAG", "Cloudinary delete success: $publicId")
-                    completion(true)
-                } else {
-                    Log.e("TAG", "Cloudinary delete failed: $result")
-                    completion(false)
-                }
-            } catch (e: Exception) {
-                Log.e("TAG", "Cloudinary delete error: ${e.message}")
+            val result = response["result"] as? String
+            if (result == "ok") {
+                Log.v("TAG", "Cloudinary delete success: $publicId")
+                completion(true)
+            } else {
+                Log.e("TAG", "Cloudinary delete failed: $result")
                 completion(false)
             }
+        } catch (e: Exception) {
+            Log.e("TAG", "Cloudinary delete error: ${e.message}")
+            completion(false)
         }
     }
 
