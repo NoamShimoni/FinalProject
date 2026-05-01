@@ -1,5 +1,6 @@
 package com.finalProject.plateful.data.models
 
+import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.base.RecipesCompletion
 import com.finalProject.plateful.models.Recipe
@@ -42,6 +43,23 @@ class FirebaseModel {
             }
             .addOnFailureListener { e ->
                 completion()
+            }
+    }
+
+    fun updateUserNameForRecipes(userId: String, newUserName: String, completion: BooleanCompletion) {
+        db.collection(RECIPES).whereEqualTo("creatingUserId", userId).get()
+            .addOnSuccessListener { querySnapshot ->
+                db.runBatch { batch ->
+                    for (doc in querySnapshot.documents) {
+                        batch.update(doc.reference, "creatingUserName", newUserName)
+                    }
+                }.addOnSuccessListener {
+                    completion(true)
+                }.addOnFailureListener {
+                    completion(false)
+                }
+            }.addOnFailureListener {
+                completion(false)
             }
     }
 }

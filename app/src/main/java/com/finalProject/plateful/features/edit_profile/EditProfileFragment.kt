@@ -65,7 +65,6 @@ class EditProfileFragment : Fragment() {
     }
 
     fun setUserInfo() {
-
         user?.let {
             binding?.usernameTextInput?.setText(it.displayName)
 
