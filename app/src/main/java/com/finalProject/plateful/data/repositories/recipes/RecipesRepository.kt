@@ -1,6 +1,7 @@
 package com.finalProject.plateful.data.repositories.recipes
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.dao.AppLocalDB
@@ -8,6 +9,7 @@ import com.finalProject.plateful.dao.AppLocalDbRepository
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseModel
 import com.finalProject.plateful.models.Recipe
+import com.google.firebase.Timestamp
 import java.util.concurrent.Executors
 
 class RecipesRepository private constructor() {
@@ -33,7 +35,19 @@ class RecipesRepository private constructor() {
             executor.execute {
                 var time = lastUpdated
 
-                for (recipe in it) {
+                val delete = database.recipeDao.getAllRecipesSync().filter { recipe ->
+                    !it.contains(recipe)
+                }
+
+                for (recipe in delete) {
+                    database.recipeDao.deleteRecipeById(recipe.id)
+                }
+
+                val update = it.filter { recipe ->
+                    (recipe.lastUpdated ?: (Timestamp.now().seconds * 1000)) >= lastUpdated
+                }
+
+                for (recipe in update) {
                     database.recipeDao.insertRecipes(recipe)
                     recipe.lastUpdated?.let { recipeLastUpdated ->
                         if (time < recipeLastUpdated) {
@@ -56,6 +70,18 @@ class RecipesRepository private constructor() {
                 } else {
                     completion()
                 }
+            }
+        }
+    }
+
+    fun deleteRecipe(recipe: Recipe, completion: Completion) {
+        firebaseModel.deleteRecipe(recipe) {
+            storageModel.deleteRecipeImage(recipe.imageUrl) { deleteImageSuccessful ->
+                if (!deleteImageSuccessful) {
+                    Log.v("TAG", "Error deleting recipe image for recipe: ${recipe.id}")
+                }
+
+                completion()
             }
         }
     }

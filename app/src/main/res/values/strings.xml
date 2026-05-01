@@ -44,4 +44,6 @@
     <string name="choose_username">Choose a username</string>
     <string name="username_label">Username</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
 </resources>

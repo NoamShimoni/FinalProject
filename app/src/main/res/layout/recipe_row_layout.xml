@@ -10,22 +10,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="16dp">
+        android:background="@color/white">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/recipe_image_view"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_marginBottom="4dp"
             android:contentDescription="@string/title"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.003"
             app:srcCompat="@drawable/image_placeholder" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -45,14 +40,71 @@
             android:id="@+id/recipe_creator_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
             android:text="@string/created_by"
-            android:textSize="16sp"
             android:textColor="@color/midGray"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/recipe_title_text_view"
             app:layout_constraintTop_toBottomOf="@+id/recipe_title_text_view" />
+
+        <View
+            android:id="@+id/edit_delete_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/border"
+            app:layout_constraintTop_toBottomOf="@id/recipe_creator_text_view" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_delete_divider">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/recipe_edit_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/edit"
+                android:textColor="@color/orange"
+                app:icon="@drawable/ic_edit"
+                app:iconTint="@color/orange"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/center_divider"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/center_divider"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/recipe_delete_btn"
+                app:layout_constraintStart_toEndOf="@+id/recipe_edit_btn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/recipe_delete_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/delete"
+                android:textColor="@color/red"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="@color/red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/center_divider"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

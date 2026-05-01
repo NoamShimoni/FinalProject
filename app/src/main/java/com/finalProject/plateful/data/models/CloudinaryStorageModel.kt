@@ -13,6 +13,7 @@ import com.finalProject.plateful.base.StringCompletion
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import java.io.File
 import kotlin.collections.get
+import kotlin.concurrent.thread
 
 class CloudinaryStorageModel private constructor() {
     init {
@@ -35,14 +36,19 @@ class CloudinaryStorageModel private constructor() {
         val shared = CloudinaryStorageModel()
     }
 
-    private fun uploadImage(image: Bitmap, name: String, url: String, completion: StringCompletion) {
+    private fun uploadImage(
+        image: Bitmap,
+        name: String,
+        url: String,
+        completion: StringCompletion
+    ) {
         val context = MyApplication.appContext ?: return
 
         val file = bitmapToFile(image, context)
 
         MediaManager.get().upload(file.path)
             .option(name, url)
-            .callback ( object: UploadCallback {
+            .callback(object : UploadCallback {
                 override fun onStart(requestId: String) {
                     // Upload started
                 }
@@ -74,6 +80,51 @@ class CloudinaryStorageModel private constructor() {
 
     fun uploadProfileImage(image: Bitmap, userId: String, completion: StringCompletion) {
         return this.uploadImage(image, "public_id", "users/${userId}/profile_image", completion)
+    }
+
+    fun deleteRecipeImage(imageUrl: String, completion: (Boolean) -> Unit) {
+        val publicId = extractPublicId(imageUrl)
+
+        if (publicId == null) {
+            Log.e("TAG", "Failed to extract Public ID from URL")
+            completion(false)
+            return
+        }
+
+        thread {
+            try {
+                val response =
+                    MediaManager.get().cloudinary.uploader().destroy(publicId, emptyMap<Any, Any>())
+
+                val result = response["result"] as? String
+                if (result == "ok") {
+                    Log.v("TAG", "Cloudinary delete success: $publicId")
+                    completion(true)
+                } else {
+                    Log.e("TAG", "Cloudinary delete failed: $result")
+                    completion(false)
+                }
+            } catch (e: Exception) {
+                Log.e("TAG", "Cloudinary delete error: ${e.message}")
+                completion(false)
+            }
+        }
+    }
+
+    private fun extractPublicId(url: String): String? {
+        val parts = url.split("/")
+        val uploadIndex = parts.indexOf("upload")
+        if (uploadIndex == -1) return null
+
+        val afterUpload = parts.subList(uploadIndex + 1, parts.size)
+
+        val startIndex = if (afterUpload[0].startsWith("v") && afterUpload[0].substring(1)
+            .all { it.isDigit() }) { 1 } else { 0 }
+
+        val publicIdWithExtension =
+            afterUpload.subList(startIndex, afterUpload.size).joinToString("/")
+
+        return publicIdWithExtension.substringBeforeLast(".")
     }
 
     private fun bitmapToFile(image: Bitmap, context: Context): File {
