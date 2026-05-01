@@ -1,6 +1,7 @@
 package com.finalProject.plateful.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -43,21 +44,28 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.mainNavHost) as NavHostFragment
         navController = navHostFragment.navController
 
-        val navGraph = navHostFragment.navController.navInflater.inflate(R.navigation.nav_graph)
+        val navGraph = navController?.navInflater?.inflate(R.navigation.nav_graph)
 
         if (this.shouldNavigateToSignIn()) {
-            navGraph.setStartDestination(R.id.signInFragment)
+            navGraph?.setStartDestination(R.id.signInFragment)
         } else {
-            navGraph.setStartDestination(R.id.recipeListFragment)
+            navGraph?.setStartDestination(R.id.recipeListFragment)
         }
 
-        navController?.graph = navGraph
+        navGraph?.let { navGraph ->
+            navController?.graph = navGraph
+        }
     }
 
     private fun setupTopBar() {
         navController?.let {
             val appBarConfiguration = androidx.navigation.ui.AppBarConfiguration(
-                setOf(R.id.recipeListFragment, R.id.profileFragment, R.id.signInFragment)
+                setOf(
+                    R.id.recipeListFragment,
+                    R.id.profileFragment,
+                    R.id.libraryFragment,
+                    R.id.signInFragment
+                )
             )
             binding?.topAppBar?.let { toolbar ->
                 toolbar.setOnMenuItemClickListener { menuItem ->
@@ -66,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                             navController?.navigate(R.id.action_global_addRecipeFragment)
                             true
                         }
+
                         else -> false
                     }
                 }
@@ -74,24 +83,28 @@ class MainActivity : AppCompatActivity() {
 
                 it.addOnDestinationChangedListener { _, destination, _ ->
                     val addMenuItem = toolbar.menu.findItem(R.id.top_bar_menu_add)
-                    addMenuItem?.isVisible = destination.id != R.id.addRecipeFragment && destination.id != R.id.signInFragment && destination.id != R.id.signUpFragment
+                    addMenuItem?.isVisible =
+                        destination.id != R.id.addRecipeFragment && destination.id != R.id.signInFragment && destination.id != R.id.signUpFragment
                 }
             }
         }
     }
 
     private fun setupBottomBar() {
-        binding?.bottomNavigation?.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.bottom_navigation_menu_home -> {
-                    navController?.navigate(R.id.recipeListFragment)
-                    true
+        binding?.bottomNavigation?.let { bottomNavigationView ->
+            navController?.let { navController ->
+                NavigationUI.setupWithNavController(bottomNavigationView, navController)
+            }
+        }
+
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.signInFragment, R.id.signUpFragment -> {
+                    binding?.bottomNavigation?.visibility = View.GONE
                 }
-                R.id.bottom_navigation_menu_profile -> {
-                    navController?.navigate(R.id.action_global_profileFragment)
-                    true
+                else -> {
+                    binding?.bottomNavigation?.visibility = View.VISIBLE
                 }
-                else -> false
             }
         }
     }

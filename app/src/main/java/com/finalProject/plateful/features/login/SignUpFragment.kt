@@ -39,24 +39,17 @@ class SignUpFragment : Fragment() {
         }
 
         binding?.createAccountButton?.setOnClickListener {
-            if(performRegistration()) {
-                val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
-                it.findNavController().navigate(action)
-            } else {
-                binding?.loadingIndicator?.visibility = View.GONE
-            }
+            performRegistration(it)
         }
 
         return binding?.root
     }
 
-    private fun performRegistration(): Boolean {
+    private fun performRegistration(it: View) {
         val username = binding?.usernameTextInputLayout?.editText?.text.toString().trim()
         val email = binding?.emailTextInputLayout?.editText?.text.toString().trim()
         val password = binding?.passwordTextInputLayout?.editText?.text.toString()
         val confirmPassword = binding?.confirmPasswordTextInputLayout?.editText?.text.toString()
-
-        var isSuccess = false
 
         if (username.isEmpty()) {
             Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT).show()
@@ -80,11 +73,15 @@ class SignUpFragment : Fragment() {
                 bitmap = binding?.profilePreviewImageView?.bitmap
             }
 
-            AuthRepository.shared.signUp(username, email, password, bitmap) {
-                isSuccess = it ?: false
+            AuthRepository.shared.signUp(username, email, password, bitmap) { error ->
+                error?.let { error ->
+                    binding?.loadingIndicator?.visibility = View.GONE
+                    Toast.makeText(context, error,Toast.LENGTH_SHORT).show()
+                } ?: run {
+                    val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
+                    it.findNavController().navigate(action)
+                }
             }
         }
-
-        return isSuccess
     }
 }

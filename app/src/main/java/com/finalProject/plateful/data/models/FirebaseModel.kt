@@ -1,14 +1,11 @@
 package com.finalProject.plateful.data.models
 
-import android.util.Log
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.base.RecipesCompletion
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.firestore
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 
 class FirebaseModel {
     val db = Firebase.firestore
@@ -18,12 +15,13 @@ class FirebaseModel {
     }
 
     fun getAllRecipes(since: Long, completion: RecipesCompletion) {
-        db.collection(RECIPES).get().addOnCompleteListener {
-            when (it.isSuccessful) {
-                true -> completion(it.result.map { Recipe.Companion.fromJson(it.data) })
-                false -> completion(emptyList())
+        db.collection(RECIPES)
+            .whereGreaterThanOrEqualTo(Recipe.Companion.LAST_UPDATED_KEY, Timestamp(since / 1000, 0)).get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> completion(it.result.map { Recipe.Companion.fromJson(it.data) })
+                    false -> completion(emptyList())
+                }
             }
-        }
     }
 
     fun addRecipe(recipe: Recipe, completion: Completion) {
@@ -40,7 +38,7 @@ class FirebaseModel {
 
     fun deleteRecipe(recipe: Recipe, completion: Completion) {
         db.collection(RECIPES)
-            .document(recipe.id).delete()
+            .document(recipe.id).update("isDeleted", true)
             .addOnSuccessListener { documentReference ->
                 completion()
             }

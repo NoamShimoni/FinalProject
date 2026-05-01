@@ -9,8 +9,12 @@ import com.finalProject.plateful.models.Recipe
 
 @Dao
 interface RecipeDao {
+
     @Query("SELECT * FROM Recipe")
     fun getAllRecipes(): LiveData<MutableList<Recipe>>
+
+    @Query("SELECT * FROM Recipe WHERE creatingUserId = :creatingUserId")
+    fun getAllRecipesByUser(creatingUserId: String): LiveData<MutableList<Recipe>>
 
     @Query("SELECT * FROM Recipe")
     fun getAllRecipesSync(): MutableList<Recipe>
@@ -20,4 +24,7 @@ interface RecipeDao {
 
     @Query("DELETE FROM Recipe WHERE id = :recipeId")
     fun deleteRecipeById(recipeId: String)
+
+    @Query("DELETE FROM Recipe")
+    fun deleteRecipes()
 }

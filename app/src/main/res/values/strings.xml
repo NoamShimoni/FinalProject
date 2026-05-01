@@ -46,4 +46,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="library">Library</string>
 </resources>

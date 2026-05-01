@@ -15,7 +15,10 @@ data class Recipe(
     var ingredients: String,
     val instructions: String,
     val imageUrl: String,
-    val lastUpdated: Long?
+    val creatingUserId: String,
+    val creatingUserName: String,
+    val isDeleted: Boolean,
+    val lastUpdated: Long?,
     ) {
     companion object {
         var lastUpdated: Long
@@ -37,6 +40,9 @@ data class Recipe(
 
         const val INSTRUCTIONS_KEY = "instructions"
         const val IMAGE_URL_KEY = "imageUrl"
+        const val CREATING_USER_ID_KEY = "creatingUserId"
+        const val CREATING_USER_NAME_KEY = "creatingUserName"
+        const val IS_DELETED = "isDeleted"
         const val LAST_UPDATED_KEY = "lastUpdated"
 
 
@@ -47,6 +53,9 @@ data class Recipe(
             val ingredients = json[INGREDIENTS_KEY] as? String ?: ""
             val instructions = json[INSTRUCTIONS_KEY] as? String ?: ""
             val imageUrl = json[IMAGE_URL_KEY] as? String ?: ""
+            val creatingUserId = json[CREATING_USER_ID_KEY] as? String ?: ""
+            val creatingUserName = json[CREATING_USER_NAME_KEY] as? String ?: ""
+            val isDeleted = json[IS_DELETED] as? Boolean ?: false
             val timestamp = json[LAST_UPDATED_KEY] as? Timestamp
             val lastUpdatedLong = timestamp?.toDate()?.time
 
@@ -56,6 +65,9 @@ data class Recipe(
                 ingredients = ingredients,
                 instructions = instructions,
                 imageUrl = imageUrl,
+                creatingUserId = creatingUserId,
+                creatingUserName = creatingUserName,
+                isDeleted = isDeleted,
                 lastUpdated = lastUpdatedLong
             )
         }
@@ -68,6 +80,9 @@ data class Recipe(
             INGREDIENTS_KEY to ingredients,
             INSTRUCTIONS_KEY to instructions,
             IMAGE_URL_KEY to imageUrl,
+            CREATING_USER_ID_KEY to creatingUserId,
+            CREATING_USER_NAME_KEY to creatingUserName,
+            IS_DELETED to isDeleted,
             LAST_UPDATED_KEY to FieldValue.serverTimestamp()
         )
 }

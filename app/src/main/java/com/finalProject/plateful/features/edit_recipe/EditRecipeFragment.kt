@@ -11,13 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
-import com.finalProject.plateful.databinding.FragmentEditRecipeBinding
+import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.squareup.picasso.Picasso
 
 class EditRecipeFragment : Fragment() {
-    private var binding: FragmentEditRecipeBinding? = null
+    private var binding: FragmentAddRecipeBinding? = null
     private var cameraLauncher: ActivityResultLauncher<Void?>? = null
     private var hasImageChanged = false
 
@@ -26,6 +26,8 @@ class EditRecipeFragment : Fragment() {
     var ingredients: String? = null
     var instructions: String? = null
     var imageUrl: String? = null
+    var creatingUserId: String? = null
+    var creatingUserName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +37,10 @@ class EditRecipeFragment : Fragment() {
             this.ingredients = it.getString(Recipe.INGREDIENTS_KEY)
             this.instructions = it.getString(Recipe.INSTRUCTIONS_KEY)
             this.imageUrl = it.getString(Recipe.IMAGE_URL_KEY)
+            this.creatingUserId = it.getString(Recipe.CREATING_USER_ID_KEY)
+            this.creatingUserName = it.getString(Recipe.CREATING_USER_NAME_KEY)
 
-            if (this.id.isNullOrEmpty()) {
+            if (this.id.isNullOrEmpty() || this.creatingUserId.isNullOrEmpty()) {
                 this.dismiss()
             }
         }
@@ -46,7 +50,7 @@ class EditRecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentEditRecipeBinding.inflate(inflater, container, false)
+        binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
         setupView()
 
         cameraLauncher =
@@ -85,31 +89,31 @@ class EditRecipeFragment : Fragment() {
             val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
 
             id?.let { id ->
-                var newImageUrl = ""
-                var imageBitmap: Bitmap? = null
+                creatingUserId?.let { creatingUserId ->
+                    var imageBitmap: Bitmap? = null
 
-                this.imageUrl?.let { imageUrl ->
-                    if (!this.hasImageChanged) {
-                        newImageUrl = imageUrl
-                    } else {
+                    if (this.hasImageChanged) {
                         binding?.recipeImageImageView?.isDrawingCacheEnabled = true
                         binding?.recipeImageImageView?.buildDrawingCache()
 
                         imageBitmap = binding?.recipeImageImageView?.bitmap
                     }
-                }
 
-                val recipe = Recipe(
-                    id = id,
-                    title = recipeTitle,
-                    ingredients = recipeIngredients,
-                    instructions = recipeInstructions,
-                    imageUrl = newImageUrl,
-                    lastUpdated = null
-                )
+                    val recipe = Recipe(
+                        id = id,
+                        title = recipeTitle,
+                        ingredients = recipeIngredients,
+                        instructions = recipeInstructions,
+                        imageUrl = imageUrl ?: "",
+                        creatingUserId = creatingUserId,
+                        creatingUserName = creatingUserName ?: "",
+                        isDeleted = false,
+                        lastUpdated = Recipe.lastUpdated
+                    )
 
-                RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
-                    dismiss()
+                    RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
+                        dismiss()
+                    }
                 }
             }
         }
