@@ -1,4 +1,4 @@
-package com.finalProject.plateful.features.recipe_list
+package com.finalProject.plateful.base.recipe_list
 
 import android.view.View
 import androidx.navigation.findNavController
@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 class RecipeRowViewHolder(
     private val binding: RecipeRowLayoutBinding,
     private val listener: OnItemClickListener?,
-    private val viewModel: RecipesListViewModel
+    private val viewModel: IRecipesViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
     private var recipe: Recipe? = null
 

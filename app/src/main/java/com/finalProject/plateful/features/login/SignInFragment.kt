@@ -35,16 +35,15 @@ class SignInFragment : Fragment() {
             } else {
                 binding?.loadingIndicator?.visibility = View.VISIBLE
 
-                AuthRepository.shared.signIn(email, password) { isSuccess ->
-                    isSuccess?.let { isSuccess ->
-                        if (isSuccess) {
-                            val action =
-                                SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
-                            it.findNavController().navigate(action)
-                        }
+                AuthRepository.shared.signIn(email, password) { error ->
+                    error?.let { error ->
+                        binding?.loadingIndicator?.visibility = View.GONE
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                    } ?: run {
+                        val action =
+                            SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
+                        it.findNavController().navigate(action)
                     }
-
-                    binding?.loadingIndicator?.visibility = View.GONE
                 }
             }
         }

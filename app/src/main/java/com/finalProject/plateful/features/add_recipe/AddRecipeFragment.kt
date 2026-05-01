@@ -66,6 +66,7 @@ class AddRecipeFragment : Fragment() {
                     imageUrl = "",
                     creatingUserId = creatingUser.uid,
                     creatingUserName = creatingUser.displayName ?: "",
+                    isDeleted = false,
                     lastUpdated = null
                 )
 
@@ -75,7 +76,7 @@ class AddRecipeFragment : Fragment() {
                 val bitmap = binding?.recipeImageImageView?.bitmap
 
                 bitmap?.let {
-                    RecipesRepository.shared.addRecipe( it, recipe, ) {
+                    RecipesRepository.shared.addRecipe( it, recipe) {
                         dismiss()
                     }
                 } ?: run {

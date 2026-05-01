@@ -1,8 +1,6 @@
 package com.finalProject.plateful.dao
 
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.finalProject.plateful.base.MyApplication
 
 object AppLocalDB {

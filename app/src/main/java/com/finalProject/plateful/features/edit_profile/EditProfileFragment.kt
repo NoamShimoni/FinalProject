@@ -86,11 +86,11 @@ class EditProfileFragment : Fragment() {
 
         val newName = binding?.usernameTextInput?.text.toString()
 
-        viewModel.updateProfile(newName, bitmap) { isSuccess ->
-            if (isSuccess) {
+        viewModel.updateProfile(newName, bitmap) { error ->
+            if (error.isNullOrEmpty()) {
                 view?.findNavController()?.popBackStack()
             } else {
-                Toast.makeText(context, "Failed to update profile", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
             }
 
             binding?.loadingIndicator?.visibility = View.GONE

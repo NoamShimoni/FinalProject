@@ -73,18 +73,15 @@ class SignUpFragment : Fragment() {
                 bitmap = binding?.profilePreviewImageView?.bitmap
             }
 
-            AuthRepository.shared.signUp(username, email, password, bitmap) { isSuccess ->
-                isSuccess?.let { isSuccess ->
-                    if (isSuccess) {
-                        val action =
-                            SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
-                        it.findNavController().navigate(action)
-                    }
+            AuthRepository.shared.signUp(username, email, password, bitmap) { error ->
+                error?.let { error ->
+                    binding?.loadingIndicator?.visibility = View.GONE
+                    Toast.makeText(context, error,Toast.LENGTH_SHORT).show()
+                } ?: run {
+                    val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
+                    it.findNavController().navigate(action)
                 }
-
-                binding?.loadingIndicator?.visibility = View.GONE
             }
-
         }
     }
 }
