@@ -24,9 +24,6 @@ interface RecipeDao {
     @Query("DELETE FROM Recipe WHERE id = :recipeId")
     fun deleteRecipeById(recipeId: String)
 
-    @Query("UPDATE Recipe SET creatingUserName = :newUserName WHERE creatingUserId = :userId")
-    fun updateUserNameForRecipes(userId: String, newUserName: String)
-
     @Query("DELETE FROM Recipe")
     fun deleteRecipes()
 }

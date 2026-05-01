@@ -6,6 +6,7 @@ import com.finalProject.plateful.base.RecipesCompletion
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.firestore
 
 class FirebaseModel {
@@ -53,7 +54,7 @@ class FirebaseModel {
             .addOnSuccessListener { querySnapshot ->
                 db.runBatch { batch ->
                     for (doc in querySnapshot.documents) {
-                        batch.update(doc.reference, "creatingUserName", newUserName)
+                        batch.update(doc.reference, "creatingUserName", newUserName, Recipe.Companion.LAST_UPDATED_KEY, FieldValue.serverTimestamp())
                     }
                 }.addOnSuccessListener {
                     completion(true)
