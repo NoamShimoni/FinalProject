@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
+import com.google.firebase.auth.FirebaseUser
 
 
 class ProfileViewModel: ViewModel() {
@@ -12,5 +13,13 @@ class ProfileViewModel: ViewModel() {
 
     fun refreshRecipes() {
         RecipesRepository.shared.refreshRecipes()
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        return AuthRepository.shared.getCurrentUser()
+    }
+
+    fun signOut() {
+        AuthRepository.shared.signOut()
     }
 }

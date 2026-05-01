@@ -2,6 +2,7 @@ package com.finalProject.plateful.data.repositories.auth
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseAuthModel
@@ -30,30 +31,40 @@ class AuthRepository private constructor() {
         completion: BooleanCompletion
     ) {
         firebaseAuthModel.signUp(email, password) { isSuccess ->
-            val user = Firebase.auth.currentUser
-
-            if (user == null || !isSuccess) {
-                completion(false)
+            if (isSuccess) {
+                updateProfile(username, profileImageBitmap, completion)
             } else {
-                if (profileImageBitmap != null) {
-                    storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
-                        val profileUpdates = UserProfileChangeRequest.Builder()
+                completion(false)
+            }
+        }
+    }
 
-                        profileUpdates.displayName = username
+    fun updateProfile(username: String, profileImageBitmap: Bitmap?, completion: BooleanCompletion) {
+        val user = Firebase.auth.currentUser
 
-                        if (imageUrl != null) {
-                            profileUpdates.photoUri = Uri.parse(imageUrl)
-                        }
+        if (user == null) {
+            completion(false)
+        } else {
+            if (profileImageBitmap != null) {
+                Log.v("EditProfileFragment", "Uploading profile image for user ${user.uid}")
 
-                        firebaseAuthModel.updateProfile(profileUpdates.build(), completion)
-                    }
-                } else {
+                storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
                     val profileUpdates = UserProfileChangeRequest.Builder()
-                        .setDisplayName(username)
-                        .build()
 
-                    firebaseAuthModel.updateProfile(profileUpdates, completion)
+                    profileUpdates.displayName = username
+
+                    if (imageUrl != null) {
+                        profileUpdates.photoUri = Uri.parse(imageUrl)
+                    }
+
+                    firebaseAuthModel.updateProfile(profileUpdates.build(), completion)
                 }
+            } else {
+                val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(username)
+                    .build()
+
+                firebaseAuthModel.updateProfile(profileUpdates, completion)
             }
         }
     }

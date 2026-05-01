@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.databinding.FragmentProfileBinding
 import com.finalProject.plateful.utils.extentions.loadAvatar
 
@@ -16,7 +15,6 @@ class ProfileFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by viewModels()
 
-    private val authRepository = AuthRepository.shared
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +32,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding?.logoutNavigationCard?.setOnClickListener {
-            authRepository.signOut()
+            viewModel.signOut()
             val action = ProfileFragmentDirections.actionProfileFragmentToSignInFragment()
             it.findNavController().navigate(action)
         }
@@ -50,7 +48,7 @@ class ProfileFragment : Fragment() {
     }
 
     fun setUserInfo() {
-        val user = authRepository.getCurrentUser()
+        val user = viewModel.getCurrentUser()
 
         user?.let {
             binding?.usernameTextView?.text = it.displayName
