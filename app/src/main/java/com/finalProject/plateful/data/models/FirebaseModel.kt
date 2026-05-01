@@ -18,7 +18,9 @@ class FirebaseModel {
 
     fun getAllRecipes(since: Long, completion: RecipesCompletion) {
         db.collection(RECIPES)
-            .whereGreaterThanOrEqualTo(Recipe.Companion.LAST_UPDATED_KEY, Timestamp(since / 1000, 0)).get().addOnCompleteListener {
+            .whereGreaterThanOrEqualTo(Recipe.Companion.LAST_UPDATED_KEY, Timestamp(since / 1000, 0))
+            .orderBy(Recipe.Companion.LAST_UPDATED_KEY)
+            .get().addOnCompleteListener {
                 when (it.isSuccessful) {
                     true -> completion(it.result.map { Recipe.Companion.fromJson(it.data) })
                     false -> completion(emptyList())
