@@ -11,13 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
-import com.finalProject.plateful.databinding.FragmentEditRecipeBinding
+import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.squareup.picasso.Picasso
 
 class EditRecipeFragment : Fragment() {
-    private var binding: FragmentEditRecipeBinding? = null
+    private var binding: FragmentAddRecipeBinding? = null
     private var cameraLauncher: ActivityResultLauncher<Void?>? = null
     private var hasImageChanged = false
 
@@ -50,7 +50,7 @@ class EditRecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentEditRecipeBinding.inflate(inflater, container, false)
+        binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
         setupView()
 
         cameraLauncher =
@@ -90,18 +90,13 @@ class EditRecipeFragment : Fragment() {
 
             id?.let { id ->
                 creatingUserId?.let { creatingUserId ->
-                    var newImageUrl = ""
                     var imageBitmap: Bitmap? = null
 
-                    this.imageUrl?.let { imageUrl ->
-                        if (!this.hasImageChanged) {
-                            newImageUrl = imageUrl
-                        } else {
-                            binding?.recipeImageImageView?.isDrawingCacheEnabled = true
-                            binding?.recipeImageImageView?.buildDrawingCache()
+                    if (this.hasImageChanged) {
+                        binding?.recipeImageImageView?.isDrawingCacheEnabled = true
+                        binding?.recipeImageImageView?.buildDrawingCache()
 
-                            imageBitmap = binding?.recipeImageImageView?.bitmap
-                        }
+                        imageBitmap = binding?.recipeImageImageView?.bitmap
                     }
 
                     val recipe = Recipe(
@@ -109,10 +104,11 @@ class EditRecipeFragment : Fragment() {
                         title = recipeTitle,
                         ingredients = recipeIngredients,
                         instructions = recipeInstructions,
-                        imageUrl = newImageUrl,
+                        imageUrl = imageUrl ?: "",
                         creatingUserId = creatingUserId,
                         creatingUserName = creatingUserName ?: "",
-                        lastUpdated = null
+                        isDeleted = false,
+                        lastUpdated = Recipe.lastUpdated
                     )
 
                     RecipesRepository.shared.editRecipe(recipe, imageBitmap) {

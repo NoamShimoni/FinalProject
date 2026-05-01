@@ -6,17 +6,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.finalProject.plateful.base.MyApplication
 
 object AppLocalDB {
-
-    private val MIGRATION_ADD_CREATING_USER = object : Migration(1, 2) {
-        override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL("ALTER TABLE Recipe ADD COLUMN creatingUserId TEXT NOT NULL DEFAULT ''")
-        }
-    }
-    private val MIGRATION_ADD_CREATING_USERNAME = object : Migration(2, 3) {
-        override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL("ALTER TABLE Recipe ADD COLUMN creatingUserName TEXT NOT NULL DEFAULT ''")
-        }
-    }
     val db: AppLocalDbRepository by lazy {
         val context =
             MyApplication.appContext ?: throw IllegalStateException("Context is not initialized")
@@ -25,7 +14,6 @@ object AppLocalDB {
             context,
             AppLocalDbRepository::class.java,
             "recipes.db"
-        ).addMigrations(MIGRATION_ADD_CREATING_USER).addMigrations(MIGRATION_ADD_CREATING_USERNAME)
-            .build()
+        ).fallbackToDestructiveMigration(true).build()
     }
 }
