@@ -3,18 +3,25 @@ package com.finalProject.plateful.features.recipe_list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.finalProject.plateful.base.IRecipesViewModel
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
 
 
-class RecipesListViewModel: ViewModel() {
-    var data: LiveData<MutableList<Recipe>> = RecipesRepository.shared.getAllRecipes(null)
-    val isRefreshing = MutableLiveData<Boolean>()
+class RecipesListViewModel: ViewModel(), IRecipesViewModel {
+    override var data: LiveData<MutableList<Recipe>> = RecipesRepository.shared.getAllRecipes(null)
+    override val isRefreshing = MutableLiveData<Boolean>()
 
-    fun refreshRecipes() {
+    override fun refreshRecipes() {
         isRefreshing.value = true
         RecipesRepository.shared.refreshRecipes {
             isRefreshing.postValue(false)
+        }
+    }
+
+    override fun deleteRecipe(recipe: Recipe) {
+        RecipesRepository.shared.deleteRecipe(recipe) {
+            refreshRecipes()
         }
     }
 }

@@ -129,6 +129,6 @@
         android:id="@+id/libraryFragment"
         android:name="com.finalProject.plateful.features.library.LibraryFragment"
         android:label="Library"
-        tools:layout="@layout/fragment_library">
+        tools:layout="@layout/fragment_recipe_list">
     </fragment>
 </navigation>

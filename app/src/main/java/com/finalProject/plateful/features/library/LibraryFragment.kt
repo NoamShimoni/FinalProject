@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finalProject.plateful.NavGraphDirections
-import com.finalProject.plateful.databinding.FragmentLibraryBinding
-import com.finalProject.plateful.models.Recipe
+import com.finalProject.plateful.databinding.FragmentRecipeListBinding
 import com.finalProject.plateful.features.recipe_list.OnItemClickListener
 import com.finalProject.plateful.features.recipe_list.RecipesAdapter
+import com.finalProject.plateful.models.Recipe
 
 class LibraryFragment : Fragment() {
-    private var binding: FragmentLibraryBinding? = null
+    private var binding: FragmentRecipeListBinding? = null
     private val viewModel: LibraryViewModel by viewModels()
     private var adapter: RecipesAdapter? = null
 
@@ -23,7 +23,7 @@ class LibraryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLibraryBinding.inflate(layoutInflater, container, false)
+        binding = FragmentRecipeListBinding.inflate(layoutInflater, container, false)
 
         setupRecyclerView()
 
@@ -41,7 +41,7 @@ class LibraryFragment : Fragment() {
 
         binding?.recyclerView?.setHasFixedSize(true)
 
-        adapter = RecipesAdapter(viewModel.data.value)
+        adapter = RecipesAdapter(viewModel)
 
         adapter?.listener = object: OnItemClickListener {
 

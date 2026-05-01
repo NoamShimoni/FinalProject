@@ -4,14 +4,15 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.finalProject.plateful.NavGraphDirections
-import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
+import com.finalProject.plateful.base.IRecipesViewModel
 import com.finalProject.plateful.databinding.RecipeRowLayoutBinding
 import com.finalProject.plateful.models.Recipe
 import com.squareup.picasso.Picasso
 
 class RecipeRowViewHolder(
     private val binding: RecipeRowLayoutBinding,
-    private val listener: OnItemClickListener?
+    private val listener: OnItemClickListener?,
+    private val viewModel: IRecipesViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
     private var recipe: Recipe? = null
 
@@ -39,9 +40,7 @@ class RecipeRowViewHolder(
 
         binding.recipeDeleteBtn.setOnClickListener {
             recipe?.let { recipe ->
-                RecipesRepository.shared.deleteRecipe(recipe) {
-                    RecipesRepository.shared.refreshRecipes {}
-                }
+                viewModel.deleteRecipe(recipe)
             }
         }
     }

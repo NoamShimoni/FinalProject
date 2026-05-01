@@ -39,7 +39,7 @@ class RecipeListFragment : Fragment() {
 
         binding?.recyclerView?.setHasFixedSize(true)
 
-        adapter = RecipesAdapter(viewModel.data.value)
+        adapter = RecipesAdapter(viewModel)
 
         adapter?.listener = object: OnItemClickListener {
 

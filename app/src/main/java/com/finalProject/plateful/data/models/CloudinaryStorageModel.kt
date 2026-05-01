@@ -12,7 +12,6 @@ import com.finalProject.plateful.base.MyApplication
 import com.finalProject.plateful.base.StringCompletion
 import java.io.File
 import java.util.concurrent.Executors
-import kotlin.concurrent.thread
 
 class CloudinaryStorageModel private constructor() {
     private val executor = Executors.newSingleThreadExecutor()

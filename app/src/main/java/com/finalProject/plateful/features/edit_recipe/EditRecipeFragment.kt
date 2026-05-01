@@ -11,13 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
-import com.finalProject.plateful.databinding.FragmentEditRecipeBinding
+import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.squareup.picasso.Picasso
 
 class EditRecipeFragment : Fragment() {
-    private var binding: FragmentEditRecipeBinding? = null
+    private var binding: FragmentAddRecipeBinding? = null
     private var cameraLauncher: ActivityResultLauncher<Void?>? = null
     private var hasImageChanged = false
 
@@ -50,7 +50,7 @@ class EditRecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentEditRecipeBinding.inflate(inflater, container, false)
+        binding = FragmentAddRecipeBinding.inflate(inflater, container, false)
         setupView()
 
         cameraLauncher =
