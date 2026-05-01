@@ -9,9 +9,7 @@ import com.finalProject.plateful.dao.AppLocalDbRepository
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseModel
 import com.finalProject.plateful.models.Recipe
-import com.google.firebase.Timestamp
 import java.util.concurrent.Executors
-import kotlin.concurrent.thread
 
 class RecipesRepository private constructor() {
     private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared
@@ -55,20 +53,7 @@ class RecipesRepository private constructor() {
         }
     }
 
-    fun addRecipe(recipeImage: Bitmap, recipe: Recipe, completion: Completion) {
-        firebaseModel.addRecipe(recipe) {
-            storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
-                if (!imageUrl.isNullOrEmpty()) {
-                    val recipeCopy = recipe.copy(imageUrl = imageUrl)
-                    firebaseModel.addRecipe(recipeCopy, completion)
-                } else {
-                    completion()
-                }
-            }
-        }
-    }
-
-    fun editRecipe(recipe: Recipe, recipeImage: Bitmap?, completion: Completion) {
+    fun upsertRecipe(recipeImage: Bitmap?, recipe: Recipe, completion: Completion) {
         firebaseModel.addRecipe(recipe) {
             recipeImage?.let {
                 storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->

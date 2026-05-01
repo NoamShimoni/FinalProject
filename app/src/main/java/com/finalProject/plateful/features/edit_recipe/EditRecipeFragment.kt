@@ -111,7 +111,7 @@ class EditRecipeFragment : Fragment() {
                         lastUpdated = Recipe.lastUpdated
                     )
 
-                    RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
+                    RecipesRepository.shared.upsertRecipe(imageBitmap, recipe) {
                         dismiss()
                     }
                 }

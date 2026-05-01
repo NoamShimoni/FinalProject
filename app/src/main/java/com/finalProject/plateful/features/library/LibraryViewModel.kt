@@ -9,7 +9,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 
-class RecipesListViewModel: ViewModel() {
+class LibraryViewModel: ViewModel() {
     var data: LiveData<MutableList<Recipe>> = RecipesRepository.shared.getAllRecipes(Firebase.auth.currentUser?.uid)
     val isRefreshing = MutableLiveData<Boolean>()
 

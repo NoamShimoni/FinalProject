@@ -8,14 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.finalProject.plateful.NavGraphDirections
 import com.finalProject.plateful.databinding.FragmentLibraryBinding
 import com.finalProject.plateful.models.Recipe
-import com.finalProject.plateful.utils.recipe_row.OnItemClickListener
-import com.finalProject.plateful.utils.recipe_row.RecipesAdapter
+import com.finalProject.plateful.features.recipe_list.OnItemClickListener
+import com.finalProject.plateful.features.recipe_list.RecipesAdapter
 
 class LibraryFragment : Fragment() {
     private var binding: FragmentLibraryBinding? = null
-    private val viewModel: RecipesListViewModel by viewModels()
+    private val viewModel: LibraryViewModel by viewModels()
     private var adapter: RecipesAdapter? = null
 
     override fun onCreateView(
@@ -79,7 +80,7 @@ class LibraryFragment : Fragment() {
 
     private fun navigateToRecipeDetailsFragment(recipe: Recipe){
         view?.let {
-            val action = LibraryFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
+            val action = NavGraphDirections.actionGlobalRecipeDetailsFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
             Navigation.findNavController(it).navigate(action)
         }
     }
