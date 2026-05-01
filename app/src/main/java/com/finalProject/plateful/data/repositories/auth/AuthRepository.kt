@@ -46,8 +46,6 @@ class AuthRepository private constructor() {
             completion(false)
         } else {
             if (profileImageBitmap != null) {
-                Log.v("EditProfileFragment", "Uploading profile image for user ${user.uid}")
-
                 storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
                     val profileUpdates = UserProfileChangeRequest.Builder()
 

@@ -86,8 +86,6 @@ class EditProfileFragment : Fragment() {
 
         val newName = binding?.usernameTextInput?.text.toString()
 
-        Log.v("EditProfileFragment", "New name: $newName, Bitmap is null: ${bitmap == null}")
-
         viewModel.updateProfile(newName, bitmap) { isSuccess ->
             if (isSuccess) {
                 view?.findNavController()?.popBackStack()
