@@ -53,17 +53,18 @@ class RecipesRepository private constructor() {
         }
     }
 
-    fun upsertRecipe(recipeImage: Bitmap?, recipe: Recipe, completion: Completion) {
+    fun addRecipe(recipeImage: Bitmap, recipe: Recipe, completion: Completion) {
+        firebaseModel.addRecipe(recipe) {
+            storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
+                this.uploadRecipeImage(recipe, recipeImage, completion)
+            }
+        }
+    }
+
+    fun editRecipe(recipe: Recipe, recipeImage: Bitmap?, completion: Completion) {
         firebaseModel.addRecipe(recipe) {
             recipeImage?.let {
-                storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
-                    if (!imageUrl.isNullOrEmpty()) {
-                        val recipeCopy = recipe.copy(imageUrl = imageUrl)
-                        firebaseModel.addRecipe(recipeCopy, completion)
-                    } else {
-                        completion()
-                    }
-                }
+                this.uploadRecipeImage(recipe, recipeImage, completion)
             } ?: run {
                 completion()
             }
@@ -82,6 +83,17 @@ class RecipesRepository private constructor() {
                 if (!deleteImageSuccessful) {
                     Log.v("TAG", "Error deleting recipe image for recipe: ${recipe.id}")
                 }
+            }
+        }
+    }
+
+    private fun uploadRecipeImage(recipe: Recipe, recipeImage: Bitmap, completion: Completion) {
+        storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
+            if (!imageUrl.isNullOrEmpty()) {
+                val recipeCopy = recipe.copy(imageUrl = imageUrl)
+                firebaseModel.addRecipe(recipeCopy, completion)
+            } else {
+                completion()
             }
         }
     }
