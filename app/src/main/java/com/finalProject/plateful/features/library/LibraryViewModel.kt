@@ -3,7 +3,7 @@ package com.finalProject.plateful.features.library
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.finalProject.plateful.base.IRecipesViewModel
+import com.finalProject.plateful.base.recipe_list.IRecipesViewModel
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase

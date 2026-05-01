@@ -1,4 +1,4 @@
-package com.finalProject.plateful.base
+package com.finalProject.plateful.base.recipe_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

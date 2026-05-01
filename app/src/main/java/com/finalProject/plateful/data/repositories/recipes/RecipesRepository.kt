@@ -55,9 +55,7 @@ class RecipesRepository private constructor() {
 
     fun addRecipe(recipeImage: Bitmap, recipe: Recipe, completion: Completion) {
         firebaseModel.addRecipe(recipe) {
-            storageModel.uploadRecipeImage(recipeImage, recipe.id) { imageUrl ->
-                this.uploadRecipeImage(recipe, recipeImage, completion)
-            }
+            this.uploadRecipeImage(recipe, recipeImage, completion)
         }
     }
 
