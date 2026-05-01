@@ -11,7 +11,8 @@ interface OnItemClickListener {
 }
 
 class RecipesAdapter (
-     var recipes: MutableList<Recipe>?
+    var recipes: MutableList<Recipe>?,
+    private val viewModel: RecipesListViewModel
 ): RecyclerView.Adapter<RecipeRowViewHolder>() {
 
     var listener: OnItemClickListener? = null
@@ -24,7 +25,7 @@ class RecipesAdapter (
         val inflator = LayoutInflater.from(parent.context)
         val binding = RecipeRowLayoutBinding.inflate(inflator, parent, false)
 
-        return RecipeRowViewHolder(binding, listener)
+        return RecipeRowViewHolder(binding, listener, viewModel)
     }
 
     override fun onBindViewHolder(

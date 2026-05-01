@@ -38,9 +38,9 @@ class RecipeListFragment : Fragment() {
 
         binding?.recyclerView?.setHasFixedSize(true)
 
-        adapter = RecipesAdapter(viewModel.data.value)
+        adapter = RecipesAdapter(viewModel.data.value, viewModel)
 
-        adapter?.listener = object: OnItemClickListener {
+        adapter?.listener = object : OnItemClickListener {
 
             override fun onRecipeItemClick(recipe: Recipe) {
                 navigateToRecipeDetailsFragment(recipe)

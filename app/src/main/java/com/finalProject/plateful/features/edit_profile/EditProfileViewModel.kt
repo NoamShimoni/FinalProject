@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 
-
 class EditProfileViewModel: ViewModel() {
     fun getCurrentUser(): FirebaseUser? {
         return AuthRepository.shared.getCurrentUser()
