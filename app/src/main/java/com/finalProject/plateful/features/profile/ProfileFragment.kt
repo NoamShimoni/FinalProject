@@ -39,8 +39,6 @@ class ProfileFragment : Fragment() {
             it.findNavController().navigate(action)
         }
 
-
-
         setUserInfo()
 
         return binding?.root
