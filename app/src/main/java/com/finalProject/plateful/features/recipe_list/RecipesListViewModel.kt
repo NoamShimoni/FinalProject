@@ -13,7 +13,6 @@ class RecipesListViewModel: ViewModel(), IRecipesViewModel {
     override val isRefreshing = MutableLiveData<Boolean>()
 
     override fun refreshRecipes() {
-        isRefreshing.value = true
         RecipesRepository.shared.refreshRecipes {
             isRefreshing.postValue(false)
         }
