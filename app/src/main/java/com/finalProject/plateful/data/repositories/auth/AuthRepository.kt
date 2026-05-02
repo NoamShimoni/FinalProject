@@ -67,6 +67,6 @@ class AuthRepository private constructor() {
     }
 
     fun isUserSignedIn(): Boolean {
-        return Firebase.auth.currentUser != null
+        return this.getCurrentUser() != null
     }
 }
