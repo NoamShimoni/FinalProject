@@ -1,16 +1,13 @@
 package com.finalProject.plateful.models
 
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 data class RemoteRecipe(
     val idMeal: String?,
     val strMeal: String?,
-    val strMealAlternate: String?,
-    val strCategory: String?,
-    val strArea: String?,
-    val strCountry: String?,
     val strInstructions: String?,
     val strMealThumb: String?,
-    val strTags: String?,
-    val strYoutube: String?,
     val strIngredient1: String?,
     val strIngredient2: String?,
     val strIngredient3: String?,
@@ -51,9 +48,6 @@ data class RemoteRecipe(
     val strMeasure18: String?,
     val strMeasure19: String?,
     val strMeasure20: String?,
-    val strSource: String?,
-    val strImageSource: String?,
-    val strCreativeCommonsConfirmed: String?,
     val dateModified: String?
 ) {
     fun toRecipe(): Recipe {
@@ -75,7 +69,7 @@ data class RemoteRecipe(
         
         val parsedDate = try {
             dateModified?.let {
-                java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).parse(it)?.time
+                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(it)?.time
             }
         } catch (e: Exception) {
             null

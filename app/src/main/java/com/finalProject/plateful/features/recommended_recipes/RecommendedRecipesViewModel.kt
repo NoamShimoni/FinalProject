@@ -29,13 +29,9 @@ class RecommendedRecipesViewModel : ViewModel(), IRecipesViewModel {
         }
     }
 
-    override fun deleteRecipe(recipe: Recipe) {
-        // No-op for remote recipes
-    }
+    override fun deleteRecipe(recipe: Recipe) {}
 
     override fun isRecipeByCurrentUser(recipe: Recipe): Boolean {
-        // We do not want edit/delete buttons for remote recommendations
         return false
     }
-
 }
