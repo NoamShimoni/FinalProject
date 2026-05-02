@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.finalProject.plateful.base.recipe_list.IRecipesViewModel
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
 
@@ -24,5 +26,10 @@ class LibraryViewModel: ViewModel(), IRecipesViewModel {
         RecipesRepository.shared.deleteRecipe(recipe) {
             refreshRecipes()
         }
+    }
+
+    override fun isRecipeByCurrentUser(recipe: Recipe): Boolean {
+        val currentUser = AuthRepository.shared.getCurrentUser()
+        return recipe.creatingUserId == currentUser?.uid
     }
 }

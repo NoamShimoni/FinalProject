@@ -30,30 +30,38 @@ class AuthRepository private constructor() {
         completion: StringCompletion
     ) {
         firebaseAuthModel.signUp(email, password) { error ->
-            val user = Firebase.auth.currentUser
-
-            if (user == null || !error.isNullOrEmpty()) {
-                completion(error)
+            if (!error.isNullOrEmpty()) {
+                updateProfile(username, profileImageBitmap, completion)
             } else {
-                if (profileImageBitmap != null) {
-                    storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
-                        val profileUpdates = UserProfileChangeRequest.Builder()
+                completion(error)
+            }
+        }
+    }
 
-                        profileUpdates.displayName = username
+    fun updateProfile(username: String, profileImageBitmap: Bitmap?, completion: StringCompletion) {
+        val user = Firebase.auth.currentUser
 
-                        if (imageUrl != null) {
-                            profileUpdates.photoUri = Uri.parse(imageUrl)
-                        }
-
-                        firebaseAuthModel.updateProfile(profileUpdates.build(), completion)
-                    }
-                } else {
+        if (user == null) {
+            completion("User is not signed in")
+        } else {
+            if (profileImageBitmap != null) {
+                storageModel.uploadProfileImage(profileImageBitmap, user.uid) { imageUrl ->
                     val profileUpdates = UserProfileChangeRequest.Builder()
-                        .setDisplayName(username)
-                        .build()
 
-                    firebaseAuthModel.updateProfile(profileUpdates, completion)
+                    profileUpdates.displayName = username
+
+                    if (imageUrl != null) {
+                        profileUpdates.photoUri = Uri.parse(imageUrl)
+                    }
+
+                    firebaseAuthModel.updateProfile(profileUpdates.build(), completion)
                 }
+            } else {
+                val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(username)
+                    .build()
+
+                firebaseAuthModel.updateProfile(profileUpdates, completion)
             }
         }
     }

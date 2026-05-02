@@ -41,7 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="20dp"
             android:text="@string/created_by"
             android:textColor="@color/midGray"
             android:textSize="16sp"

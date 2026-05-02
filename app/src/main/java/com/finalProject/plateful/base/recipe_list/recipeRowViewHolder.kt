@@ -48,16 +48,13 @@ class RecipeRowViewHolder(
         this.recipe = recipe
 
         binding.recipeTitleTextView.text = recipe.title
+        binding.recipeCreatorTextView.text = recipe.creatingUserName
 
         Picasso.get().load(recipe.imageUrl).into(binding.recipeImageView)
 
-        val isOwner = true //TODO: implement this check when Recipe model has a creatingUserId
-
-        if (isOwner) {
-            binding.editDeleteDivider.visibility = View.VISIBLE
+        if (viewModel.isRecipeByCurrentUser(recipe)) {
             binding.buttonsContainer.visibility = View.VISIBLE
         } else {
-            binding.editDeleteDivider.visibility = View.GONE
             binding.buttonsContainer.visibility = View.GONE
         }
     }

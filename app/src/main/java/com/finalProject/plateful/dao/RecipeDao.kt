@@ -2,14 +2,12 @@ package com.finalProject.plateful.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Upsert
 import com.finalProject.plateful.models.Recipe
 
 @Dao
 interface RecipeDao {
-
     @Query("SELECT * FROM Recipe")
     fun getAllRecipes(): LiveData<MutableList<Recipe>>
 
@@ -19,8 +17,8 @@ interface RecipeDao {
     @Query("SELECT * FROM Recipe")
     fun getAllRecipesSync(): MutableList<Recipe>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRecipes(vararg recipes: Recipe)
+    @Upsert
+    fun upsertRecipes(vararg recipes: Recipe)
 
     @Query("DELETE FROM Recipe WHERE id = :recipeId")
     fun deleteRecipeById(recipeId: String)

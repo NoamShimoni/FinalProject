@@ -9,16 +9,20 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
+import com.finalProject.plateful.features.profile.ProfileViewModel
 import com.finalProject.plateful.models.Recipe
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import kotlin.getValue
 
 class AddRecipeFragment : Fragment() {
     private var binding: FragmentAddRecipeBinding? = null
+    private val viewModel: AddRecipeViewModel by viewModels()
     private var cameraLauncher: ActivityResultLauncher<Void?>? = null
 
     override fun onCreateView(
@@ -51,9 +55,9 @@ class AddRecipeFragment : Fragment() {
             val recipeTitle = binding?.recipeTitleTextInput?.text.toString()
             val recipeIngredients = binding?.recipeIngredientsTextInput?.text.toString()
             val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
-            val creatingUser = Firebase.auth.currentUser
+            val user = viewModel.getCurrentUser()
 
-            creatingUser?.let { creatingUser ->
+            user?.let { creatingUser ->
                 val recipe = Recipe(
                     id = java.util.UUID.randomUUID().toString(),
                     title = recipeTitle,

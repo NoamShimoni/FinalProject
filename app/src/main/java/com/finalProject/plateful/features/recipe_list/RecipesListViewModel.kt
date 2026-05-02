@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.finalProject.plateful.base.recipe_list.IRecipesViewModel
+import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
-
+import com.google.firebase.auth.FirebaseUser
 
 class RecipesListViewModel: ViewModel(), IRecipesViewModel {
     override var data: LiveData<MutableList<Recipe>> = RecipesRepository.shared.getAllRecipes(null)
@@ -22,5 +23,10 @@ class RecipesListViewModel: ViewModel(), IRecipesViewModel {
         RecipesRepository.shared.deleteRecipe(recipe) {
             refreshRecipes()
         }
+    }
+
+    override fun isRecipeByCurrentUser(recipe: Recipe): Boolean {
+        val currentUser = AuthRepository.shared.getCurrentUser()
+        return recipe.creatingUserId == currentUser?.uid
     }
 }

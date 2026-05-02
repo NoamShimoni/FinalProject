@@ -10,11 +10,15 @@ import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseModel
 import com.finalProject.plateful.models.Recipe
 import java.util.concurrent.Executors
+import android.os.Handler
+import android.os.Looper
+import com.finalProject.plateful.base.StringCompletion
 
 class RecipesRepository private constructor() {
     private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared
     private val firebaseModel = FirebaseModel()
     private val executor = Executors.newSingleThreadExecutor()
+    private val mainHandler = Handler.createAsync(Looper.getMainLooper())
     private val database: AppLocalDbRepository = AppLocalDB.db
     private val recipes: LiveData<MutableList<Recipe>>? = null
 
@@ -26,7 +30,7 @@ class RecipesRepository private constructor() {
         return recipes ?: creatingUserId?.let { creatingUserId -> database.recipeDao.getAllRecipesByUser(creatingUserId) } ?: run { database.recipeDao.getAllRecipes() }
     }
 
-    fun refreshRecipes(completion: Completion) {
+    fun refreshRecipes(completion: Completion?) {
         val lastUpdated = Recipe.Companion.lastUpdated
 
         firebaseModel.getAllRecipes(lastUpdated) {
@@ -37,7 +41,7 @@ class RecipesRepository private constructor() {
                     if(recipe.isDeleted) {
                         database.recipeDao.deleteRecipeById(recipe.id)
                     } else {
-                        database.recipeDao.insertRecipes(recipe)
+                        database.recipeDao.upsertRecipes(recipe)
                     }
 
                     recipe.lastUpdated?.let { recipeLastUpdated ->
@@ -48,7 +52,11 @@ class RecipesRepository private constructor() {
                 }
 
                 Recipe.Companion.lastUpdated = time
-                completion()
+                completion?.let {
+                    mainHandler.post {
+                        it()
+                    }
+                }
             }
         }
     }
@@ -92,6 +100,16 @@ class RecipesRepository private constructor() {
                 firebaseModel.addRecipe(recipeCopy, completion)
             } else {
                 completion()
+            }
+        }
+    }
+
+    fun updateUserNameForRecipes(userId: String, newUserName: String, completion: StringCompletion) {
+        firebaseModel.updateUserNameForRecipes(userId, newUserName) { isSuccess ->
+            if (isSuccess) {
+                completion(null)
+            } else {
+                completion("Failed to update username for relevant recipes")
             }
         }
     }
