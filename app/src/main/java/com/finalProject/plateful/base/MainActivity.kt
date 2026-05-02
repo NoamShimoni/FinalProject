@@ -3,6 +3,7 @@ package com.finalProject.plateful.base
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -15,6 +16,7 @@ import com.finalProject.plateful.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
+    private val viewModel: MainActivityViewModel by viewModels()
     private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +112,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shouldNavigateToSignIn(): Boolean {
-        return !AuthRepository.shared.isUserSignedIn()
+        return !viewModel.isUserSignedIn()
     }
 }

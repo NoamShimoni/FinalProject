@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
 import com.finalProject.plateful.utils.extentions.bitmap
@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso
 class EditRecipeFragment : Fragment() {
     private var binding: FragmentAddRecipeBinding? = null
     private var cameraLauncher: ActivityResultLauncher<Void?>? = null
+    private val viewModel: EditRecipeViewModel by viewModels()
     private var hasImageChanged = false
 
     var id: String? = null
@@ -111,7 +112,7 @@ class EditRecipeFragment : Fragment() {
                         lastUpdated = Recipe.lastUpdated
                     )
 
-                    RecipesRepository.shared.editRecipe(recipe, imageBitmap) {
+                    viewModel.editRecipe(recipe, imageBitmap) {
                         dismiss()
                     }
                 }
