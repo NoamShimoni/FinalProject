@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentEditProfileBinding
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.finalProject.plateful.utils.extentions.loadAvatar
+import com.finalProject.plateful.utils.extentions.setAvatarImageBitmap
 import com.google.firebase.auth.FirebaseUser
 
 class EditProfileFragment : Fragment() {
@@ -36,7 +37,7 @@ class EditProfileFragment : Fragment() {
         cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
                 bitMap ->
             bitMap?.let {
-                binding?.avatarImageView?.setImageBitmap(it)
+                binding?.avatarImageView?.setAvatarImageBitmap(it)
                 isImageSelected = true
             } ?: Toast.makeText(context, "No image captured", Toast.LENGTH_SHORT).show()
         }
