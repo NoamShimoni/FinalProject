@@ -76,7 +76,7 @@ class AddRecipeFragment : Fragment() {
                 val bitmap = binding?.recipeImageImageView?.bitmap
 
                 bitmap?.let {
-                    RecipesRepository.shared.addRecipe( it, recipe) {
+                    viewModel.addRecipe( it, recipe) {
                         dismiss()
                     }
                 } ?: run {
