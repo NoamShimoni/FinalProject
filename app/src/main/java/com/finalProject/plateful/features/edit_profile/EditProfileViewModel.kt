@@ -1,7 +1,7 @@
 package com.finalProject.plateful.features.edit_profile
 
-import androidx.lifecycle.ViewModel
 import android.graphics.Bitmap
+import androidx.lifecycle.ViewModel
 import com.finalProject.plateful.base.StringCompletion
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository

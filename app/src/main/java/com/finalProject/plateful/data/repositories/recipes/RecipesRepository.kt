@@ -1,18 +1,18 @@
 package com.finalProject.plateful.data.repositories.recipes
 
 import android.graphics.Bitmap
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.finalProject.plateful.base.Completion
+import com.finalProject.plateful.base.StringCompletion
 import com.finalProject.plateful.dao.AppLocalDB
 import com.finalProject.plateful.dao.AppLocalDbRepository
 import com.finalProject.plateful.data.models.CloudinaryStorageModel
 import com.finalProject.plateful.data.models.FirebaseModel
 import com.finalProject.plateful.models.Recipe
 import java.util.concurrent.Executors
-import android.os.Handler
-import android.os.Looper
-import com.finalProject.plateful.base.StringCompletion
 
 class RecipesRepository private constructor() {
     private val storageModel: CloudinaryStorageModel = CloudinaryStorageModel.shared

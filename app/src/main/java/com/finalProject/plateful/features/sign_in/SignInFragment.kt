@@ -1,4 +1,4 @@
-package com.finalProject.plateful.features.login
+package com.finalProject.plateful.features.sign_in
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.databinding.FragmentSignInBinding
 
 class SignInFragment : Fragment() {
     private var binding: FragmentSignInBinding? = null
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,7 @@ class SignInFragment : Fragment() {
             } else {
                 binding?.loadingIndicator?.visibility = View.VISIBLE
 
-                AuthRepository.shared.signIn(email, password) { error ->
+                viewModel.signIn(email, password) { error ->
                     error?.let { error ->
                         binding?.loadingIndicator?.visibility = View.GONE
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()

@@ -11,14 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
-import com.finalProject.plateful.features.profile.ProfileViewModel
 import com.finalProject.plateful.models.Recipe
 import com.finalProject.plateful.utils.extentions.bitmap
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
-import kotlin.getValue
 
 class AddRecipeFragment : Fragment() {
     private var binding: FragmentAddRecipeBinding? = null
@@ -76,7 +71,7 @@ class AddRecipeFragment : Fragment() {
                 val bitmap = binding?.recipeImageImageView?.bitmap
 
                 bitmap?.let {
-                    RecipesRepository.shared.addRecipe( it, recipe) {
+                    viewModel.addRecipe( it, recipe) {
                         dismiss()
                     }
                 } ?: run {
