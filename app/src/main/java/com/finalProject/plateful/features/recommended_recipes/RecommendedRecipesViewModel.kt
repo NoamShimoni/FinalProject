@@ -1,6 +1,5 @@
 package com.finalProject.plateful.features.recommended_recipes
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,8 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecommendedRecipesViewModel : ViewModel(), IRecipesViewModel {
-    private val _data = MutableLiveData<MutableList<Recipe>>()
-    override var data: LiveData<MutableList<Recipe>> = _data
+    override var data = MutableLiveData<MutableList<Recipe>>()
     override val isRefreshing = MutableLiveData<Boolean>()
 
     override fun refreshRecipes() {
@@ -21,7 +19,7 @@ class RecommendedRecipesViewModel : ViewModel(), IRecipesViewModel {
 
             val mappedRecipes = remoteRecipes.meals?.map { it.toRecipe() }?.toMutableList() ?: mutableListOf()
 
-            _data.postValue(mappedRecipes)
+            data.postValue(mappedRecipes)
             isRefreshing.postValue(false)
         }
     }
