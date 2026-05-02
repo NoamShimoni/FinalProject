@@ -28,7 +28,8 @@ class LibraryViewModel: ViewModel(), IRecipesViewModel {
         }
     }
 
-    override fun getCurrentUser(): FirebaseUser? {
-        return AuthRepository.shared.getCurrentUser()
+    override fun isRecipeByCurrentUser(recipe: Recipe): Boolean {
+        val currentUser = AuthRepository.shared.getCurrentUser()
+        return recipe.creatingUserId == currentUser?.uid
     }
 }

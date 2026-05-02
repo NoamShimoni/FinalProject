@@ -10,5 +10,5 @@ interface IRecipesViewModel {
     val isRefreshing: MutableLiveData<Boolean>
     fun refreshRecipes()
     fun deleteRecipe(recipe: Recipe)
-    fun getCurrentUser(): FirebaseUser?
+    fun isRecipeByCurrentUser(recipe: Recipe): Boolean
 }
