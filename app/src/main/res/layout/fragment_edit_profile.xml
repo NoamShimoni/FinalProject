@@ -67,6 +67,7 @@
                 android:textColor="@color/darkGray"
                 app:cornerRadius="8dp"
                 app:icon="@android:drawable/ic_menu_camera"
+                app:iconSize="24dp"
                 app:iconTint="@color/darkGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
