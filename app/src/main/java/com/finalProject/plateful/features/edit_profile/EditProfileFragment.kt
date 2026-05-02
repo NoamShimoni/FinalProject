@@ -49,17 +49,25 @@ class EditProfileFragment : Fragment() {
 
         binding?.loadingIndicator?.visibility = View.GONE
 
-        binding?.saveButton?.setOnClickListener {
-            val newName = binding?.usernameTextInput?.text.toString()
+        binding?.saveButton?.setOnClickListener{
+            handleSaveProfile()
+        }
 
-                if (newName != user?.displayName || isImageSelected) {
+        return binding?.root
+    }
+
+    fun handleSaveProfile() {
+        val newName = binding?.usernameTextInput?.text.toString()
+
+        if (!newName.isEmpty()) {
+            if (newName != user?.displayName || isImageSelected) {
                 handleProfileSaving()
             } else {
                 Toast.makeText(context, "No changes to save", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(context, "Username cannot be empty", Toast.LENGTH_SHORT).show()
         }
-
-        return binding?.root
     }
 
     fun setUserInfo() {
