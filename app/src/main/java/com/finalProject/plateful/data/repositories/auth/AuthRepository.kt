@@ -30,7 +30,7 @@ class AuthRepository private constructor() {
         completion: StringCompletion
     ) {
         firebaseAuthModel.signUp(email, password) { error ->
-            if (!error.isNullOrEmpty()) {
+            if (error.isNullOrEmpty()) {
                 updateProfile(username, profileImageBitmap, completion)
             } else {
                 completion(error)

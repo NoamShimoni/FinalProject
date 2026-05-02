@@ -1,6 +1,7 @@
 package com.finalProject.plateful.features.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,8 @@ class ProfileFragment : Fragment() {
 
     fun setUserInfo() {
         val user = viewModel.getCurrentUser()
+
+        Log.v("ProfileFragment", "Current user: ${user?.displayName}, email: ${user?.email}, photoUrl: ${user?.photoUrl}")
 
         user?.let {
             binding?.usernameTextView?.text = it.displayName

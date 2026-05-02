@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentSignUpBinding
 import com.finalProject.plateful.utils.extentions.bitmap
+import com.finalProject.plateful.utils.extentions.setAvatarImageBitmap
 
 class SignUpFragment : Fragment() {
     private var binding: FragmentSignUpBinding? = null
@@ -23,7 +24,7 @@ class SignUpFragment : Fragment() {
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitMap ->
             bitMap?.let {
-                binding?.profilePreviewImageView?.setImageBitmap(it)
+                binding?.profilePreviewImageView?.setAvatarImageBitmap(it)
                 isImageSelected = true
             } ?: Toast.makeText(context, "No image captured", Toast.LENGTH_SHORT).show()
         }
