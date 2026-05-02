@@ -7,17 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.finalProject.plateful.base.recipe_list.IRecipesViewModel
 import com.finalProject.plateful.data.repositories.remote_recipes.RemoteRecipesRepository
 import com.finalProject.plateful.models.Recipe
-import com.finalProject.plateful.models.RemoteRecipe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
 
 class RecommendedRecipesViewModel : ViewModel(), IRecipesViewModel {
     private val _data = MutableLiveData<MutableList<Recipe>>()
     override var data: LiveData<MutableList<Recipe>> = _data
     override val isRefreshing = MutableLiveData<Boolean>()
-    
-    private val executor = Executors.newSingleThreadExecutor()
 
     override fun refreshRecipes() {
         viewModelScope.launch(Dispatchers.IO) {
