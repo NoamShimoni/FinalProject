@@ -66,40 +66,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subtitle_text_view" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profile_preview_image_view"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/avatar_card_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="8dp"
-            android:background="@color/grayBackground"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
+            app:cardBackgroundColor="@color/avatarBackground"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_image_label_text_view"
-            app:srcCompat="@drawable/ic_chef_hat" />
+            app:strokeWidth="0dp">
 
-        <com.google.android.material.button.MaterialButton
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_preview_image_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                app:tint="@color/orange"
+                android:src="@drawable/ic_person" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/upload_photo_button"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:text="@string/upload_photo"
-            android:textColor="@color/textContent"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:minHeight="0dp"
-            app:cornerRadius="8dp"
-            app:strokeColor="@color/border"
-            app:icon="@android:drawable/ic_menu_camera"
-            app:iconSize="32dp"
-            app:iconPadding="12dp"
-            app:iconGravity="textStart"
-            app:iconTint="@color/textContent"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_preview_image_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/profile_preview_image_view"
-            app:layout_constraintTop_toTopOf="@+id/profile_preview_image_view" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-8dp"
+            android:layout_marginBottom="-8dp"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            app:tint="@color/darkGray"
+            app:backgroundTint="@android:color/white"
+            app:fabCustomSize="48dp"
+            app:maxImageSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/avatar_card_view"
+            app:layout_constraintStart_toStartOf="@id/avatar_card_view" />
 
         <TextView
             android:id="@+id/username_label_text_view"
@@ -110,7 +111,7 @@
             android:textColor="@color/textContent"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_preview_image_view" />
+            app:layout_constraintTop_toBottomOf="@+id/avatar_card_view" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_text_input_layout"
