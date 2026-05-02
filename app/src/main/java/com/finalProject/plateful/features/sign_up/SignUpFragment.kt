@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentSignUpBinding
-import com.finalProject.plateful.features.sign_in.SignUpFragmentDirections
 import com.finalProject.plateful.utils.extentions.bitmap
 
 class SignUpFragment : Fragment() {

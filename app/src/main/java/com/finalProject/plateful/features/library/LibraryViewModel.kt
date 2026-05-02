@@ -8,7 +8,6 @@ import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
 

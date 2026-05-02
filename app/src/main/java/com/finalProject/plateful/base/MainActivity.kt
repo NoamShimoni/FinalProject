@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.finalProject.plateful.R
-import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -2,7 +2,6 @@ package com.finalProject.plateful.features.edit_profile
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.finalProject.plateful.databinding.FragmentEditProfileBinding
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.finalProject.plateful.utils.extentions.loadAvatar
 import com.google.firebase.auth.FirebaseUser
-import kotlin.getValue
 
 class EditProfileFragment : Fragment() {
     private var binding: FragmentEditProfileBinding? = null

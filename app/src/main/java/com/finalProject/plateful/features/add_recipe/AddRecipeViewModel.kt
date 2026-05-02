@@ -14,8 +14,6 @@ class AddRecipeViewModel: ViewModel() {
     }
 
     fun addRecipe(bitmap: Bitmap, recipe: Recipe, completion: Completion) {
-        RecipesRepository.shared.addRecipe( bitmap, recipe) {
-            completion()
-        }
+        RecipesRepository.shared.addRecipe( bitmap, recipe, completion)
     }
 }
