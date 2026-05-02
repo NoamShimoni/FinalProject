@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_library"
         android:title="@string/library" />
     <item
+        android:id="@+id/recommendedRecipesFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_editor_choice"
+        android:title="Recommended" />
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person"
         android:title="@string/profile"
