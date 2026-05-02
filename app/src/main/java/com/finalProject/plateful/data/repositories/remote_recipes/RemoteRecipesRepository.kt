@@ -1,7 +1,6 @@
 package com.finalProject.plateful.data.repositories.remote_recipes
 
 import com.finalProject.plateful.data.networking.NetworkClient
-import com.finalProject.plateful.models.RemoteRecipe
 import com.finalProject.plateful.models.RemoteRecipes
 
 class RemoteRecipesRepository : RecipesRepository {

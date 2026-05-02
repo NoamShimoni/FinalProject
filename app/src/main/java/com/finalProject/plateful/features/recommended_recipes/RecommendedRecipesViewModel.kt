@@ -17,8 +17,6 @@ class RecommendedRecipesViewModel : ViewModel(), IRecipesViewModel {
     private val executor = Executors.newSingleThreadExecutor()
 
     override fun refreshRecipes() {
-        isRefreshing.postValue(true)
-        
         executor.execute {
             val remoteRecipes = RemoteRecipesRepository.shared.getRecipes()
             
