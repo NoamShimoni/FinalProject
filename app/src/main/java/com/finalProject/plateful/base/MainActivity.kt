@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         setupBottomBar()
 
         setupTopBar()
-
     }
 
     private fun setupNavigation() {
@@ -65,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.recipeListFragment,
                     R.id.profileFragment,
                     R.id.libraryFragment,
+                    R.id.recommendedRecipesFragment,
                     R.id.signInFragment
                 )
             )
@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.signInFragment, R.id.signUpFragment -> {
                     binding?.bottomNavigation?.visibility = View.GONE
                 }
+
                 else -> {
                     binding?.bottomNavigation?.visibility = View.VISIBLE
                 }

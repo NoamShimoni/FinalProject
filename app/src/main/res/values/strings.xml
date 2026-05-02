@@ -47,4 +47,5 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="library">Library</string>
+    <string name="recommended">Recommended</string>
 </resources>
