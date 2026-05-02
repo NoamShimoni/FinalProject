@@ -22,8 +22,8 @@ class RecipesAdapter (
         parent: ViewGroup,
         viewType: Int
     ): RecipeRowViewHolder {
-        val inflator = LayoutInflater.from(parent.context)
-        val binding = RecipeRowLayoutBinding.inflate(inflator, parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = RecipeRowLayoutBinding.inflate(inflater, parent, false)
 
         return RecipeRowViewHolder(binding, listener, viewModel)
     }
