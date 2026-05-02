@@ -127,7 +127,7 @@
     <fragment
         android:id="@+id/recommendedRecipesFragment"
         android:name="com.finalProject.plateful.features.recommended_recipes.RecommendedRecipesFragment"
-        android:label="Recommended"
+        android:label="Recommended Recipes"
         tools:layout="@layout/fragment_recipe_list">
     </fragment>
 </navigation>
