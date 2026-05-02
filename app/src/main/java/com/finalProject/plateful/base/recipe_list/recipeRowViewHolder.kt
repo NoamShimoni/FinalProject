@@ -52,9 +52,7 @@ class RecipeRowViewHolder(
 
         Picasso.get().load(recipe.imageUrl).into(binding.recipeImageView)
 
-        val isOwner = viewModel.isRecipeByCurrentUser(recipe)
-
-        if (isOwner) {
+        if (viewModel.isRecipeByCurrentUser(recipe)) {
             binding.buttonsContainer.visibility = View.VISIBLE
         } else {
             binding.buttonsContainer.visibility = View.GONE
