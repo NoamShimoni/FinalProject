@@ -1,5 +1,5 @@
 package com.finalProject.plateful.models
 
 data class RemoteRecipes(
-    val meals: MutableList<RemoteRecipe>?
+    val meals: List<RemoteRecipe>?
 )
