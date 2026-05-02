@@ -18,7 +18,7 @@ interface RecipeDao {
     fun getAllRecipesSync(): MutableList<Recipe>
 
     @Upsert
-    fun insertRecipes(vararg recipes: Recipe)
+    fun upsertRecipes(vararg recipes: Recipe)
 
     @Query("DELETE FROM Recipe WHERE id = :recipeId")
     fun deleteRecipeById(recipeId: String)

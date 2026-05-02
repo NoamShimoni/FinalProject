@@ -3,7 +3,6 @@ package com.finalProject.plateful.data.repositories.recipes
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.finalProject.plateful.base.BooleanCompletion
 import com.finalProject.plateful.base.Completion
 import com.finalProject.plateful.dao.AppLocalDB
 import com.finalProject.plateful.dao.AppLocalDbRepository
@@ -42,7 +41,7 @@ class RecipesRepository private constructor() {
                     if(recipe.isDeleted) {
                         database.recipeDao.deleteRecipeById(recipe.id)
                     } else {
-                        database.recipeDao.insertRecipes(recipe)
+                        database.recipeDao.upsertRecipes(recipe)
                     }
 
                     recipe.lastUpdated?.let { recipeLastUpdated ->
