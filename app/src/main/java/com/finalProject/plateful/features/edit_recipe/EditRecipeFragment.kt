@@ -85,7 +85,7 @@ class EditRecipeFragment : Fragment() {
 
         binding?.saveRecipeButton?.setOnClickListener {
             binding?.let { binding ->
-                if (RecipeFormValidator.validateForm(binding, context)) {
+                if (RecipeFormValidator.validateForm(binding)) {
                     binding.loadingIndicator.visibility = View.VISIBLE
 
                     val recipeTitle = binding.recipeTitleTextInput.text.toString()

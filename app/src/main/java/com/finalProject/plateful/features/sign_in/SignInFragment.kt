@@ -24,25 +24,7 @@ class SignInFragment : Fragment() {
         binding?.loadingIndicator?.visibility = View.GONE
 
         binding?.signInButton?.setOnClickListener {
-            binding?.let { binding ->
-                if (SignInFormValidator.validateForm(binding)) {
-                    val email = binding.emailTextInputLayout.editText?.text.toString().trim()
-                    val password = binding.passwordTextInputLayout.editText?.text.toString()
-
-                    binding.loadingIndicator.visibility = View.VISIBLE
-
-                    viewModel.signIn(email, password) { error ->
-                        error?.let { errorMsg ->
-                            binding.loadingIndicator.visibility = View.GONE
-                            Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
-                        } ?: run {
-                            val action =
-                                SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
-                            view?.findNavController()?.navigate(action)
-                        }
-                    }
-                }
-            }
+            performSignIn()
         }
 
         binding?.signUpTextView?.setOnClickListener {
@@ -51,5 +33,27 @@ class SignInFragment : Fragment() {
         }
 
         return binding?.root
+    }
+
+    fun performSignIn() {
+        binding?.let { binding ->
+            if (SignInFormValidator.validateForm(binding)) {
+                val email = binding.emailTextInputLayout.editText?.text.toString().trim()
+                val password = binding.passwordTextInputLayout.editText?.text.toString()
+
+                binding.loadingIndicator.visibility = View.VISIBLE
+
+                viewModel.signIn(email, password) { error ->
+                    error?.let { errorMsg ->
+                        binding.loadingIndicator.visibility = View.GONE
+                        Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
+                    } ?: run {
+                        val action =
+                            SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
+                        view?.findNavController()?.navigate(action)
+                    }
+                }
+            }
+        }
     }
 }

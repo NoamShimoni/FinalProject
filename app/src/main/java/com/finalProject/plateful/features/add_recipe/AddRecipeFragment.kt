@@ -47,7 +47,7 @@ class AddRecipeFragment : Fragment() {
 
         binding?.saveRecipeButton?.setOnClickListener {
             binding?.let { binding ->
-                if (RecipeFormValidator.validateForm(binding, context)) {
+                if (RecipeFormValidator.validateForm(binding)) {
 
                     binding.loadingIndicator.visibility = View.VISIBLE
 

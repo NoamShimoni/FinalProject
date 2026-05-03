@@ -4,9 +4,8 @@ import android.content.Context
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 
 object RecipeFormValidator {
-    fun validateForm(binding: FragmentAddRecipeBinding, context: Context?): Boolean {
+    fun validateForm(binding: FragmentAddRecipeBinding): Boolean {
         var isValid = true
-        val invalidFields = mutableListOf<String>()
 
         val title = binding.recipeTitleTextInput.text.toString().trim()
         val ingredients = binding.recipeIngredientsTextInput.text.toString().trim()
@@ -14,7 +13,6 @@ object RecipeFormValidator {
 
         if (title.isEmpty()) {
             binding.recipeTitleTextInputLayout.error = "Title is required"
-            invalidFields.add("title")
             isValid = false
         } else {
             binding.recipeTitleTextInputLayout.error = null
@@ -22,7 +20,6 @@ object RecipeFormValidator {
 
         if (ingredients.isEmpty()) {
             binding.recipeIngredientsTextInputLayout.error = "Ingredients are required"
-            invalidFields.add("ingredients")
             isValid = false
         } else {
             binding.recipeIngredientsTextInputLayout.error = null
@@ -30,7 +27,6 @@ object RecipeFormValidator {
 
         if (instructions.isEmpty()) {
             binding.recipeInstructionsTextInputLayout.error = "Instructions are required"
-            invalidFields.add("instructions")
             isValid = false
         } else {
             binding.recipeInstructionsTextInputLayout.error = null

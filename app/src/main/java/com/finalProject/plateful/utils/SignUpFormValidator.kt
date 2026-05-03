@@ -22,7 +22,7 @@ object SignUpFormValidator {
         if (email.isEmpty()) {
             binding.emailTextInputLayout.error = "Please enter an email address"
             isValid = false
-        } else if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.emailTextInputLayout.error = "Please enter a valid email address"
             isValid = false
         } else {

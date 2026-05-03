@@ -42,13 +42,13 @@ class SignUpFragment : Fragment() {
         }
 
         binding?.createAccountButton?.setOnClickListener {
-            performRegistration(it)
+            performRegistration()
         }
 
         return binding?.root
     }
 
-    private fun performRegistration(it: View) {
+    private fun performRegistration() {
         binding?.let { binding ->
             if (SignUpFormValidator.validateForm(binding)) {
                 val username = binding.usernameTextInputLayout.editText?.text.toString().trim()
@@ -70,7 +70,7 @@ class SignUpFragment : Fragment() {
                         Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
                     } ?: run {
                         val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
-                        it.findNavController().navigate(action)
+                        view?.findNavController()?.navigate(action)
                     }
                 }
             }
