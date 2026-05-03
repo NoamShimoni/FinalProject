@@ -51,8 +51,6 @@ class ProfileFragment : Fragment() {
     fun setUserInfo() {
         val user = viewModel.getCurrentUser()
 
-        Log.v("ProfileFragment", "Current user: ${user?.displayName}, email: ${user?.email}, photoUrl: ${user?.photoUrl}")
-
         user?.let {
             binding?.usernameTextView?.text = it.displayName
 
