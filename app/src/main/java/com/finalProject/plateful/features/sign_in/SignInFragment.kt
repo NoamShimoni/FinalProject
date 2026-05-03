@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentSignInBinding
+import com.finalProject.plateful.utils.SignInFormValidator
 
 class SignInFragment : Fragment() {
     private var binding: FragmentSignInBinding? = null
@@ -23,27 +24,22 @@ class SignInFragment : Fragment() {
         binding?.loadingIndicator?.visibility = View.GONE
 
         binding?.signInButton?.setOnClickListener {
-            val email = binding?.emailTextInputLayout?.editText?.text.toString()
-            val password = binding?.passwordTextInputLayout?.editText?.text.toString()
+            binding?.let { binding ->
+                if (!SignInFormValidator.validateForm(binding)) {
+                    val email = binding.emailTextInputLayout.editText?.text.toString().trim()
+                    val password = binding.passwordTextInputLayout.editText?.text.toString()
 
-            if (email.isEmpty()) {
-                Toast.makeText(context, "Please enter an email address", Toast.LENGTH_SHORT).show()
-            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT)
-                    .show()
-            } else if (password.isEmpty()) {
-                Toast.makeText(context, "Please enter a password", Toast.LENGTH_SHORT).show()
-            } else {
-                binding?.loadingIndicator?.visibility = View.VISIBLE
+                    binding.loadingIndicator.visibility = View.VISIBLE
 
-                viewModel.signIn(email, password) { error ->
-                    error?.let { error ->
-                        binding?.loadingIndicator?.visibility = View.GONE
-                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-                    } ?: run {
-                        val action =
-                            SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
-                        it.findNavController().navigate(action)
+                    viewModel.signIn(email, password) { error ->
+                        error?.let { errorMsg ->
+                            binding.loadingIndicator.visibility = View.GONE
+                            Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
+                        } ?: run {
+                            val action =
+                                SignInFragmentDirections.actionSignInFragmentToRecipeListFragment()
+                            view?.findNavController()?.navigate(action)
+                        }
                     }
                 }
             }

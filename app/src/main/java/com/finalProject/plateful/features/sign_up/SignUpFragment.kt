@@ -2,7 +2,6 @@ package com.finalProject.plateful.features.sign_up
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentSignUpBinding
+import com.finalProject.plateful.utils.SignUpFormValidator
 import com.finalProject.plateful.utils.extentions.bitmap
 
 class SignUpFragment : Fragment() {
@@ -48,40 +48,29 @@ class SignUpFragment : Fragment() {
     }
 
     private fun performRegistration(it: View) {
-        val username = binding?.usernameTextInputLayout?.editText?.text.toString().trim()
-        val email = binding?.emailTextInputLayout?.editText?.text.toString().trim()
-        val password = binding?.passwordTextInputLayout?.editText?.text.toString()
-        val confirmPassword = binding?.confirmPasswordTextInputLayout?.editText?.text.toString()
+        binding?.let { binding ->
+            if (!SignUpFormValidator.validateForm(binding)) {
+                val username = binding.usernameTextInputLayout.editText?.text.toString().trim()
+                val email = binding.emailTextInputLayout.editText?.text.toString().trim()
+                val password = binding.passwordTextInputLayout.editText?.text.toString()
 
-        if (username.isEmpty()) {
-            Toast.makeText(context, "Please enter a username", Toast.LENGTH_SHORT).show()
-        } else if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email)
-                .matches()
-        ) {
-            Toast.makeText(context, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
-        } else if (password.isEmpty() || password.length < 6) {
-            Toast.makeText(context, "Password must be at least 6 characters", Toast.LENGTH_SHORT)
-                .show()
-        } else if (password != confirmPassword) {
-            Toast.makeText(context, "Password confirmation does not match", Toast.LENGTH_SHORT)
-                .show()
-        } else {
-            binding?.loadingIndicator?.visibility = View.VISIBLE
+                binding.loadingIndicator.visibility = View.VISIBLE
 
-            var bitmap: Bitmap? = null
-            if (isImageSelected) {
-                binding?.profilePreviewImageView?.isDrawingCacheEnabled = true
-                binding?.profilePreviewImageView?.buildDrawingCache()
-                bitmap = binding?.profilePreviewImageView?.bitmap
-            }
+                var bitmap: Bitmap? = null
+                if (isImageSelected) {
+                    binding.profilePreviewImageView.isDrawingCacheEnabled = true
+                    binding.profilePreviewImageView.buildDrawingCache()
+                    bitmap = binding.profilePreviewImageView.bitmap
+                }
 
-            viewModel.signUp(username, email, password, bitmap) { error ->
-                error?.let { error ->
-                    binding?.loadingIndicator?.visibility = View.GONE
-                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-                } ?: run {
-                    val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
-                    it.findNavController().navigate(action)
+                viewModel.signUp(username, email, password, bitmap) { error ->
+                    error?.let { errorMsg ->
+                        binding.loadingIndicator.visibility = View.GONE
+                        Toast.makeText(context, errorMsg, Toast.LENGTH_SHORT).show()
+                    } ?: run {
+                        val action = SignUpFragmentDirections.actionSignUpFragmentToRecipeListFragment()
+                        it.findNavController().navigate(action)
+                    }
                 }
             }
         }

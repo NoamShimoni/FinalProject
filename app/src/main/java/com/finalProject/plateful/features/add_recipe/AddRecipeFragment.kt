@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
+import com.finalProject.plateful.utils.RecipeFormValidator
 import com.finalProject.plateful.utils.extentions.bitmap
 
 class AddRecipeFragment : Fragment() {
@@ -45,40 +46,45 @@ class AddRecipeFragment : Fragment() {
         binding?.loadingIndicator?.visibility = View.GONE
 
         binding?.saveRecipeButton?.setOnClickListener {
-            binding?.loadingIndicator?.visibility = View.VISIBLE
+            binding?.let { binding ->
+                if (!RecipeFormValidator.validateForm(binding, context)) {
 
-            val recipeTitle = binding?.recipeTitleTextInput?.text.toString()
-            val recipeIngredients = binding?.recipeIngredientsTextInput?.text.toString()
-            val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
-            val user = viewModel.getCurrentUser()
+                    binding.loadingIndicator.visibility = View.VISIBLE
 
-            user?.let { creatingUser ->
-                val recipe = Recipe(
-                    id = java.util.UUID.randomUUID().toString(),
-                    title = recipeTitle,
-                    ingredients = recipeIngredients,
-                    instructions = recipeInstructions,
-                    imageUrl = "",
-                    creatingUserId = creatingUser.uid,
-                    creatingUserName = creatingUser.displayName ?: "",
-                    isDeleted = false,
-                    lastUpdated = null
-                )
+                    val recipeTitle = binding.recipeTitleTextInput.text.toString()
+                    val recipeIngredients = binding.recipeIngredientsTextInput.text.toString()
+                    val recipeInstructions = binding.recipeInstructionsTextInput.text.toString()
+                    val user = viewModel.getCurrentUser()
 
-                binding?.recipeImageImageView?.isDrawingCacheEnabled = true
-                binding?.recipeImageImageView?.buildDrawingCache()
+                    user?.let { creatingUser ->
+                        val recipe = Recipe(
+                            id = java.util.UUID.randomUUID().toString(),
+                            title = recipeTitle,
+                            ingredients = recipeIngredients,
+                            instructions = recipeInstructions,
+                            imageUrl = "",
+                            creatingUserId = creatingUser.uid,
+                            creatingUserName = creatingUser.displayName ?: "",
+                            isDeleted = false,
+                            lastUpdated = null
+                        )
 
-                val bitmap = binding?.recipeImageImageView?.bitmap
+                        binding.recipeImageImageView.isDrawingCacheEnabled = true
+                        binding.recipeImageImageView.buildDrawingCache()
 
-                bitmap?.let {
-                    viewModel.addRecipe( it, recipe) {
-                        dismiss()
+                        val bitmap = binding.recipeImageImageView.bitmap
+
+                        bitmap?.let {
+                            viewModel.addRecipe( it, recipe) {
+                                dismiss()
+                            }
+                        } ?: run {
+                            Toast.makeText(context, "Please capture a profile image", Toast.LENGTH_SHORT).show()
+                        }
+                    } ?: run {
+                        Log.v("TAG", "Error adding recipe. No current user")
                     }
-                } ?: run {
-                    Toast.makeText(context, "Please capture a profile image", Toast.LENGTH_SHORT).show()
                 }
-            } ?: run {
-                Log.v("TAG", "Error adding recipe. No current user")
             }
         }
     }
