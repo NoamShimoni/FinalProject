@@ -50,7 +50,7 @@ class SignUpFragment : Fragment() {
 
     private fun performRegistration(it: View) {
         binding?.let { binding ->
-            if (!SignUpFormValidator.validateForm(binding)) {
+            if (SignUpFormValidator.validateForm(binding)) {
                 val username = binding.usernameTextInputLayout.editText?.text.toString().trim()
                 val email = binding.emailTextInputLayout.editText?.text.toString().trim()
                 val password = binding.passwordTextInputLayout.editText?.text.toString()

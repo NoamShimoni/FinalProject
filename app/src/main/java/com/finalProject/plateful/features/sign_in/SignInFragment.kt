@@ -25,7 +25,7 @@ class SignInFragment : Fragment() {
 
         binding?.signInButton?.setOnClickListener {
             binding?.let { binding ->
-                if (!SignInFormValidator.validateForm(binding)) {
+                if (SignInFormValidator.validateForm(binding)) {
                     val email = binding.emailTextInputLayout.editText?.text.toString().trim()
                     val password = binding.passwordTextInputLayout.editText?.text.toString()
 
