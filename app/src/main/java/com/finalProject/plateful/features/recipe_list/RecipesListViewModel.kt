@@ -9,7 +9,8 @@ import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
 
 class RecipesListViewModel: ViewModel(), IRecipesViewModel {
-    override var data: LiveData<MutableList<Recipe>> = RecipesRepository.shared.getAllRecipes(null)
+    override val data: LiveData<MutableList<Recipe>>
+        get() = RecipesRepository.shared.getAllRecipes(null)
     override val isRefreshing = MutableLiveData<Boolean>()
 
     override fun refreshRecipes() {
