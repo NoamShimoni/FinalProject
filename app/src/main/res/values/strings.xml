@@ -13,7 +13,7 @@
     <string name="ingredients_content">Ingredients content</string>
     <string name="home">Home</string>
     <string name="my_recipes">My Recipes</string>
-    <string name="log_out">Log Out</string>
+    <string name="log_out">Sign Out</string>
     <string name="recipe_app_version">Recipe App v1.0.0</string>
     <string name="made_with_love">Made with ❤️ for food lovers</string>
     <string name="edit_profile">Edit Profile</string>
@@ -48,4 +48,5 @@
     <string name="edit">Edit</string>
     <string name="library">Library</string>
     <string name="recommended">Recommended</string>
+    <string name="recipe_creator_format">By %1$s</string>
 </resources>

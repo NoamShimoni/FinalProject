@@ -10,54 +10,6 @@
     android:paddingTop="16dp">
 
         <TextView
-            android:id="@+id/title_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/create_account"
-            android:textColor="@color/textContent"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/subtitle_text_view"
-            app:layout_constraintEnd_toStartOf="@+id/logo_card_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/logo_card_view"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/subtitle_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/join_community"
-            android:textSize="14sp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/logo_card_view"
-            app:layout_constraintEnd_toStartOf="@+id/logo_card_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/logo_card_view"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            app:cardBackgroundColor="@color/orange"
-            app:cardCornerRadius="32dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeWidth="0dp">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/logo_image_view"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_chef_hat"
-                app:tint="@color/white" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
             android:id="@+id/profile_image_label_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +18,7 @@
             android:textColor="@color/textContent"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo_card_view" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/avatar_card_view"
@@ -122,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:boxStrokeColor="@color/orange"
+            app:errorEnabled="true"
             app:hintEnabled="false"
             app:layout_constraintTop_toBottomOf="@+id/username_label_text_view">
 
@@ -150,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:boxStrokeColor="@color/orange"
+            app:errorEnabled="true"
             app:hintEnabled="false"
             app:layout_constraintTop_toBottomOf="@+id/email_label_text_view">
 
@@ -178,6 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:boxStrokeColor="@color/orange"
+            app:errorEnabled="true"
             app:hintEnabled="false"
             app:passwordToggleEnabled="true"
             app:layout_constraintTop_toBottomOf="@+id/password_label_text_view">
@@ -207,6 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:boxStrokeColor="@color/orange"
+            app:errorEnabled="true"
             app:hintEnabled="false"
             app:passwordToggleEnabled="true"
             app:layout_constraintTop_toBottomOf="@+id/confirm_password_label_text_view">

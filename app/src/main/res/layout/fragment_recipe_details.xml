@@ -25,10 +25,10 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/recipe_details_card"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="-32dp"
             app:cardBackgroundColor="@android:color/white"
-            app:cardCornerRadius="32dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.TopRounded"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

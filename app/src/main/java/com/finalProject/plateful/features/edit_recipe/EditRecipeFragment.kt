@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentAddRecipeBinding
 import com.finalProject.plateful.models.Recipe
+import com.finalProject.plateful.utils.RecipeFormValidator
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.squareup.picasso.Picasso
 
@@ -83,37 +84,41 @@ class EditRecipeFragment : Fragment() {
         }
 
         binding?.saveRecipeButton?.setOnClickListener {
-            binding?.loadingIndicator?.visibility = View.VISIBLE
+            binding?.let { binding ->
+                if (RecipeFormValidator.validateForm(binding)) {
+                    binding.loadingIndicator.visibility = View.VISIBLE
 
-            val recipeTitle = binding?.recipeTitleTextInput?.text.toString()
-            val recipeIngredients = binding?.recipeIngredientsTextInput?.text.toString()
-            val recipeInstructions = binding?.recipeInstructionsTextInput?.text.toString()
+                    val recipeTitle = binding.recipeTitleTextInput.text.toString()
+                    val recipeIngredients = binding.recipeIngredientsTextInput.text.toString()
+                    val recipeInstructions = binding.recipeInstructionsTextInput.text.toString()
 
-            id?.let { id ->
-                creatingUserId?.let { creatingUserId ->
-                    var imageBitmap: Bitmap? = null
+                    id?.let { id ->
+                        creatingUserId?.let { creatingUserId ->
+                            var imageBitmap: Bitmap? = null
 
-                    if (this.hasImageChanged) {
-                        binding?.recipeImageImageView?.isDrawingCacheEnabled = true
-                        binding?.recipeImageImageView?.buildDrawingCache()
+                            if (this.hasImageChanged) {
+                                binding.recipeImageImageView.isDrawingCacheEnabled = true
+                                binding.recipeImageImageView.buildDrawingCache()
 
-                        imageBitmap = binding?.recipeImageImageView?.bitmap
-                    }
+                                imageBitmap = binding.recipeImageImageView.bitmap
+                            }
 
-                    val recipe = Recipe(
-                        id = id,
-                        title = recipeTitle,
-                        ingredients = recipeIngredients,
-                        instructions = recipeInstructions,
-                        imageUrl = imageUrl ?: "",
-                        creatingUserId = creatingUserId,
-                        creatingUserName = creatingUserName ?: "",
-                        isDeleted = false,
-                        lastUpdated = Recipe.lastUpdated
-                    )
+                            val recipe = Recipe(
+                                id = id,
+                                title = recipeTitle,
+                                ingredients = recipeIngredients,
+                                instructions = recipeInstructions,
+                                imageUrl = imageUrl ?: "",
+                                creatingUserId = creatingUserId,
+                                creatingUserName = creatingUserName ?: "",
+                                isDeleted = false,
+                                lastUpdated = Recipe.lastUpdated
+                            )
 
-                    viewModel.editRecipe(recipe, imageBitmap) {
-                        dismiss()
+                            viewModel.editRecipe(recipe, imageBitmap) {
+                                dismiss()
+                            }
+                        }
                     }
                 }
             }
