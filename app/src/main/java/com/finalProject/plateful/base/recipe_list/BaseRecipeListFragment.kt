@@ -75,7 +75,13 @@ abstract class BaseRecipeListFragment : Fragment() {
 
     private fun navigateToRecipeDetailsFragment(recipe: Recipe){
         view?.let {
-            val action = NavGraphDirections.actionGlobalRecipeDetailsFragment(recipe.title, recipe.ingredients, recipe.instructions, recipe.imageUrl)
+            val action = NavGraphDirections.actionGlobalRecipeDetailsFragment(
+                recipe.title,
+                recipe.ingredients,
+                recipe.instructions,
+                recipe.imageUrl,
+                recipe.creatingUserName
+            )
             it.findNavController().navigate(action)
         }
     }

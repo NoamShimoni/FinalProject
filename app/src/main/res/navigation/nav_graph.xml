@@ -37,6 +37,10 @@
             android:name="IMAGE_URL_KEY"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="CREATOR_NAME_KEY"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
