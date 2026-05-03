@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import com.finalProject.plateful.databinding.FragmentEditProfileBinding
 import com.finalProject.plateful.utils.extentions.bitmap
 import com.finalProject.plateful.utils.extentions.loadAvatar
+import com.finalProject.plateful.utils.extentions.setAvatarImageBitmap
 import com.google.firebase.auth.FirebaseUser
 
 class EditProfileFragment : Fragment() {
@@ -36,7 +37,7 @@ class EditProfileFragment : Fragment() {
         cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
                 bitMap ->
             bitMap?.let {
-                binding?.avatarImageView?.setImageBitmap(it)
+                binding?.avatarImageView?.setAvatarImageBitmap(it)
                 isImageSelected = true
             } ?: Toast.makeText(context, "No image captured", Toast.LENGTH_SHORT).show()
         }
@@ -49,17 +50,25 @@ class EditProfileFragment : Fragment() {
 
         binding?.loadingIndicator?.visibility = View.GONE
 
-        binding?.saveButton?.setOnClickListener {
-            val newName = binding?.usernameTextInput?.text.toString()
+        binding?.saveButton?.setOnClickListener{
+            handleSaveProfile()
+        }
 
-                if (newName != user?.displayName || isImageSelected) {
+        return binding?.root
+    }
+
+    fun handleSaveProfile() {
+        val newName = binding?.usernameTextInput?.text.toString()
+
+        if (!newName.isEmpty()) {
+            if (newName != user?.displayName || isImageSelected) {
                 handleProfileSaving()
             } else {
                 Toast.makeText(context, "No changes to save", Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(context, "Username cannot be empty", Toast.LENGTH_SHORT).show()
         }
-
-        return binding?.root
     }
 
     fun setUserInfo() {
