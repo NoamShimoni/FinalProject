@@ -10,11 +10,20 @@ import com.squareup.picasso.Picasso
 val ImageView.bitmap: Bitmap?
     get() = (this.drawable as? BitmapDrawable)?.bitmap
 
+fun customizeAvatarImageView(imageView: ImageView) {
+    imageView.imageTintList = null
+    imageView.layoutParams?.width = ViewGroup.LayoutParams.MATCH_PARENT
+    imageView.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+}
+
 fun ImageView.loadAvatar(url: Uri) {
-    this.imageTintList = null
-    this.layoutParams?.width = ViewGroup.LayoutParams.MATCH_PARENT
-    this.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
-    this.scaleType = ImageView.ScaleType.CENTER_CROP
+    customizeAvatarImageView(this)
 
     Picasso.get().load(url).into(this)
+}
+
+fun ImageView.setAvatarImageBitmap(bitmap: Bitmap) {
+    customizeAvatarImageView(this)
+    this.setImageBitmap(bitmap)
 }

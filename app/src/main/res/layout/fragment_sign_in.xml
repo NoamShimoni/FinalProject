@@ -15,8 +15,8 @@
             android:id="@+id/logo_card_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:cardBackgroundColor="@color/avatarBackground"
-            app:cardCornerRadius="40dp"
+            app:cardBackgroundColor="@color/orange"
+            app:cardCornerRadius="50dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_chef_hat"
-                app:tint="@color/orange" />
+                app:tint="@color/white" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
