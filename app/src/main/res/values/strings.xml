@@ -48,4 +48,5 @@
     <string name="edit">Edit</string>
     <string name="library">Library</string>
     <string name="recommended">Recommended</string>
+    <string name="recipe_creator_format">By %1$s</string>
 </resources>

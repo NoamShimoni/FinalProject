@@ -4,6 +4,7 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.finalProject.plateful.NavGraphDirections
+import com.finalProject.plateful.R
 import com.finalProject.plateful.databinding.RecipeRowLayoutBinding
 import com.finalProject.plateful.models.Recipe
 import com.squareup.picasso.Picasso
@@ -48,7 +49,7 @@ class RecipeRowViewHolder(
         this.recipe = recipe
 
         binding.recipeTitleTextView.text = recipe.title
-        binding.recipeCreatorTextView.text = recipe.creatingUserName
+        binding.recipeCreatorTextView.text = itemView.context.getString(R.string.recipe_creator_format, recipe.creatingUserName)
 
         Picasso.get().load(recipe.imageUrl).into(binding.recipeImageView)
 
