@@ -42,7 +42,10 @@ class FirebaseModel {
 
     fun deleteRecipe(recipe: Recipe, completion: Completion) {
         db.collection(RECIPES)
-            .document(recipe.id).update("isDeleted", true)
+            .document(recipe.id).update(
+                "isDeleted", true,
+                Recipe.Companion.LAST_UPDATED_KEY, FieldValue.serverTimestamp()
+            )
             .addOnSuccessListener { documentReference ->
                 completion()
             }

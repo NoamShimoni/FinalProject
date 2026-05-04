@@ -79,16 +79,12 @@ class RecipesRepository private constructor() {
 
     fun deleteRecipe(recipe: Recipe, completion: Completion) {
         firebaseModel.deleteRecipe(recipe) {
-            executor.execute {
-                database.recipeDao.deleteRecipeById(recipe.id)
-            }
-
-            completion()
-
             storageModel.deleteRecipeImage(recipe.imageUrl) { deleteImageSuccessful ->
                 if (!deleteImageSuccessful) {
                     Log.v("TAG", "Error deleting recipe image for recipe: ${recipe.id}")
                 }
+
+                completion()
             }
         }
     }
