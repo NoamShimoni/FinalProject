@@ -66,6 +66,7 @@ class AddRecipeFragment : Fragment() {
                             creatingUserId = creatingUser.uid,
                             creatingUserName = creatingUser.displayName ?: "",
                             isDeleted = false,
+                            creationDate = System.currentTimeMillis(),
                             lastUpdated = null
                         )
 
