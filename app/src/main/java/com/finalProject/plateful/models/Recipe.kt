@@ -18,6 +18,7 @@ data class Recipe(
     val creatingUserId: String,
     val creatingUserName: String,
     val isDeleted: Boolean,
+    val creationDate: Long,
     val lastUpdated: Long?,
     ) {
     companion object {
@@ -43,6 +44,7 @@ data class Recipe(
         const val CREATING_USER_ID_KEY = "creatingUserId"
         const val CREATING_USER_NAME_KEY = "creatingUserName"
         const val IS_DELETED = "isDeleted"
+        const val CREATION_DATE_KEY = "creationDate"
         const val LAST_UPDATED_KEY = "lastUpdated"
 
 
@@ -56,6 +58,7 @@ data class Recipe(
             val creatingUserId = json[CREATING_USER_ID_KEY] as? String ?: ""
             val creatingUserName = json[CREATING_USER_NAME_KEY] as? String ?: ""
             val isDeleted = json[IS_DELETED] as? Boolean ?: false
+            val creationDate = json[CREATION_DATE_KEY] as? Long ?: System.currentTimeMillis()
             val timestamp = json[LAST_UPDATED_KEY] as? Timestamp
             val lastUpdatedLong = timestamp?.toDate()?.time
 
@@ -68,6 +71,7 @@ data class Recipe(
                 creatingUserId = creatingUserId,
                 creatingUserName = creatingUserName,
                 isDeleted = isDeleted,
+                creationDate = creationDate,
                 lastUpdated = lastUpdatedLong
             )
         }
@@ -83,6 +87,7 @@ data class Recipe(
             CREATING_USER_ID_KEY to creatingUserId,
             CREATING_USER_NAME_KEY to creatingUserName,
             IS_DELETED to isDeleted,
+            CREATION_DATE_KEY to creationDate,
             LAST_UPDATED_KEY to FieldValue.serverTimestamp()
         )
 }

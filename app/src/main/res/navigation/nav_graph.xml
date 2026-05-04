@@ -96,6 +96,9 @@
         <argument
             android:name="creatingUserName"
             app:argType="string" />
+        <argument
+            android:name="creationDate"
+            app:argType="long" />
     </fragment>
 
     <fragment

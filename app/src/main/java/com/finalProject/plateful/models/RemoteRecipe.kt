@@ -84,6 +84,7 @@ data class RemoteRecipe(
             creatingUserId = "API",
             creatingUserName = "TheMealDB",
             isDeleted = false,
+            creationDate = parsedDate,
             lastUpdated = parsedDate
         )
     }

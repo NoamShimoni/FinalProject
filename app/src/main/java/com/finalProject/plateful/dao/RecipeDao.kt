@@ -8,10 +8,10 @@ import com.finalProject.plateful.models.Recipe
 
 @Dao
 interface RecipeDao {
-    @Query("SELECT * FROM Recipe")
+    @Query("SELECT * FROM Recipe ORDER BY creationDate DESC")
     fun getAllRecipes(): LiveData<MutableList<Recipe>>
 
-    @Query("SELECT * FROM Recipe WHERE creatingUserId = :creatingUserId")
+    @Query("SELECT * FROM Recipe WHERE creatingUserId = :creatingUserId ORDER BY creationDate DESC")
     fun getAllRecipesByUser(creatingUserId: String): LiveData<MutableList<Recipe>>
 
     @Query("SELECT * FROM Recipe")
