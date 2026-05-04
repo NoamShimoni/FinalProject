@@ -7,12 +7,10 @@ import com.finalProject.plateful.base.recipe_list.IRecipesViewModel
 import com.finalProject.plateful.data.repositories.auth.AuthRepository
 import com.finalProject.plateful.data.repositories.recipes.RecipesRepository
 import com.finalProject.plateful.models.Recipe
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
-
 
 class LibraryViewModel: ViewModel(), IRecipesViewModel {
-    override var data: LiveData<MutableList<Recipe>> = RecipesRepository.shared.getAllRecipes(Firebase.auth.currentUser?.uid)
+    override val data: LiveData<MutableList<Recipe>>
+        get() = RecipesRepository.shared.getAllRecipes(AuthRepository.shared.getCurrentUser()?.uid)
     override val isRefreshing = MutableLiveData<Boolean>()
 
     override fun refreshRecipes() {
